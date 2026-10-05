@@ -1,0 +1,69 @@
+seed: 42
+
+paths:
+  sms_phishing: data/raw/Dataset_5971.csv
+  smishx: data/raw/dataset.csv
+  imc25: data/raw/final_dataset_output.csv
+  processed_dir: data/processed_quick
+  reports_dir: reports/quick
+  artifacts_dir: artifacts/quick
+
+data:
+  imc_language: English
+  min_clean_characters: 1
+  class_order: [legitimate, spam, scam]
+  external_dataset: smishx
+  drop_exact_duplicates: true
+  extra_datasets: []
+
+deduplication:
+  mask_urls: true
+  mask_emails: true
+  mask_numbers: true
+  template_min_characters: 12
+  fuzzy_enabled: false
+  fuzzy_min_characters: 35
+  fuzzy_threshold: 0.96
+  fuzzy_max_candidates_per_bucket: 50
+
+split:
+  train_fraction: 0.70
+  validation_fraction: 0.15
+  test_fraction: 0.15
+  external_overlap_policy: exclude_development
+  label_conflict_policy: exclude
+
+models:
+  naive_bayes:
+    word_ngram_range: [1, 2]
+    min_df: 1
+    max_df: 1.0
+    max_features: 20000
+    sublinear_tf: true
+    alpha: 0.5
+  svm:
+    word_ngram_range: [1, 2]
+    char_ngram_range: [3, 5]
+    min_df: 1
+    max_df: 1.0
+    word_max_features: 20000
+    char_max_features: 30000
+    sublinear_tf: true
+    C: 1.0
+    class_weight: balanced
+  charcnn:
+    max_length: 256
+    max_vocab_size: 256
+    min_char_frequency: 1
+    embedding_dim: 32
+    channels: 32
+    kernels: [3, 4, 5]
+    dropout: 0.25
+    batch_size: 128
+    epochs: 1
+    patience: 1
+    learning_rate: 0.001
+    weight_decay: 0.0001
+    class_weight: balanced
+    device: auto
+

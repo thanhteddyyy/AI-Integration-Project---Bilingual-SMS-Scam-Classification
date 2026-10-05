@@ -1,0 +1,18 @@
+source_dataset,label_original,label_level_1,scam_type
+sms_phishing,ham,legitimate,unknown
+sms_phishing,spam,spam,unknown
+sms_phishing,Spam,spam,unknown
+sms_phishing,Smishing,scam,unknown
+sms_phishing,smishing,scam,unknown
+smishx,legitimate,legitimate,unknown
+smishx,spam,spam,unknown
+smishx,smishing,scam,unknown
+imc25,spam,spam,unknown
+imc25,banking,scam,banking_finance
+imc25,delivery,scam,delivery_logistics
+imc25,government,scam,government_services
+imc25,telecom,scam,telecom_account
+imc25,wrong number,scam,social_impersonation
+imc25,hey mum/dad,scam,social_impersonation
+imc25,others,scam,other_scam
+
