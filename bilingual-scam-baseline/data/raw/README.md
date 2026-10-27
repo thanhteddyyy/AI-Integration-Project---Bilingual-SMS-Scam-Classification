@@ -10,6 +10,6 @@ Pipeline không ghi đè các file raw.
 
 full_data chia thành test và train
 
-corpus .txt là external test, có thể chỉnh thành .csv (chỉnh thêm trong adapters.py để đồng bộ dữ liệu hơn)
+corpus .txt là external test, có thể chỉnh thành .csv (chỉnh lại code trong adapters.py - lúc này đang code để nhận thêm dữ liệu từ txt thay vì chỉ csv, để đồng bộ dữ liệu hơn)
 
 vi_dataset là external test
