@@ -1,0 +1,106 @@
+seed: 42
+
+paths:
+  processed_dir: data/processed_vi
+  reports_dir: reports/vietnamese
+  artifacts_dir: artifacts/vietnamese
+
+data:
+  language: vi
+  min_clean_characters: 1
+  class_order: [legitimate, risky]
+  test_dataset: spamscam_test
+  external_dataset: [vie_sms_corpus, social_spam_post]
+  drop_exact_duplicates: true
+  extra_datasets:
+    - name: spamscam_train
+      path: data/raw/train_dataset_spamscam.csv
+      text_column: message
+      label_column: label
+      language: vi
+      encoding: utf-8-sig
+      label_mapping:
+        "0": legitimate
+        "1": risky
+    - name: spamscam_test
+      path: data/raw/test_dataset_spamscam.csv
+      text_column: message
+      label_column: label
+      language: vi
+      encoding: utf-8-sig
+      label_mapping:
+        "0": legitimate
+        "1": risky
+    - name: vie_sms_corpus
+      path: data/raw/corpus_dataset_vie-spam-sms-filtering.txt
+      text_column: text
+      label_column: label
+      language: vi
+      sep: "\t"
+      names: [label, text]
+      encoding: utf-8
+      label_mapping:
+        ham: legitimate
+        spam: risky
+    - name: social_spam_post
+      path: data/raw/vi_dataset_vnese_spam_post_in_social.csv
+      text_column: texts_vi
+      label_column: labels
+      language: vi
+      encoding: utf-8
+      label_mapping:
+        ham: legitimate
+        spam: risky
+
+deduplication:
+  mask_urls: true
+  mask_emails: true
+  mask_numbers: true
+  template_min_characters: 12
+  fuzzy_enabled: true
+  fuzzy_min_characters: 30
+  fuzzy_threshold: 0.95
+  fuzzy_max_candidates_per_bucket: 120
+
+split:
+  train_fraction: 0.85
+  validation_fraction: 0.15
+  test_fraction: 0.0
+  test_overlap_policy: exclude_development
+  external_overlap_policy: exclude_development
+  label_conflict_policy: exclude
+
+models:
+  naive_bayes:
+    word_ngram_range: [1, 2]
+    min_df: 2
+    max_df: 0.995
+    max_features: 60000
+    sublinear_tf: true
+    alpha: 0.5
+  svm:
+    word_ngram_range: [1, 2]
+    char_ngram_range: [3, 5]
+    min_df: 2
+    max_df: 0.995
+    word_max_features: 60000
+    char_max_features: 100000
+    sublinear_tf: true
+    C: 1.0
+    class_weight: balanced
+  charcnn:
+    max_length: 256
+    max_vocab_size: 512
+    min_char_frequency: 1
+    embedding_dim: 64
+    channels: 128
+    kernels: [3, 4, 5, 7]
+    dropout: 0.35
+    batch_size: 64
+    epochs: 15
+    patience: 3
+    learning_rate: 0.001
+    weight_decay: 0.0001
+    class_weight: balanced
+    device: auto
+

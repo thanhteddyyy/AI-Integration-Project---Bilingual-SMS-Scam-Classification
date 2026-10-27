@@ -103,10 +103,11 @@ def build_quality_report(frame: pd.DataFrame, dedup_report: dict, config: dict) 
     return {
         "scope": {
             "level": "level_1",
-            "language": "en",
-            "imc_language_filter": config["data"]["imc_language"],
+            "language": config["data"].get("language", "en"),
+            "imc_language_filter": config["data"].get("imc_language", "English"),
             "class_order": config["data"]["class_order"],
-            "external_dataset": config["data"]["external_dataset"],
+            "external_dataset": config["data"].get("external_dataset", []),
+            "test_dataset": config["data"].get("test_dataset", []),
         },
         "row_counts": {
             "all_loaded": len(frame),
@@ -150,4 +151,3 @@ def load_modeling_data(config: dict) -> pd.DataFrame:
             f"Prepared data not found at {path}. Run the prepare command first."
         )
     return pd.read_csv(path, dtype={"text_clean": "string", "label_level_1": "string"})
-

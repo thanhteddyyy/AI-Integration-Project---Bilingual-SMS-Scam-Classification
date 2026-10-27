@@ -4,7 +4,12 @@ from pathlib import Path
 
 import pandas as pd
 
-from scam_baseline.data.adapters import load_imc25, load_smishx, load_sms_phishing
+from scam_baseline.data.adapters import (
+    load_custom_dataset,
+    load_imc25,
+    load_smishx,
+    load_sms_phishing,
+)
 
 
 class AdapterTests(unittest.TestCase):
@@ -66,6 +71,30 @@ class AdapterTests(unittest.TestCase):
             self.assertEqual(result["source_dataset"].tolist(), ["imc25", "imc25"])
             self.assertEqual(result["label_level_1"].tolist(), ["scam", "spam"])
             self.assertEqual(result["scam_type"].tolist(), ["banking_finance", "unknown"])
+
+    def test_load_custom_tsv_dataset(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "corpus.txt"
+            with open(path, "w", encoding="utf-8") as f:
+                f.write("ham\tTin nhan hop le\n")
+                f.write("spam\tTin nhan lua dao\n")
+            spec = {
+                "name": "custom_corpus",
+                "path": str(path),
+                "text_column": "text",
+                "label_column": "label",
+                "language": "vi",
+                "sep": "\t",
+                "names": ["label", "text"],
+                "label_mapping": {
+                    "ham": "legitimate",
+                    "spam": "risky",
+                },
+            }
+            result = load_custom_dataset(spec, directory)
+            self.assertEqual(len(result), 2)
+            self.assertEqual(result["label_level_1"].tolist(), ["legitimate", "risky"])
+            self.assertEqual(result["text_raw"].tolist(), ["Tin nhan hop le", "Tin nhan lua dao"])
 
 
 if __name__ == "__main__":

@@ -40,14 +40,16 @@ def compute_metrics(
         }
         for index, label in enumerate(class_order)
     }
+    # Dynamically select the positive class for the dedicated scam/risky metrics
+    positive_label = "scam" if "scam" in per_class else ("risky" if "risky" in per_class else class_order[-1])
     return {
         "accuracy": float(accuracy_score(truth, prediction)),
         "macro_f1": float(f1_score(truth, prediction, average="macro", zero_division=0)),
         "weighted_f1": float(
             f1_score(truth, prediction, average="weighted", zero_division=0)
         ),
-        "scam_precision": per_class.get("scam", {}).get("precision", 0.0),
-        "scam_recall": per_class.get("scam", {}).get("recall", 0.0),
+        "scam_precision": per_class.get(positive_label, {}).get("precision", 0.0),
+        "scam_recall": per_class.get(positive_label, {}).get("recall", 0.0),
         "per_class": per_class,
         "confusion_matrix": confusion_matrix(
             truth, prediction, labels=class_order
@@ -140,4 +142,3 @@ def _save_confusion_matrix(
     figure.tight_layout()
     figure.savefig(path, dpi=160, bbox_inches="tight")
     plt.close(figure)
-

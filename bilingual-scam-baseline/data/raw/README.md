@@ -8,3 +8,8 @@
 
 Pipeline không ghi đè các file raw.
 
+full_data chia thành test và train
+
+corpus .txt là external test
+
+vi_dataset là external test

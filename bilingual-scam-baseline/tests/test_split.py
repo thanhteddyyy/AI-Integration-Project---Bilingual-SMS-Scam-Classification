@@ -72,6 +72,71 @@ class SplitTests(unittest.TestCase):
         self.assertEqual(development["exclusion_reason"], "overlap_with_external_test")
         assert_no_group_leakage(result)
 
+    def test_internal_test_dataset_and_overlap_removal(self):
+        config = {
+            "seed": 42,
+            "data": {
+                "test_dataset": "spamscam_test",
+                "external_dataset": "corpus_ext",
+                "drop_exact_duplicates": True,
+                "min_clean_characters": 1,
+            },
+            "split": {
+                "train_fraction": 0.85,
+                "validation_fraction": 0.15,
+                "test_fraction": 0.0,
+                "test_overlap_policy": "exclude_development",
+                "external_overlap_policy": "exclude_development",
+                "label_conflict_policy": "exclude",
+            },
+        }
+        rows = []
+        for index in range(20):
+            label = "legitimate" if index % 2 == 0 else "risky"
+            rows.append(
+                {
+                    "source_dataset": "spamscam_train",
+                    "text_clean": f"train {index}",
+                    "label_level_1": label,
+                    "group_id": f"train_grp_{index}",
+                    "strict_duplicate_key": f"train_{index}",
+                    "label_conflict": False,
+                    "exact_duplicate_rank": 1,
+                }
+            )
+        rows.append(
+            {
+                "source_dataset": "spamscam_test",
+                "text_clean": "test message",
+                "label_level_1": "risky",
+                "group_id": "test_grp_1",
+                "strict_duplicate_key": "test_1",
+                "label_conflict": False,
+                "exact_duplicate_rank": 1,
+            }
+        )
+        rows.append(
+            {
+                "source_dataset": "spamscam_train",
+                "text_clean": "overlapping train message",
+                "label_level_1": "risky",
+                "group_id": "test_grp_1",
+                "strict_duplicate_key": "test_1_dup",
+                "label_conflict": False,
+                "exact_duplicate_rank": 1,
+            }
+        )
+        result = assign_splits(pd.DataFrame(rows), config)
+        test_row = result[result["source_dataset"].eq("spamscam_test")].iloc[0]
+        overlapping_train = result[
+            result["source_dataset"].eq("spamscam_train")
+            & result["text_clean"].eq("overlapping train message")
+        ].iloc[0]
+        self.assertEqual(test_row["split"], "test")
+        self.assertEqual(overlapping_train["split"], "excluded")
+        self.assertEqual(overlapping_train["exclusion_reason"], "overlap_with_internal_test")
+        assert_no_group_leakage(result)
+
 
 if __name__ == "__main__":
     unittest.main()

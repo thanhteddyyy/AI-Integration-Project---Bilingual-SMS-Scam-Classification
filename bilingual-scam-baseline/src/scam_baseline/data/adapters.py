@@ -139,13 +139,7 @@ def load_imc25(path: str | Path, language_filter: str = "English") -> pd.DataFra
 
 
 def load_custom_dataset(spec: dict[str, Any], project_root: str | Path) -> pd.DataFrame:
-    """Load a future Vietnamese or other CSV through a config mapping.
-
-    Expected spec keys: name, path, text_column, label_column, language, and
-    label_mapping. This route is intentionally inactive until extra_datasets is
-    populated in the config.
-    """
-
+    """Load a custom CSV/TSV through a config mapping."""
     required = {
         "name",
         "path",
@@ -160,7 +154,22 @@ def load_custom_dataset(spec: dict[str, Any], project_root: str | Path) -> pd.Da
     path = Path(spec["path"])
     if not path.is_absolute():
         path = Path(project_root) / path
-    raw = pd.read_csv(path, dtype="string", keep_default_na=True)
+
+    read_kwargs: dict[str, Any] = {
+        "dtype": "string",
+        "keep_default_na": True,
+        "encoding": spec.get("encoding", "utf-8-sig"),
+    }
+    if "sep" in spec:
+        read_kwargs["sep"] = spec["sep"]
+    elif "delimiter" in spec:
+        read_kwargs["delimiter"] = spec["delimiter"]
+    if "header" in spec:
+        read_kwargs["header"] = spec["header"]
+    if "names" in spec:
+        read_kwargs["names"] = spec["names"]
+
+    raw = pd.read_csv(path, **read_kwargs)
     _require_columns(
         raw,
         {spec["text_column"], spec["label_column"]},
@@ -185,15 +194,34 @@ def load_custom_dataset(spec: dict[str, Any], project_root: str | Path) -> pd.Da
 
 
 def load_all_sources(config: dict[str, Any]) -> pd.DataFrame:
-    paths = config["paths"]
+    paths = config.get("paths", {})
     data_cfg = config["data"]
-    frames = [
-        load_sms_phishing(paths["sms_phishing"]),
-        load_smishx(paths["smishx"]),
-        load_imc25(paths["imc25"], language_filter=data_cfg["imc_language"]),
-    ]
+    project_root = Path(config.get("_project_root", "."))
+    frames = []
+
+    if "sms_phishing" in paths:
+        p = Path(paths["sms_phishing"])
+        p = p if p.is_absolute() else project_root / p
+        if p.exists():
+            frames.append(load_sms_phishing(p))
+
+    if "smishx" in paths:
+        p = Path(paths["smishx"])
+        p = p if p.is_absolute() else project_root / p
+        if p.exists():
+            frames.append(load_smishx(p))
+
+    if "imc25" in paths:
+        p = Path(paths["imc25"])
+        p = p if p.is_absolute() else project_root / p
+        if p.exists():
+            frames.append(load_imc25(p, language_filter=data_cfg.get("imc_language", "English")))
+
     for spec in data_cfg.get("extra_datasets", []):
-        frames.append(load_custom_dataset(spec, config["_project_root"]))
+        frames.append(load_custom_dataset(spec, project_root))
+
+    if not frames:
+        raise ValueError("No datasets could be loaded. Please check your data paths.")
     return pd.concat(frames, ignore_index=True)
 
 

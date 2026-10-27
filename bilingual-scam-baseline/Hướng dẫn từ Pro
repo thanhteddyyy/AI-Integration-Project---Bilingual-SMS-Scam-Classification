@@ -1,0 +1,44 @@
+### YÊU CẦU VIẾT CODE: HỆ THỐNG PHÂN LOẠI SMS LỪA ĐẢO (PHƯƠNG ÁN A - NHỊ PHÂN RỘNG)
+
+**Bối cảnh dự án:**
+Cần xây dựng một hệ thống AI bằng Python (framework PyTorch) để phân loại tin nhắn SMS tiếng Việt thành 2 nhóm (Binary Classification): Hợp lệ (Lớp 0 - Legitimate) và Đáng ngờ (Lớp 1 - Risky, bao gồm cả Spam và Scam).
+Yêu cầu AI viết code dưới dạng các module (hàm/class) rõ ràng, có chú thích đầy đủ và tuân thủ tuyệt đối các ràng buộc dưới đây.
+
+#### 1. Module Tiền xử lý dữ liệu (Data Preprocessing)
+Viết một hàm `preprocess_text(text)` thực hiện các bước sau:
+- **Bảo toàn ngôn ngữ:** Giữ nguyên các dấu tiếng Việt, không tự ý xóa dấu câu hoặc chuyển thành không dấu vì sẽ làm mất ngữ nghĩa của tiếng Việt. Chuyển toàn bộ text về in thường (lowercase).
+- **Masking thông tin định danh (PII):** Sử dụng Regular Expressions (Regex) để tìm và thay thế các chuỗi ký tự thành thẻ định danh tĩnh nhằm tránh việc mô hình học vẹt:
+  - Các đường link/URL thay bằng `<URL>`.
+  - Các số điện thoại thay bằng `<PHONE>`.
+  - Các con số đại diện cho số tiền thay bằng `<MONEY>`.
+  - Địa chỉ email thay bằng `<EMAIL>`.
+- **Chống rò rỉ dữ liệu (Data Leakage):** Viết logic để gom nhóm các tin nhắn trùng lặp hoặc gần giống nhau (sử dụng thuật toán MinHash LSH hoặc so khớp template) vào cùng một `duplicate_group`. Khi sử dụng `train_test_split`, phải dùng kỹ thuật `GroupShuffleSplit` (hoặc Group K-Fold) để đảm bảo toàn bộ các tin nhắn trong cùng một nhóm phải nằm trọn vẹn ở tập Train hoặc tập Test, tuyệt đối không bị tách rời để mô hình không "nhìn trộm" được dữ liệu.
+
+#### 2. Module Chuẩn bị Dữ liệu (Dataset & DataLoader)
+- **Gán nhãn (Labeling):** Gom tất cả các nhãn Spam (quảng cáo) và Scam/Smishing (lừa đảo) từ các dataset lại thành nhãn chung 1 (Risky). Nhãn Ham (Hợp lệ) được giữ nguyên là 0.
+- **Xây dựng từ vựng:** Viết class `Vocab` để tạo bộ từ vựng từ tập Train, có xử lý các token đặc biệt (như `<PAD>`, `<UNK>`).
+- **PyTorch Dataset:** Viết class kế thừa từ `torch.utils.data.Dataset` để biến đổi văn bản thành các tensor số nguyên chuẩn bị cho mô hình.
+
+#### 3. Module Mô hình Học sâu (TextCNN bằng PyTorch)
+Xây dựng mô hình TextCNN từ đầu bằng PyTorch (tuyệt đối không dùng pre-trained model theo quy định của môn học):
+- Sử dụng lớp `nn.Embedding` khởi tạo ngẫu nhiên, ánh xạ chỉ số từ vựng thành vector (ví dụ: `embedding_dim=100`).
+- Sử dụng nhiều lớp `nn.Conv1d` song song với các kích thước `kernel_size = [2, 3, 4]` để quét và học các cụm từ (n-gram) đáng ngờ.
+- Áp dụng hàm kích hoạt ReLU và `nn.MaxPool1d` để trích xuất đặc trưng có tín hiệu mạnh nhất.
+- Lớp Fully Connected (`nn.Linear`) cuối cùng chỉ có `out_features=2` (tương ứng với bài toán 2 lớp phân loại).
+
+#### 4. Module Huấn luyện và Xử lý Mất cân bằng (Training Loop)
+- **Xử lý mất cân bằng nhãn:** Viết hàm tính toán trọng số của lớp thiểu số (Lớp 1 - Risky) do số lượng tin nhắn rác/lừa đảo thường ít hơn rất nhiều so với tin nhắn hợp lệ. Truyền tensor trọng số này vào hàm Mất mát: `criterion = nn.CrossEntropyLoss(weight=class_weights_tensor)`. (Hoặc sử dụng `BCEWithLogitsLoss` kèm `pos_weight`).
+- **Vòng lặp Training:** Viết vòng lặp train tiêu chuẩn qua các epoch, bao gồm các bước `forward()`, `backward()`, và `optimizer.step()`. Cần tính toán hàm loss trên tập Validation sau mỗi epoch để theo dõi và chống tình trạng overfitting.
+
+#### 5. Module Đánh giá và Xuất Model (Evaluation & Export)
+Tuyệt đối không sử dụng độ chính xác tổng (Accuracy) làm thước đo chính do tính chất mất cân bằng của dữ liệu.
+- Viết hàm đánh giá tính toán các độ đo: Precision (tập trung vào lớp 1), Recall, Macro-F1 và in ra bảng Confusion Matrix (Ma trận nhầm lẫn) để theo dõi tỷ lệ Dương tính giả / Âm tính giả.
+- **Lưu mô hình:** Viết code lưu toàn bộ trạng thái (weights) của mô hình ra file `model_state_dict.pt` và cấu hình của bộ từ vựng ra file `vocabulary.json` để sử dụng cho file chạy demo.
+
+#### 6. Module Suy luận (Inference Workflow)
+Viết một hàm `predict_sms(text, model, vocab)` để dự đoán tin nhắn mới:
+1. Đưa text qua hàm `preprocess_text` để làm sạch và mask các thông tin.
+2. Chuyển văn bản thành tensor tương ứng dựa vào `vocab`.
+3. Đẩy dữ liệu qua mô hình TextCNN để tính toán xác suất.
+4. Nếu kết quả dự đoán là 0 -> Trả về kết quả: "Tin nhắn Hợp lệ (Legitimate)".
+5. Nếu kết quả dự đoán là 1 -> Trả về kết quả: "CẢNH BÁO ĐÁNG NGỜ (Risky - Spam/Scam)".
