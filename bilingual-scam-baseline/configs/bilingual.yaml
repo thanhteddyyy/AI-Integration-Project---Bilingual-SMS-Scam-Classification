@@ -1,0 +1,56 @@
+seed: 42
+
+paths:
+  processed_dir: data/processed_bilingual
+  reports_dir: reports/bilingual
+  artifacts_dir: artifacts/bilingual
+  # Placeholder default paths to pass config validation
+  sms_phishing: data/raw/Dataset_5971.csv
+  smishx: data/raw/dataset.csv
+  imc25: data/raw/final_dataset_output.csv
+
+data:
+  language: bilingual
+  min_clean_characters: 1
+  class_order: [legitimate, spam, scam]
+  drop_exact_duplicates: true
+  extra_datasets: []
+
+split:
+  train_fraction: 0.70
+  validation_fraction: 0.15
+  test_fraction: 0.15
+
+models:
+  naive_bayes:
+    word_ngram_range: [1, 2]
+    min_df: 2
+    max_df: 0.995
+    max_features: 150000
+    sublinear_tf: true
+    alpha: 0.1
+  svm:
+    word_ngram_range: [1, 2]
+    char_ngram_range: [3, 5]
+    min_df: 2
+    max_df: 0.995
+    word_max_features: 150000
+    char_max_features: 200000
+    sublinear_tf: true
+    C: 1.0
+    class_weight: balanced
+  charcnn:
+    max_length: 256
+    max_vocab_size: 512
+    min_char_frequency: 1
+    embedding_dim: 64
+    channels: 128
+    kernels: [3, 4, 5, 7]
+    dropout: 0.35
+    batch_size: 64
+    epochs: 15
+    learning_rate: 0.001
+    weight_decay: 0.0001
+    patience: 3
+    class_weight: balanced
+

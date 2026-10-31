@@ -1,0 +1,12 @@
+split,label_level_1,rows
+external_test,legitimate,8824
+external_test,spam,1285
+test,legitimate,430
+test,scam,60
+test,spam,57
+train,legitimate,500
+train,scam,500
+train,spam,500
+validation,legitimate,207
+validation,scam,31
+validation,spam,43

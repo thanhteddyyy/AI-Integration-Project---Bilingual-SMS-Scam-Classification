@@ -1,0 +1,12 @@
+{
+  "best_model": {
+    "model": "svm",
+    "selection_split": "validation",
+    "selection_metric": "macro_f1",
+    "validation_macro_f1": 0.8366417833849887,
+    "tie_breaker": "scam_recall"
+  },
+  "models_compared": [
+    "svm"
+  ]
+}

@@ -1,0 +1,64 @@
+seed: 42
+
+paths:
+  processed_dir: data/processed_vi_balanced
+  reports_dir: reports/vietnamese_balanced
+  artifacts_dir: artifacts/vietnamese_balanced
+
+data:
+  language: vi
+  min_clean_characters: 1
+  class_order: [legitimate, spam, scam]
+  test_dataset: spamscam_test
+  external_dataset: [vie_sms_corpus, social_spam_post]
+  drop_exact_duplicates: true
+  extra_datasets:
+    - name: spamscam_train
+      path: data/raw/train_dataset_spamscam_reannotated.csv
+      text_column: message
+      label_column: label_3class
+      language: vi
+      encoding: utf-8
+      label_mapping:
+        legitimate: legitimate
+        spam: spam
+        scam: scam
+
+split:
+  train_fraction: 0.85
+  validation_fraction: 0.15
+  test_fraction: 0.0
+
+models:
+  naive_bayes:
+    word_ngram_range: [1, 2]
+    min_df: 2
+    max_df: 0.995
+    max_features: 60000
+    sublinear_tf: true
+    alpha: 0.5
+  svm:
+    word_ngram_range: [1, 2]
+    char_ngram_range: [3, 5]
+    min_df: 2
+    max_df: 0.995
+    word_max_features: 60000
+    char_max_features: 100000
+    sublinear_tf: true
+    C: 1.0
+    class_weight: balanced
+  charcnn:
+    max_length: 256
+    max_vocab_size: 512
+    min_char_frequency: 1
+    embedding_dim: 64
+    channels: 128
+    kernels: [3, 4, 5, 7]
+    dropout: 0.35
+    batch_size: 64
+    epochs: 15
+    lr: 0.001
+    weight_decay: 0.0001
+    patience: 3
+    class_weight: balanced
+
