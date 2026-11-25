@@ -10,7 +10,7 @@ data:
   min_clean_characters: 1
   class_order: [legitimate, spam, scam]
   test_dataset: spamscam_test
-  external_dataset: [vie_sms_corpus, social_spam_post]
+  external_dataset: [vie_sms_corpus]  # social_spam_post removed: see vietnamese_3class.yaml
   drop_exact_duplicates: true
   extra_datasets:
     - name: spamscam_train

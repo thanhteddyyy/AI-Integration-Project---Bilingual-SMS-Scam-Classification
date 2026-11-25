@@ -11,3 +11,7 @@ data/processed/*
 reports/*
 !reports/.gitkeep
 
+
+crawl_data_scam/
+crawl_data_scam.zip
+*.zip

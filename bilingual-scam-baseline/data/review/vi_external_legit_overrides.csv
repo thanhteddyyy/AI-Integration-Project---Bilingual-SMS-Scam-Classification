@@ -1,0 +1,6 @@
+﻿group_id,text_clean,original_label,review_label,review_note,group_member_ids
+grp_1f34503f65b4a355a94e,KM,legitimate,drop,"Mảnh câu / chỉ có email, không phải tin nhắn hoàn chỉnh",sample_dc60824d3c4054a8ad03
+grp_b0b680156a61f6d48c68,(2/2)t dong tren 90 ngay. LH 19008198 (200d/p).,legitimate,drop,"Mảnh câu / chỉ có email, không phải tin nhắn hoàn chỉnh",sample_660ac095f1a7371a5ad6
+grp_5409fcd5a2daa6fbc324,Hanhnt8@techcombank.com.vn,legitimate,drop,"Mảnh câu / chỉ có email, không phải tin nhắn hoàn chỉnh",sample_f91d7af9017a9fde1ed0
+grp_0a72ae5c9709380365a1,Cac cuoc goi nho: 28/02/2015 +841239665320 +22:55 02 (QC) Co hoi nhan 5 cay vang SJC khi dang ky DV Nhac cho soan NC gui 123 (cuoc 9000d/thang),legitimate,spam,Người dùng chốt 24/11: báo cuộc gọi nhỡ kèm (QC) dụ đăng ký DV (Câu B) = spam,sample_c087aa43704f6f743b9c;sample_db9aa71599f7999c8174
+grp_3356f2d6a224d59fa7ae,Cac cuoc goi nho: 09/03/2015 +84946822943 +22:11 01 (QC) Soan DKV5 gui 123 de tai ngay 50 ban nhac cho HOT nhat voi chi 2000d/tuan.,legitimate,spam,Người dùng chốt 24/11: báo cuộc gọi nhỡ kèm (QC) dụ đăng ký DV (Câu B) = spam,sample_93e51e529de24c829045;sample_2fd88daa2fc1030e62be;sample_6fb5baaf42ea68a1e18e;sample_2db177405e9b35f3dfab;sample_36e242ac318216d0b127;sample_51d017bbd8e9f6c198a3;sample_54addac7874cf4a4b4cb;sample_f17eb211c15caab9fe18;sample_c3a061f72748729392a2
