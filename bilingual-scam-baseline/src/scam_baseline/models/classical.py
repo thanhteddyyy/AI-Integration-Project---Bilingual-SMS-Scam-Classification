@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import unicodedata
 from pathlib import Path
 
 import joblib
@@ -14,12 +15,29 @@ from ..evaluation import evaluate_predictions
 from ..io_utils import ensure_dir, write_json
 
 
+def strip_vietnamese_accents(text: str) -> str:
+    """Remove diacritics incl. đ/Đ (sklearn's 'unicode' option keeps đ)."""
+    decomposed = unicodedata.normalize("NFD", text)
+    stripped = "".join(ch for ch in decomposed if not unicodedata.combining(ch))
+    return stripped.replace("đ", "d").replace("Đ", "D")
+
+
+def _strip_accents_option(model_cfg: dict):
+    """models.<name>.strip_accents: null (keep diacritics) | 'vietnamese' | 'unicode' | 'ascii'."""
+    value = model_cfg.get("strip_accents")
+    if value in (None, "none", False):
+        return None
+    if value == "vietnamese":
+        return strip_vietnamese_accents
+    return value
+
+
 def build_naive_bayes(config: dict) -> Pipeline:
     model_cfg = config["models"]["naive_bayes"]
     vectorizer = TfidfVectorizer(
         analyzer="word",
         lowercase=True,
-        strip_accents=None,
+        strip_accents=_strip_accents_option(model_cfg),
         ngram_range=tuple(model_cfg["word_ngram_range"]),
         min_df=model_cfg["min_df"],
         max_df=model_cfg["max_df"],
@@ -30,7 +48,14 @@ def build_naive_bayes(config: dict) -> Pipeline:
     return Pipeline(
         [
             ("tfidf", vectorizer),
-            ("classifier", MultinomialNB(alpha=float(model_cfg["alpha"]))),
+            (
+                "classifier",
+                MultinomialNB(
+                    alpha=float(model_cfg["alpha"]),
+                    # false = uniform class prior: NB's counterpart of class_weight=balanced
+                    fit_prior=bool(model_cfg.get("fit_prior", True)),
+                ),
+            ),
         ]
     )
 
@@ -44,7 +69,7 @@ def build_svm(config: dict) -> Pipeline:
                 TfidfVectorizer(
                     analyzer="word",
                     lowercase=True,
-                    strip_accents=None,
+                    strip_accents=_strip_accents_option(model_cfg),
                     ngram_range=tuple(model_cfg["word_ngram_range"]),
                     min_df=model_cfg["min_df"],
                     max_df=model_cfg["max_df"],
@@ -58,7 +83,7 @@ def build_svm(config: dict) -> Pipeline:
                 TfidfVectorizer(
                     analyzer="char_wb",
                     lowercase=True,
-                    strip_accents=None,
+                    strip_accents=_strip_accents_option(model_cfg),
                     ngram_range=tuple(model_cfg["char_ngram_range"]),
                     min_df=model_cfg["min_df"],
                     max_df=model_cfg["max_df"],

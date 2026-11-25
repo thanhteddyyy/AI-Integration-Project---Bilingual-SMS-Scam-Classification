@@ -96,6 +96,49 @@ class AdapterTests(unittest.TestCase):
             self.assertEqual(result["label_level_1"].tolist(), ["legitimate", "risky"])
             self.assertEqual(result["text_raw"].tolist(), ["Tin nhan hop le", "Tin nhan lua dao"])
 
+    def test_custom_dataset_scam_type_column_only_for_scam(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "vi.csv"
+            pd.DataFrame(
+                {
+                    "message": ["a", "b", "c", "d"],
+                    "label_3class": ["legitimate", "scam", "spam", "scam"],
+                    "scam_type": ["none", "banking_finance", "none", ""],
+                }
+            ).to_csv(path, index=False)
+            spec = {
+                "name": "vi",
+                "path": str(path),
+                "text_column": "message",
+                "label_column": "label_3class",
+                "scam_type_column": "scam_type",
+                "language": "vi",
+                "label_mapping": {"legitimate": "legitimate", "spam": "spam", "scam": "scam"},
+            }
+            result = load_custom_dataset(spec, directory)
+            self.assertEqual(
+                result["scam_type"].tolist(),
+                ["unknown", "banking_finance", "unknown", "unknown"],
+            )
+
+
+class EnglishPlaceholderTests(unittest.TestCase):
+    def test_imc_tags_and_raw_text_end_up_identical(self):
+        from scam_baseline.data.adapters import normalize_en_placeholders as norm
+
+        imc = "CALL <NAMED_ENTITY> ON <PHONE_NUMBER> BEFORE <DATE_TIME> OR VISIT <URL>"
+        raw = "CALL ON 0871 230 0220 BEFORE 12/05/2024 OR VISIT http://bit.ly/abc"
+        self.assertEqual(norm(imc), norm(raw))
+        self.assertEqual(norm(raw), "CALL ON <PHONE> BEFORE <DATE_TIME> OR VISIT <URL>")
+
+    def test_ids_emails_times_and_money(self):
+        from scam_baseline.data.adapters import normalize_en_placeholders as norm
+
+        self.assertEqual(norm("code <US_DRIVER_LICENSE> mail a.b@x.com at 10:30pm"),
+                         "code <NUMBER> mail <EMAIL> at <DATE_TIME>")
+        self.assertEqual(norm("Refund of $573.00 to amazon.com/x"), "Refund of $573.00 to <URL>")
+        self.assertEqual(norm("ref 1234567"), "ref <NUMBER>")
+
 
 if __name__ == "__main__":
     unittest.main()

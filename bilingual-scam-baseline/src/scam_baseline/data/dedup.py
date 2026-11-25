@@ -7,6 +7,7 @@ from difflib import SequenceMatcher
 import pandas as pd
 
 from .clean import stable_hash, strict_duplicate_key, template_duplicate_key
+from .family import template_families
 
 
 class UnionFind:
@@ -150,6 +151,24 @@ def assign_duplicate_groups(
     ].transform("nunique")
     result["label_conflict"] = result["group_label_count"] > 1
 
+    # Template families (looser than duplicate groups): used only to decide splits, so that a
+    # near-copy of a test message (other bank name / link / amount) never sits in train.
+    family_threshold = dedup_cfg.get("family_jaccard")
+    if family_threshold:
+        families = template_families(
+            result["text_clean"].tolist(),
+            float(family_threshold),
+            link_groups=result["group_id"].tolist(),
+        )
+        family_key = (
+            pd.DataFrame({"family": families, "group_id": result["group_id"]})
+            .groupby("family")["group_id"]
+            .transform("min")
+        )
+        result["family_id"] = "fam_" + family_key.str.removeprefix("grp_")
+    else:
+        result["family_id"] = result["group_id"]
+
     report: dict[str, int | float | bool] = {
         "rows": len(result),
         "strict_duplicate_rows": int((result["exact_duplicate_count"] > 1).sum()),
@@ -162,6 +181,8 @@ def assign_duplicate_groups(
         ),
         "fuzzy_enabled": bool(dedup_cfg.get("fuzzy_enabled", True)),
         "fuzzy_pair_matches": fuzzy_matches,
+        "family_jaccard": float(family_threshold) if family_threshold else None,
+        "template_families": int(result["family_id"].nunique()),
     }
     return result, report
 

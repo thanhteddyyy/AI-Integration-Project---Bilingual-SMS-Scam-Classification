@@ -30,6 +30,7 @@ models:
     max_features: 120000
     sublinear_tf: true
     alpha: 0.5
+    fit_prior: false  # training set is no longer down-sampled (balance_datasets v2)
   svm:
     word_ngram_range: [1, 2]
     char_ngram_range: [3, 5]

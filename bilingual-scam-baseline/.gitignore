@@ -15,3 +15,5 @@ reports/*
 crawl_data_scam/
 crawl_data_scam.zip
 *.zip
+
+data/processed_vi_exp_*/

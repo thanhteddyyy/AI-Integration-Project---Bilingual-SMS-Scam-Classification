@@ -138,5 +138,32 @@ class SplitTests(unittest.TestCase):
         assert_no_group_leakage(result)
 
 
+    def test_family_id_keeps_template_family_in_one_split(self):
+        rows = []
+        for label in ["legitimate", "spam", "scam"]:
+            for family in range(10):
+                for member in range(3):  # 3 different duplicate groups per family
+                    rows.append({
+                        "source_dataset": "sms_phishing",
+                        "text_clean": f"{label} {family} {member}",
+                        "label_level_1": label,
+                        "group_id": f"{label}_{family}_{member}",
+                        "family_id": f"fam_{label}_{family}",
+                        "strict_duplicate_key": f"{label}_{family}_{member}",
+                        "label_conflict": False,
+                        "exact_duplicate_rank": 1,
+                    })
+        result = assign_splits(pd.DataFrame(rows), self._config())
+        self.assertTrue((result.groupby("family_id")["split"].nunique() == 1).all())
+        assert_no_group_leakage(result)
+
+    def test_leakage_check_covers_family_id(self):
+        frame = pd.DataFrame({
+            "group_id": ["a", "b"], "family_id": ["f", "f"], "split": ["train", "test"],
+        })
+        with self.assertRaises(AssertionError):
+            assert_no_group_leakage(frame)
+
+
 if __name__ == "__main__":
     unittest.main()

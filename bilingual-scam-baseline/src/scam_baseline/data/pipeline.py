@@ -23,6 +23,7 @@ MASTER_COLUMNS = [
     "label_level_1",
     "scam_type",
     "group_id",
+    "family_id",
     "split",
     "exclusion_reason",
     "exact_duplicate_rank",
@@ -39,6 +40,7 @@ MASTER_COLUMNS = [
 
 def prepare_data(config: dict) -> tuple[pd.DataFrame, dict]:
     frame = load_all_sources(config)
+    override_report = frame.attrs.get("label_overrides")
     frame["text_raw"] = frame["text_raw"].fillna("").astype(str)
     frame["text_clean"] = frame["text_raw"].map(clean_text)
     frame["sample_id"] = frame.apply(
@@ -70,6 +72,8 @@ def prepare_data(config: dict) -> tuple[pd.DataFrame, dict]:
     split_summary.to_csv(processed_dir / "split_summary.csv", index=False)
 
     report = build_quality_report(frame, dedup_report, config)
+    if override_report:
+        report["label_overrides"] = override_report
     write_json(report, reports_dir / "data_quality_report.json")
     exclusions = (
         frame.loc[frame["split"].eq("excluded"), "exclusion_reason"]

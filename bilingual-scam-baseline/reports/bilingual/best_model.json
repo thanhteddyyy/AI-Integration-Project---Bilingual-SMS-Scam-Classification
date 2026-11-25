@@ -2,11 +2,13 @@
   "best_model": {
     "model": "svm",
     "selection_split": "validation",
-    "selection_metric": "macro_f1",
-    "validation_macro_f1": 0.8366417833849887,
-    "tie_breaker": "scam_recall"
+    "selection_metric": "scam_f2",
+    "validation_scam_f2": 0.9364764695742114,
+    "tie_breaker": "macro_f1",
+    "validation_macro_f1": 0.8664836812058702
   },
   "models_compared": [
+    "naive_bayes",
     "svm"
   ]
 }

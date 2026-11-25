@@ -14,8 +14,33 @@ from sklearn.metrics import (
     classification_report,
     confusion_matrix,
     f1_score,
+    fbeta_score,
+    matthews_corrcoef,
     precision_recall_fscore_support,
 )
+
+# F-beta for the positive (scam/risky) class. beta=2 weighs recall twice as much as precision:
+# missing a scam costs the user more than a false alarm.
+SCAM_F_BETA = 2.0
+
+
+def wilson_interval(successes: int, total: int, z: float = 1.96) -> list[float] | None:
+    """95% Wilson score interval for a proportion (e.g. scam recall on a small external set)."""
+    if total <= 0:
+        return None
+    p = successes / total
+    denom = 1 + z * z / total
+    centre = (p + z * z / (2 * total)) / denom
+    half = z * np.sqrt(p * (1 - p) / total + z * z / (4 * total * total)) / denom
+    return [float(max(0.0, centre - half)), float(min(1.0, centre + half))]
+
+
+def positive_label_for(class_order: list[str]) -> str:
+    if "scam" in class_order:
+        return "scam"
+    if "risky" in class_order:
+        return "risky"
+    return class_order[-1]
 
 from .io_utils import ensure_dir, write_json
 
@@ -40,16 +65,39 @@ def compute_metrics(
         }
         for index, label in enumerate(class_order)
     }
-    # Dynamically select the positive class for the dedicated scam/risky metrics
-    positive_label = "scam" if "scam" in per_class else ("risky" if "risky" in per_class else class_order[-1])
+    positive_label = positive_label_for(class_order)
+    scam_f2 = fbeta_score(
+        truth,
+        prediction,
+        beta=SCAM_F_BETA,
+        labels=[positive_label],
+        average=None,
+        zero_division=0,
+    )
+    # MCC is undefined (sklearn returns 0) when only one class is present in truth and prediction.
+    mcc = matthews_corrcoef(truth, prediction) if len(set(truth) | set(prediction)) > 1 else 0.0
+    positives = [p for t, p in zip(truth, prediction) if t == positive_label]
+    negatives = [p for t, p in zip(truth, prediction) if t != positive_label]
+    false_alarms = sum(p == positive_label for p in negatives)
     return {
         "accuracy": float(accuracy_score(truth, prediction)),
         "macro_f1": float(f1_score(truth, prediction, average="macro", zero_division=0)),
         "weighted_f1": float(
             f1_score(truth, prediction, average="weighted", zero_division=0)
         ),
+        "mcc": float(mcc),
+        "positive_label": positive_label,
+        "scam_support": per_class.get(positive_label, {}).get("support", 0),
         "scam_precision": per_class.get(positive_label, {}).get("precision", 0.0),
         "scam_recall": per_class.get(positive_label, {}).get("recall", 0.0),
+        "scam_f1": per_class.get(positive_label, {}).get("f1", 0.0),
+        "scam_f2": float(scam_f2[0]),
+        "scam_recall_ci95": wilson_interval(
+            sum(p == positive_label for p in positives), len(positives)
+        ),
+        # share of non-scam messages flagged as scam (false alarm rate)
+        "scam_fpr": float(false_alarms / len(negatives)) if negatives else 0.0,
+        "scam_fpr_ci95": wilson_interval(false_alarms, len(negatives)),
         "per_class": per_class,
         "confusion_matrix": confusion_matrix(
             truth, prediction, labels=class_order
@@ -88,6 +136,12 @@ def evaluate_predictions(
             group["label_level_1"], group["prediction"], class_order
         )
         for language, group in result.groupby("language")
+    }
+    # external_test mixes sources with different roles (e.g. vi_crawl = scam recall,
+    # vie_sms_corpus = false alarms), so report each one separately.
+    metrics["by_source"] = {
+        source: compute_metrics(group["label_level_1"], group["prediction"], class_order)
+        for source, group in result.groupby("source_dataset")
     }
     write_json(metrics, output / f"metrics_{split_name}.json")
     result[

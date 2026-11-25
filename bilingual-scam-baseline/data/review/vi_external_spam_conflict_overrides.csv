@@ -1,0 +1,13 @@
+group_member_ids,review_label,review_note
+sample_5fcdef9d0862d4af64d7,legitimate,"1.2 mã bảo mật/OTP (Facebook) – nhãn gốc spam sai, trùng với bản ham"
+sample_4d58db0179f5dda20e5a,legitimate,1.2 mã xác minh Google – nhãn gốc spam sai
+sample_2badc803f80556a1827e,legitimate,1.2 mã xác minh Google – nhãn gốc spam sai
+sample_bad31e63d9207f40866f,legitimate,1.2 mã xác minh Google – nhãn gốc spam sai
+sample_3231f5ccc4e32b8f7d60,drop,"Mảnh câu ""TC4"" (cú pháp người dùng tự gửi), không phải tin nhắn"
+sample_2780e132c8a936584c6d,legitimate,1.2 tin xác nhận đã từ chối nhận quảng cáo
+sample_cd2cdeff005150651e0f,legitimate,1.2 thông báo gián đoạn dịch vụ FPT Telecom
+sample_e9a4cf9cd936801efb8f,legitimate,"Tin cá nhân ""Ok"" – nhãn gốc spam sai"
+sample_710b44b934fd3eead35d,legitimate,"Tin trả lời nhanh ""Tôi đang họp"" – nhãn gốc spam sai"
+sample_807a70efcf18c2ea9d94,legitimate,"Tin trả lời nhanh ""Tôi đang họp"" – nhãn gốc spam sai"
+sample_91735fc1e59bcd6b3a48,legitimate,"Tin cá nhân ""Ok"" – nhãn gốc spam sai"
+sample_a4501071bb8dc9c22f72,legitimate,"Tin cá nhân ""Ok"" – nhãn gốc spam sai"

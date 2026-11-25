@@ -15,7 +15,12 @@ def load_config(config_path: str | Path) -> dict[str, Any]:
         raise ValueError(f"Config must contain a YAML mapping: {path}")
 
     config = deepcopy(config)
-    project_root = path.parent.parent
+    # project root = nearest ancestor holding src/scam_baseline (configs may live in sub-folders
+    # such as configs/experiments/); falls back to the old "parent of configs/" rule.
+    project_root = next(
+        (p for p in path.parents if (p / "src" / "scam_baseline").is_dir()),
+        path.parent.parent,
+    )
     config["_config_path"] = str(path)
     config["_project_root"] = str(project_root)
     for key, value in config.get("paths", {}).items():

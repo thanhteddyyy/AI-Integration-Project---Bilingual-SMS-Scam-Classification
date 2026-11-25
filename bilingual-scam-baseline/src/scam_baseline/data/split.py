@@ -10,6 +10,9 @@ def assign_splits(frame: pd.DataFrame, config: dict) -> pd.DataFrame:
     split_cfg = config["split"]
     result["split"] = "pending"
     result["exclusion_reason"] = ""
+    # Unit that must not be split across train / validation / test / external: the template
+    # family when deduplication.family_jaccard is set, otherwise the duplicate group.
+    key = "family_id" if "family_id" in result.columns else "group_id"
 
     invalid_text = result["text_clean"].str.len() < int(
         data_cfg.get("min_clean_characters", 1)
@@ -41,10 +44,10 @@ def assign_splits(frame: pd.DataFrame, config: dict) -> pd.DataFrame:
     # Exclude development rows overlapping with external test
     if external_names and split_cfg.get("external_overlap_policy") == "exclude_development":
         external_groups = set(
-            result.loc[result["source_dataset"].isin(external_names), "group_id"]
+            result.loc[result["source_dataset"].isin(external_names), key]
         )
         overlap_mask = (
-            result["group_id"].isin(external_groups)
+            result[key].isin(external_groups)
             & ~result["source_dataset"].isin(external_names)
             & result["split"].eq("pending")
         )
@@ -64,10 +67,10 @@ def assign_splits(frame: pd.DataFrame, config: dict) -> pd.DataFrame:
         # Exclude remaining development rows overlapping with internal test
         if split_cfg.get("test_overlap_policy", "exclude_development") == "exclude_development":
             internal_test_groups = set(
-                result.loc[result["source_dataset"].isin(test_names), "group_id"]
+                result.loc[result["source_dataset"].isin(test_names), key]
             )
             overlap_test_mask = (
-                result["group_id"].isin(internal_test_groups)
+                result[key].isin(internal_test_groups)
                 & ~result["source_dataset"].isin(test_names)
                 & result["split"].eq("pending")
             )
@@ -89,8 +92,9 @@ def assign_splits(frame: pd.DataFrame, config: dict) -> pd.DataFrame:
 
     eligible = result[result["split"].eq("pending")]
     groups = (
-        eligible.groupby("group_id", as_index=False)
+        eligible.groupby(key, as_index=False)
         .agg(label_level_1=("label_level_1", "first"))
+        .rename(columns={key: "group_id"})
         .sort_values("group_id")
         .reset_index(drop=True)
     )
@@ -133,7 +137,7 @@ def assign_splits(frame: pd.DataFrame, config: dict) -> pd.DataFrame:
         )
 
     result.loc[result["split"].eq("pending"), "split"] = result.loc[
-        result["split"].eq("pending"), "group_id"
+        result["split"].eq("pending"), key
     ].map(assignments)
     if result["split"].isna().any() or result["split"].eq("pending").any():
         raise RuntimeError("Split assignment left unresolved rows")
@@ -157,10 +161,13 @@ def _stratified_group_partition(
 
 def assert_no_group_leakage(frame: pd.DataFrame) -> None:
     active = frame[frame["split"].isin(["train", "validation", "test", "external_test"])]
-    group_split_count = active.groupby("group_id")["split"].nunique()
-    leaking = group_split_count[group_split_count > 1]
-    if not leaking.empty:
-        raise AssertionError(
-            f"Found {len(leaking)} duplicate groups across active splits"
-        )
+    for key in ("group_id", "family_id"):
+        if key not in active.columns:
+            continue
+        group_split_count = active.groupby(key)["split"].nunique()
+        leaking = group_split_count[group_split_count > 1]
+        if not leaking.empty:
+            raise AssertionError(
+                f"Found {len(leaking)} {key} values across active splits"
+            )
 

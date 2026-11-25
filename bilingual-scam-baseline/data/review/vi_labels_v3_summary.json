@@ -1,0 +1,80 @@
+{
+  "tuan": {
+    "family_jaccard": 0.5,
+    "families_total": 1835,
+    "full_v3": {
+      "legitimate": 2065,
+      "scam": 641,
+      "spam": 285
+    },
+    "train_before_family_filter": {
+      "legitimate": 1736,
+      "scam": 518,
+      "spam": 140
+    },
+    "train_removed_family_overlap": {
+      "scam": 128,
+      "legitimate": 53,
+      "spam": 18
+    },
+    "train_v3": {
+      "legitimate": 1683,
+      "scam": 390,
+      "spam": 122
+    },
+    "test_v3": {
+      "legitimate": 329,
+      "spam": 145,
+      "scam": 123
+    },
+    "train_v3_scam_type": {
+      "prize_lottery": 79,
+      "other_scam": 74,
+      "banking_finance": 71,
+      "government_services": 54,
+      "investment": 49,
+      "job_task_scam": 40,
+      "delivery_logistics": 15,
+      "telecom_account": 7,
+      "social_impersonation": 1
+    },
+    "test_v3_scam_type": {
+      "banking_finance": 57,
+      "prize_lottery": 22,
+      "government_services": 17,
+      "job_task_scam": 12,
+      "social_impersonation": 6,
+      "delivery_logistics": 5,
+      "investment": 3,
+      "telecom_account": 1
+    }
+  },
+  "vie_sms_corpus": {
+    "rows_raw": 6570,
+    "rows_dropped": 66,
+    "rows_label_propagated_from_duplicate": 322,
+    "rows_duplicate_key_conflict": 0,
+    "spam_rows_not_reviewed": 0,
+    "v3": {
+      "legitimate": 6123,
+      "spam": 381
+    },
+    "label_source": {
+      "original": 5386,
+      "review_v3_spam": 812,
+      "propagated_duplicate": 284,
+      "override_legit": 11,
+      "override_spam_conflict": 11
+    },
+    "halves": {
+      "dev": {
+        "legitimate": 3058,
+        "spam": 191
+      },
+      "holdout": {
+        "legitimate": 3065,
+        "spam": 190
+      }
+    }
+  }
+}

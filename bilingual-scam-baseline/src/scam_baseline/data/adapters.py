@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
+
+from .overrides import apply_label_overrides
 
 
 LEVEL1_MAP = {
@@ -23,6 +26,52 @@ IMC_SCAM_TYPE_MAP = {
     "hey mum/dad": "social_impersonation",
     "others": "other_scam",
 }
+
+
+# ---------------------------------------------------------------------------
+# English placeholder normalisation (data.normalize_en_placeholders)
+# ---------------------------------------------------------------------------
+# IMC25 ships text already anonymised with Presidio tags (<PHONE_NUMBER>, <NAMED_ENTITY>, ...)
+# while sms_phishing / SmishX contain raw numbers and links. Without normalisation a model can
+# learn "has a <TAG> => scam/spam" because IMC25 has no legitimate messages. We map every source
+# to the same small tag set and apply the same regex masking to all English rows.
+EN_TAG_MAP = {
+    "URL": "<URL>", "IP_ADDRESS": "<URL>",
+    "PHONE_NUMBER": "<PHONE>", "PHONE": "<PHONE>",
+    "EMAIL_ADDRESS": "<EMAIL>", "EMAIL": "<EMAIL>",
+    "DATE_TIME": "<DATE_TIME>", "TIME": "<DATE_TIME>", "DATE": "<DATE_TIME>",
+    # identifiers / numbers
+    "US_DRIVER_LICENSE": "<NUMBER>", "US_BANK_NUMBER": "<NUMBER>", "UK_NHS": "<NUMBER>",
+    "US_PASSPORT": "<NUMBER>", "MEDICAL_LICENSE": "<NUMBER>", "US_SSN": "<NUMBER>",
+    "CREDIT_CARD": "<NUMBER>", "US_ITIN": "<NUMBER>", "IBAN_CODE": "<NUMBER>",
+    "DECIMAL": "<NUMBER>", "NUMBER": "<NUMBER>",
+}
+# NER tags (<NAMED_ENTITY>, <LOCATION>, <NRP>, <PERSON>, ...) cannot be reproduced on the other
+# sources, so any tag not in EN_TAG_MAP is removed.
+_EN_TAG_RE = re.compile(r"<([A-Za-z_]+)>")
+_EN_URL_RE = re.compile(
+    r"(?i)\b(?:https?://|www\.)\S+|\b[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:com|net|org|co|uk|io|ly|me|info|biz|"
+    r"xyz|top|vip|club|online|site|link|app|us|in|ru|cn)(?:/\S*)?"
+)
+_EN_EMAIL_RE = re.compile(r"\b[\w.+-]+@[\w-]+\.[\w.-]+\b")
+_EN_TIME_RE = re.compile(r"(?i)\b\d{1,2}[:.]\d{2}(?:\s?[ap]\.?m\.?)?\b|\b\d{1,2}\s?[ap]\.?m\b")
+_EN_DATE_RE = re.compile(r"\b\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?\b")
+_EN_PHONE_RE = re.compile(r"(?<![\w$£€])\+?\d[\d\s().-]{7,}\d(?![\w%])")
+_EN_LONG_NUMBER_RE = re.compile(r"(?<![\w$£€.,])\d{5,}(?![\w%])")
+
+
+def normalize_en_placeholders(text: str) -> str:
+    def tag(match: re.Match) -> str:
+        return f" {EN_TAG_MAP.get(match.group(1).upper(), '')} "
+
+    value = _EN_TAG_RE.sub(tag, str(text))
+    value = _EN_EMAIL_RE.sub(" <EMAIL> ", value)
+    value = _EN_URL_RE.sub(" <URL> ", value)
+    value = _EN_TIME_RE.sub(" <DATE_TIME> ", value)
+    value = _EN_DATE_RE.sub(" <DATE_TIME> ", value)
+    value = _EN_PHONE_RE.sub(" <PHONE> ", value)
+    value = _EN_LONG_NUMBER_RE.sub(" <NUMBER> ", value)
+    return re.sub(r"\s+", " ", value).strip()
 
 
 def _metadata_json(row: pd.Series, columns: list[str]) -> str:
@@ -190,6 +239,12 @@ def load_custom_dataset(spec: dict[str, Any], project_root: str | Path) -> pd.Da
     normalized = output["label_original"].str.strip().str.casefold()
     output["label_level_1"] = normalized.map(mapping)
     output["scam_type"] = "unknown"
+    scam_type_column = spec.get("scam_type_column")
+    if scam_type_column:
+        _require_columns(raw, {scam_type_column}, str(spec["name"]))
+        scam_type = raw[scam_type_column].reset_index(drop=True).astype("string").str.strip()
+        is_scam = output["label_level_1"].eq("scam")
+        output.loc[is_scam, "scam_type"] = scam_type[is_scam].fillna("unknown").replace("", "unknown")
     return output
 
 
@@ -222,7 +277,18 @@ def load_all_sources(config: dict[str, Any]) -> pd.DataFrame:
 
     if not frames:
         raise ValueError("No datasets could be loaded. Please check your data paths.")
-    return pd.concat(frames, ignore_index=True)
+    frame = pd.concat(frames, ignore_index=True)
+    if data_cfg.get("normalize_en_placeholders"):
+        english = frame["language"].eq("en")
+        frame.loc[english, "text_raw"] = (
+            frame.loc[english, "text_raw"].fillna("").map(normalize_en_placeholders).astype("string")
+        )
+    if data_cfg.get("label_overrides"):
+        frame, override_report = apply_label_overrides(
+            frame, list(data_cfg["label_overrides"]), project_root
+        )
+        frame.attrs["label_overrides"] = override_report
+    return frame
 
 
 def _require_columns(

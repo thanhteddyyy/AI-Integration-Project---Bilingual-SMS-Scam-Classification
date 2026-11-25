@@ -10,37 +10,47 @@ data:
   min_clean_characters: 1
   class_order: [legitimate, risky]
   test_dataset: spamscam_test
-  external_dataset: [vie_sms_corpus]  # social_spam_post removed: see vietnamese_3class.yaml
+  external_dataset: [vie_sms_holdout]  # social_spam_post removed: see vietnamese_3class.yaml
   drop_exact_duplicates: true
+  # v3 labels + option-B train (see vietnamese_3class.yaml)
   extra_datasets:
     - name: spamscam_train
-      path: data/raw/train_dataset_spamscam.csv
+      path: data/raw/train_dataset_spamscam_v3.csv
       text_column: message
-      label_column: label
+      label_column: label_3class
       language: vi
       encoding: utf-8-sig
       label_mapping:
-        "0": legitimate
-        "1": risky
+        legitimate: legitimate
+        spam: risky
+        scam: risky
     - name: spamscam_test
-      path: data/raw/test_dataset_spamscam.csv
+      path: data/raw/test_dataset_spamscam_v3.csv
       text_column: message
-      label_column: label
+      label_column: label_3class
       language: vi
       encoding: utf-8-sig
       label_mapping:
-        "0": legitimate
-        "1": risky
-    - name: vie_sms_corpus
-      path: data/raw/corpus_dataset_vie-spam-sms-filtering.txt
+        legitimate: legitimate
+        spam: risky
+        scam: risky
+    - name: vie_sms_dev
+      path: data/raw/vie_sms_corpus_dev_v3.csv
       text_column: text
-      label_column: label
+      label_column: label_3class
       language: vi
-      sep: "\t"
-      names: [label, text]
-      encoding: utf-8
+      encoding: utf-8-sig
       label_mapping:
-        ham: legitimate
+        legitimate: legitimate
+        spam: risky
+    - name: vie_sms_holdout
+      path: data/raw/vie_sms_corpus_holdout_v3.csv
+      text_column: text
+      label_column: label_3class
+      language: vi
+      encoding: utf-8-sig
+      label_mapping:
+        legitimate: legitimate
         spam: risky
 
 deduplication:
@@ -52,6 +62,8 @@ deduplication:
   fuzzy_min_characters: 30
   fuzzy_threshold: 0.95
   fuzzy_max_candidates_per_bucket: 120
+  # 2026-11-25: whole template families (word 3-gram Jaccard >= 0.5) stay in one split
+  family_jaccard: 0.5
 
 split:
   train_fraction: 0.85

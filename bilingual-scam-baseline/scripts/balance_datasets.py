@@ -1,314 +1,330 @@
-import csv
-import json
+"""Build the training sets used by the bilingual model (v2, 2026-11-25).
+
+Replaces the old 500/500/500 (VI) and 2000/2000/2000 (EN) balancing, which threw away real data
+(VI legit 1,231 -> 500, EN scam 10,315 -> 2,000), produced exact-copy augmentations, edited only
+``text_clean`` (so meta-features from ``text_raw`` were wrong) and reused ``sample_id``s.
+
+Policy (handoff section 3.3):
+  * Keep every real train row; class imbalance is handled by ``class_weight: balanced`` in the models.
+  * English: only the scam class is capped (default 4,000), stratified by ``scam_type``.
+  * Vietnamese: optional augmentation of the minority classes (spam, scam), train split ONLY:
+    remove diacritics, synonym swap (with and without diacritics), entity swap (bank / courier /
+    telco / e-commerce names), teencode. At most ``--vi-max-aug-per-row`` variants per real message;
+    a variant is kept only if its text is new (not equal to any row in ANY split, nor to another
+    variant, compared on the pipeline's template key). Augmented rows get a fresh ``sample_id``,
+    ``is_augmented=True``, ``aug_parent_id``, ``aug_ops``; ``text_raw`` and ``text_clean`` are both
+    rewritten; ``group_id`` is the parent's so group-level leakage checks still hold.
+  * validation / test / external_test are never touched.
+
+Usage:
+  python scripts/balance_datasets.py                 # VI with augmentation + EN
+  python scripts/balance_datasets.py --no-vi-augment # VI real data only (for the ablation)
+  python scripts/balance_datasets.py --lang vi
+"""
+from __future__ import annotations
+
+import argparse
 import random
 import re
 import sys
 import unicodedata
-from collections import Counter
 from pathlib import Path
-import pandas as pd
-import numpy as np
 
-if hasattr(sys.stdout, 'reconfigure'):
-    sys.stdout.reconfigure(encoding='utf-8')
+import numpy as np
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from scam_baseline.data.clean import clean_text, stable_hash, template_duplicate_key  # noqa: E402
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 RANDOM_SEED = 42
-random.seed(RANDOM_SEED)
-np.random.seed(RANDOM_SEED)
+ACTIVE_SPLITS = ["train", "validation", "test", "external_test"]
 
-# =====================================================================
-# 1. VIETNAMESE DATA AUGMENTATION & BALANCING
-# =====================================================================
+# ---------------------------------------------------------------------------
+# Vietnamese augmentation resources
+# ---------------------------------------------------------------------------
+ENTITY_GROUPS = {
+    "bank": ["Vietcombank", "Techcombank", "ACB", "BIDV", "MBBank", "Sacombank", "VPBank",
+             "VietinBank", "TPBank", "Agribank", "VIB", "SHB", "HDBank", "OCB", "SeABank"],
+    "courier": ["GHTK", "GHN", "J&T Express", "Viettel Post", "VNPost", "Ninja Van", "Best Express"],
+    "telco": ["Viettel", "Vinaphone", "MobiFone"],
+    "shop": ["Shopee", "Lazada", "Tiki", "TikTok Shop"],
+}
 
-VI_BANKS = [
-    'Vietcombank', 'Techcombank', 'ACB', 'BIDV', 'MBBank', 'Sacombank', 
-    'VPBank', 'VietinBank', 'TPBank', 'Agribank', 'VIB', 'SHB', 'HDBank'
+# (pattern, replacements); accented and unaccented spellings are listed separately because
+# about 60% of the Vietnamese scam messages carry diacritics.
+SYNONYMS = [
+    (r"tài khoản", ["TK", "tài khoản của bạn"]),
+    (r"tai khoan", ["TK", "tai khoan cua ban"]),
+    (r"vui lòng", ["hãy", "quý khách vui lòng", "đề nghị"]),
+    (r"vui long", ["hay", "quy khach vui long", "de nghi"]),
+    (r"xác thực", ["xác minh", "cập nhật"]),
+    (r"xac thuc", ["xac minh", "cap nhat"]),
+    (r"đăng nhập", ["truy cập", "login"]),
+    (r"dang nhap", ["truy cap", "login"]),
+    (r"thông báo", ["TB", "cảnh báo"]),
+    (r"thong bao", ["TB", "canh bao"]),
+    (r"quý khách", ["QK", "bạn"]),
+    (r"quy khach", ["QK", "ban"]),
+    (r"miễn phí", ["free", "0đ", "hoàn toàn miễn phí"]),
+    (r"mien phi", ["free", "0d", "hoan toan mien phi"]),
+    (r"khuyến mãi", ["KM", "ưu đãi"]),
+    (r"khuyen mai", ["KM", "uu dai"]),
+    (r"liên hệ", ["LH", "gọi ngay"]),
+    (r"lien he", ["LH", "goi ngay"]),
+    (r"chúc mừng", ["xin chúc mừng", "chúc mừng bạn"]),
+    (r"chuc mung", ["xin chuc mung", "chuc mung ban"]),
+    (r"trúng thưởng", ["trúng giải", "nhận thưởng"]),
+    (r"trung thuong", ["trung giai", "nhan thuong"]),
+    (r"nhận ngay", ["nhận liền", "lĩnh ngay"]),
+    (r"nhan ngay", ["nhan lien", "linh ngay"]),
+    (r"truy cập", ["vào", "bấm vào"]),
+    (r"truy cap", ["vao", "bam vao"]),
+    (r"hết hạn", ["sắp hết hạn", "quá hạn"]),
+    (r"het han", ["sap het han", "qua han"]),
 ]
 
-VI_SYNONYMS = [
-    (r'\btai khoan\b', ['TK', 'tai khoan ca nhan', 'tai khoan ngan hang']),
-    (r'\bkhoa\b', ['tam ngung', 'tam khoa', 'chan giao dich']),
-    (r'\bthiet bi la\b', ['thiet bi khac', 'may la', 'thiet bi chua xac thuc']),
-    (r'\bvui long\b', ['quy khach vui long', 'hay', 'de nghi quy khach']),
-    (r'\bxac thuc\b', ['xac minh', 'cap nhat', 'kiem tra']),
-    (r'\bthong bao\b', ['TB', 'canh bao khan', 'thong diep']),
-    (r'\bngay\b', ['ngay lap tuc', 'hom nay', 'truoc 24h']),
-    (r'\bkich hoat\b', ['dang nhap', 'mo dich vu', 'su dung'])
+TEENCODE = [
+    (r"không", ["ko", "k", "hok"]),
+    (r"khong", ["ko", "k"]),
+    (r"được", ["đc", "dc"]),
+    (r"duoc", ["dc"]),
+    (r"anh/chị", ["a/c"]),
+    (r"anh/chi", ["a/c"]),
+    (r"rồi", ["r"]),
+    (r"với", ["vs"]),
+    (r"gì", ["j"]),
+    (r"nhé", ["nha", "nhá"]),
+    (r"tài khoản", ["tk"]),
+    (r"tai khoan", ["tk"]),
 ]
 
-def augment_vietnamese_scam(text: str) -> str:
-    """Generate high-quality entity-varied text for Vietnamese scam SMS."""
-    new_text = text
-    # 1. Swap Bank names if present
-    for bank in VI_BANKS:
-        if bank.lower() in new_text.lower():
-            target_bank = random.choice([b for b in VI_BANKS if b.lower() != bank.lower()])
-            pattern = re.compile(re.escape(bank), re.IGNORECASE)
-            new_text = pattern.sub(target_bank, new_text)
-            break
-            
-    # 2. Swap 1 or 2 synonym phrases
-    applied = 0
-    for pattern, replacements in VI_SYNONYMS:
-        if re.search(pattern, new_text, re.IGNORECASE) and random.random() < 0.5:
-            replacement = random.choice(replacements)
-            new_text = re.sub(pattern, replacement, new_text, count=1, flags=re.IGNORECASE)
-            applied += 1
-            if applied >= 2:
+
+def _word_re(pattern: str) -> re.Pattern:
+    return re.compile(rf"(?<!\w){pattern}(?!\w)", re.IGNORECASE)
+
+
+SYNONYM_RES = [(_word_re(p), r) for p, r in SYNONYMS]
+TEENCODE_RES = [(_word_re(p), r) for p, r in TEENCODE]
+ENTITY_RES = {
+    group: [(name, _word_re(re.escape(name))) for name in names] for group, names in ENTITY_GROUPS.items()
+}
+
+
+def has_diacritics(text: str) -> bool:
+    return any(unicodedata.combining(c) for c in unicodedata.normalize("NFD", text)) or "đ" in text.lower()
+
+
+def op_strip_diacritics(text: str, rng: random.Random) -> str | None:
+    if not has_diacritics(text):
+        return None
+    out = "".join(c for c in unicodedata.normalize("NFD", text) if not unicodedata.combining(c))
+    return unicodedata.normalize("NFC", out.replace("đ", "d").replace("Đ", "D"))
+
+
+def _swap_from(table, text: str, rng: random.Random, max_swaps: int) -> str | None:
+    candidates = [(rx, reps) for rx, reps in table if rx.search(text)]
+    if not candidates:
+        return None
+    rng.shuffle(candidates)
+    out = text
+    for rx, reps in candidates[:max_swaps]:
+        out = rx.sub(rng.choice(reps), out, count=1)
+    return out if out != text else None
+
+
+def op_synonym(text: str, rng: random.Random) -> str | None:
+    return _swap_from(SYNONYM_RES, text, rng, max_swaps=2)
+
+
+def op_teencode(text: str, rng: random.Random) -> str | None:
+    return _swap_from(TEENCODE_RES, text, rng, max_swaps=3)
+
+
+def op_entity(text: str, rng: random.Random) -> str | None:
+    found = [(group, name, rx) for group, items in ENTITY_RES.items() for name, rx in items if rx.search(text)]
+    if not found:
+        return None
+    group, name, rx = rng.choice(found)
+    target = rng.choice([n for n in ENTITY_GROUPS[group] if n.lower() != name.lower()])
+    return rx.sub(target, text)
+
+
+AUG_OPS = {
+    "strip_diacritics": op_strip_diacritics,
+    "synonym": op_synonym,
+    "entity": op_entity,
+    "teencode": op_teencode,
+}
+
+
+def make_variant(text: str, rng: random.Random) -> tuple[str, list[str]] | None:
+    """Apply 1-2 random applicable operations. Returns (new_text, ops) or None."""
+    names = list(AUG_OPS)
+    rng.shuffle(names)
+    wanted = rng.choice([1, 2])
+    out, applied = text, []
+    for name in names:
+        result = AUG_OPS[name](out, rng)
+        if result is not None:
+            out, applied = result, applied + [name]
+            if len(applied) >= wanted:
                 break
-                
-    # 3. Random money token perturbation if [MONEY] or digits present
-    if '[MONEY]' in new_text and random.random() < 0.3:
-        new_text = new_text.replace('[MONEY]', random.choice(['[MONEY]', '[MONEY] VND', 'so tien [MONEY]']))
-        
-    return new_text.strip()
-
-def augment_vietnamese_spam(text: str) -> str:
-    """Generate varied Vietnamese spam SMS without changing its spam semantics."""
-    new_text = text
-    # 1. Swap promotional / advertising synonyms if present
-    spam_synonyms = [
-        (r'\bkhuyen mai\b', ['KM', 'uu dai', 'chuong trinh KM']),
-        (r'\bưu đãi\b', ['khuyến mãi', 'quà tặng', 'chương trình ưu đãi']),
-        (r'\bmiễn phí\b', ['free', '0đ', 'hoàn toàn miễn phí']),
-        (r'\bmien phi\b', ['free', '0d', 'hoan toan mien phi']),
-        (r'\bnhận ngay\b', ['rinh ngay', 'nhận liền tay', 'sở hữu ngay']),
-        (r'\bnhan ngay\b', ['rinh ngay', 'nhan lien tay', 'so huu ngay']),
-        (r'\bliên hệ\b', ['LH', 'gọi ngay', 'inbox']),
-        (r'\blien he\b', ['LH', 'goi ngay', 'inbox']),
-    ]
-    applied = 0
-    for pattern, replacements in spam_synonyms:
-        if re.search(pattern, new_text, re.IGNORECASE) and random.random() < 0.6:
-            replacement = random.choice(replacements)
-            new_text = re.sub(pattern, replacement, new_text, count=1, flags=re.IGNORECASE)
-            applied += 1
-            if applied >= 2:
-                break
-
-    # 2. Insert or vary common promo prefixes if still identical or randomly
-    prefixes = ['[QC] ', '(QC) ', '[TB-KM] ', 'HOT: ', 'ƯU ĐÃI: ', 'KM: ']
-    if new_text == text or random.random() < 0.5:
-        clean_body = re.sub(r'^(\(TB\)|\(QC\)|\[QC\]|\[TB\]|HOT:)\s*', '', new_text, flags=re.IGNORECASE)
-        new_text = random.choice(prefixes) + clean_body
-
-    return new_text.strip()
+    return (out, applied) if applied and out != text else None
 
 
-def assert_zero_leakage_and_conflict(df: pd.DataFrame, dataset_name: str) -> None:
-    """Verify 0 group_id leakage across active splits and 0 label conflicts."""
-    active = df[df['split'].isin(['train', 'validation', 'test', 'external_test'])]
-    leak_counts = active.groupby('group_id')['split'].nunique()
-    leaking_groups = leak_counts[leak_counts > 1]
-    if not leaking_groups.empty:
-        raise AssertionError(
-            f"[{dataset_name}] Found {len(leaking_groups)} leaking group_ids across splits!"
-        )
-    conflict_counts = active.groupby('group_id')['label_level_1'].nunique()
-    conflict_groups = conflict_counts[conflict_counts > 1]
-    if not conflict_groups.empty:
-        raise AssertionError(
-            f"[{dataset_name}] Found {len(conflict_groups)} label conflict group_ids!"
-        )
-    print(f"[{dataset_name}] Audit Check PASSED: 0 leaking groups, 0 label conflicts.")
+# ---------------------------------------------------------------------------
+# helpers
+# ---------------------------------------------------------------------------
+def add_aug_columns(frame: pd.DataFrame) -> pd.DataFrame:
+    frame = frame.copy()
+    for column, default in [("is_augmented", False), ("aug_parent_id", ""), ("aug_ops", "")]:
+        if column not in frame.columns:
+            frame[column] = default
+    return frame
 
 
-def balance_vietnamese_dataset(project_root: Path, target_per_class: int = 500):
-    print('\n' + '='*60)
-    print('BALANCE VIETNAMESE DATASET (ANTI-LEAKAGE COMPLIANT)')
-    print('='*60)
-    
-    input_modeling = project_root / 'data' / 'processed_vi_3class' / 'modeling_data.csv'
-    output_dir = project_root / 'data' / 'processed_vi_balanced'
-    output_dir.mkdir(parents=True, exist_ok=True)
-    
-    df = pd.read_csv(input_modeling, dtype=str)
-    print(f'Loaded {len(df)} total rows from {input_modeling}')
-    
-    train_df = df[df['split'] == 'train'].copy()
-    val_df = df[df['split'] == 'validation'].copy()
-    test_df = df[df['split'] == 'test'].copy()
-    ext_df = df[df['split'] == 'external_test'].copy()
-    
-    print('Original Train counts:')
-    print(train_df['label_level_1'].value_counts())
-    
-    # 1. Legitimate: Downsample to target_per_class
-    legit_df = train_df[train_df['label_level_1'] == 'legitimate']
-    if len(legit_df) > target_per_class:
-        legit_sampled = legit_df.sample(n=target_per_class, random_state=RANDOM_SEED)
-    else:
-        legit_sampled = legit_df
-        
-    # 2. Spam: Strictly in-split train augmentation ONLY (NO borrowing from external_test!)
-    spam_df = train_df[train_df['label_level_1'] == 'spam'].copy()
-    needed_spam = target_per_class - len(spam_df)
-    print(f'Spam count: {len(spam_df)}, needed (in-split augmentation): {needed_spam}')
-    
-    extra_spams = []
-    if needed_spam > 0:
-        aug_spams = []
-        spam_pool = spam_df.to_dict('records')
-        for i in range(needed_spam):
-            base_row = random.choice(spam_pool).copy()
-            aug_text = augment_vietnamese_spam(str(base_row['text_clean']))
-            base_row['text_clean'] = aug_text
-            base_row['source_record_id'] = f"aug_vi_spam_{i}"
-            base_row['sample_id'] = f"sample_aug_vi_spam_{i}"
-            aug_spams.append(base_row)
-        extra_spams.append(pd.DataFrame(aug_spams))
-        
-    all_spam = pd.concat([spam_df] + extra_spams, ignore_index=True)
-    if len(all_spam) > target_per_class:
-        all_spam = all_spam.sample(n=target_per_class, random_state=RANDOM_SEED)
-        
-    # 3. Scam: Original train scam + in-split augmentation
-    scam_df = train_df[train_df['label_level_1'] == 'scam'].copy()
-    needed_scam = target_per_class - len(scam_df)
-    print(f'Scam count: {len(scam_df)}, needed (in-split augmentation): {needed_scam}')
-    
-    aug_scams = []
-    pool = scam_df.to_dict('records')
-    for i in range(needed_scam):
-        base_row = random.choice(pool).copy()
-        base_row['text_clean'] = augment_vietnamese_scam(str(base_row['text_clean']))
-        base_row['source_record_id'] = f"aug_scam_{i}"
-        base_row['sample_id'] = f"sample_aug_vi_scam_{i}"
-        aug_scams.append(base_row)
-        
-    all_scam = pd.concat([scam_df, pd.DataFrame(aug_scams)], ignore_index=True)
-    if len(all_scam) > target_per_class:
-        all_scam = all_scam.sample(n=target_per_class, random_state=RANDOM_SEED)
-        
-    # Combine balanced train
-    balanced_train = pd.concat([legit_sampled, all_spam, all_scam], ignore_index=True)
-    balanced_train = balanced_train.sample(frac=1.0, random_state=RANDOM_SEED).reset_index(drop=True)
-    
-    print('\nNew Balanced Train counts:')
-    print(balanced_train['label_level_1'].value_counts())
-    
-    # Reassemble complete dataset (val, test, external test remain 100% untouched & isolated)
-    full_balanced = pd.concat([balanced_train, val_df, test_df, ext_df], ignore_index=True)
-    assert_zero_leakage_and_conflict(full_balanced, "Vietnamese Balanced")
-    
-    out_path = output_dir / 'modeling_data.csv'
-    full_balanced.to_csv(out_path, index=False, encoding='utf-8')
-    print(f'Saved balanced modeling data to: {out_path}')
-    
-    # Save split summary
-    summary = full_balanced.groupby(['split', 'label_level_1']).size().rename('rows').reset_index()
-    summary.to_csv(output_dir / 'split_summary.csv', index=False)
-    print('\nSplit summary:')
+def assert_integrity(df: pd.DataFrame, name: str) -> None:
+    active = df[df["split"].isin(ACTIVE_SPLITS)]
+    leaks = (active.groupby("group_id")["split"].nunique() > 1).sum()
+    conflicts = (active.groupby("group_id")["label_level_1"].nunique() > 1).sum()
+    dup_ids = int(df["sample_id"].duplicated().sum())
+    aug_outside_train = int((df["is_augmented"].astype(str).eq("True") & ~df["split"].eq("train")).sum())
+    train_text_dups = int(df.loc[df["split"].eq("train"), "text_clean"].duplicated().sum())
+    problems = {
+        "leaking_groups": int(leaks),
+        "label_conflict_groups": int(conflicts),
+        "duplicate_sample_ids": dup_ids,
+        "augmented_rows_outside_train": aug_outside_train,
+    }
+    if any(problems.values()):
+        raise AssertionError(f"[{name}] integrity check failed: {problems}")
+    print(f"[{name}] integrity OK: 0 leaking groups, 0 label conflicts, unique sample_id, "
+          f"augmentation only in train (identical train texts: {train_text_dups}).")
+
+
+def save(df: pd.DataFrame, out_dir: Path, name: str) -> None:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    df.to_csv(out_dir / "modeling_data.csv", index=False, encoding="utf-8")
+    summary = df.groupby(["split", "label_level_1", "is_augmented"]).size().rename("rows").reset_index()
+    summary.to_csv(out_dir / "split_summary.csv", index=False)
+    print(f"[{name}] saved {len(df):,} rows -> {out_dir / 'modeling_data.csv'}")
     print(summary.to_string(index=False))
 
-# =====================================================================
-# 2. ENGLISH DATA BALANCING
-# =====================================================================
 
-EN_SYNONYMS = [
-    (r'\burget\b', ['immediate', 'important', 'action required']),
-    (r'\bcall\b', ['ring', 'contact', 'reach out to']),
-    (r'\bfree\b', ['complimentary', 'no cost', 'bonus']),
-    (r'\bwin\b', ['claim', 'receive', 'collect']),
-    (r'\bprize\b', ['reward', 'gift', 'award']),
-    (r'\baccount\b', ['profile', 'banking access', 'online account']),
-    (r'\bsuspended\b', ['on hold', 'locked', 'restricted']),
-    (r'\bverify\b', ['confirm', 'validate', 'update'])
-]
-
-def augment_english_spam(text: str) -> str:
-    """Generate synonym-varied English spam SMS."""
-    new_text = text
-    applied = 0
-    for pattern, replacements in EN_SYNONYMS:
-        if re.search(pattern, new_text, re.IGNORECASE) and random.random() < 0.5:
-            replacement = random.choice(replacements)
-            new_text = re.sub(pattern, replacement, new_text, count=1, flags=re.IGNORECASE)
-            applied += 1
-            if applied >= 2:
+# ---------------------------------------------------------------------------
+# Vietnamese
+# ---------------------------------------------------------------------------
+def augment_vietnamese(train: pd.DataFrame, all_rows: pd.DataFrame, labels: list[str],
+                       max_per_row: int, rng: random.Random) -> pd.DataFrame:
+    seen = set(all_rows["text_raw"].fillna("").map(template_duplicate_key))
+    cap = int((train["label_level_1"] == "legitimate").sum())  # never let a minority class exceed ham
+    new_rows = []
+    for label in labels:
+        pool = train[train["label_level_1"] == label]
+        budget = max(0, cap - len(pool))
+        made = 0
+        for _, parent in pool.sample(frac=1.0, random_state=RANDOM_SEED).iterrows():
+            if made >= budget:
                 break
-    return new_text.strip()
+            kept = 0
+            for _attempt in range(max_per_row * 4):
+                if kept >= max_per_row or made >= budget:
+                    break
+                variant = make_variant(str(parent["text_raw"]), rng)
+                if variant is None:
+                    continue
+                text, ops = variant
+                key = template_duplicate_key(text)
+                if key in seen:
+                    continue
+                seen.add(key)
+                row = parent.copy()
+                row["text_raw"] = text
+                row["text_clean"] = clean_text(text)
+                row["sample_id"] = "sample_aug_" + stable_hash(f"{parent['sample_id']}|{kept}|{text}")
+                row["source_record_id"] = f"{parent['source_record_id']}#aug{kept}"
+                row["is_augmented"] = True
+                row["aug_parent_id"] = parent["sample_id"]
+                row["aug_ops"] = "+".join(ops)
+                new_rows.append(row)
+                kept += 1
+                made += 1
+        print(f"  {label}: {len(pool)} real + {made} augmented (cap {budget})")
+    return pd.DataFrame(new_rows)
 
-def balance_english_dataset(project_root: Path, target_per_class: int = 2000):
-    print('\n' + '='*60)
-    print('BALANCE ENGLISH DATASET')
-    print('='*60)
-    
-    input_modeling = project_root / 'data' / 'processed' / 'modeling_data.csv'
-    output_dir = project_root / 'data' / 'processed_en_balanced'
-    output_dir.mkdir(parents=True, exist_ok=True)
-    
-    df = pd.read_csv(input_modeling, dtype=str)
-    print(f'Loaded {len(df)} total rows from {input_modeling}')
-    
-    train_df = df[df['split'] == 'train'].copy()
-    val_df = df[df['split'] == 'validation'].copy()
-    test_df = df[df['split'] == 'test'].copy()
-    ext_df = df[df['split'] == 'external_test'].copy()
-    
-    print('Original Train counts:')
-    print(train_df['label_level_1'].value_counts())
-    
-    # 1. Legitimate: Downsample from 3,007 to target_per_class
-    legit_df = train_df[train_df['label_level_1'] == 'legitimate']
-    legit_sampled = legit_df.sample(n=target_per_class, random_state=RANDOM_SEED)
-    
-    # 2. Scam: Downsample from 10,315 to target_per_class (stratified by scam_type if possible)
-    scam_df = train_df[train_df['label_level_1'] == 'scam']
-    # Stratified sample by scam_type to preserve diversity of subtypes
-    if 'scam_type' in scam_df.columns:
-        scam_sampled = scam_df.groupby('scam_type', group_keys=False).apply(
-            lambda x: x.sample(frac=target_per_class / len(scam_df), random_state=RANDOM_SEED)
-        )
-        if len(scam_sampled) < target_per_class:
-            diff = target_per_class - len(scam_sampled)
-            extra = scam_df.drop(scam_sampled.index).sample(n=diff, random_state=RANDOM_SEED)
-            scam_sampled = pd.concat([scam_sampled, extra])
-        elif len(scam_sampled) > target_per_class:
-            scam_sampled = scam_sampled.sample(n=target_per_class, random_state=RANDOM_SEED)
-    else:
-        scam_sampled = scam_df.sample(n=target_per_class, random_state=RANDOM_SEED)
-        
-    # 3. Spam: 1,080 samples -> augment to target_per_class
-    spam_df = train_df[train_df['label_level_1'] == 'spam'].copy()
-    needed_spam = target_per_class - len(spam_df)
-    print(f'Spam count: {len(spam_df)}, needed: {needed_spam}')
-    
-    aug_spams = []
-    pool = spam_df.to_dict('records')
-    for i in range(needed_spam):
-        base_row = random.choice(pool).copy()
-        base_row['text_clean'] = augment_english_spam(str(base_row['text_clean']))
-        base_row['source_record_id'] = f"aug_en_spam_{i}"
-        aug_spams.append(base_row)
-        
-    all_spam = pd.concat([spam_df, pd.DataFrame(aug_spams)], ignore_index=True)
-    if len(all_spam) > target_per_class:
-        all_spam = all_spam.sample(n=target_per_class, random_state=RANDOM_SEED)
-        
-    # Combine balanced train
-    balanced_train = pd.concat([legit_sampled, all_spam, scam_sampled], ignore_index=True)
-    balanced_train = balanced_train.sample(frac=1.0, random_state=RANDOM_SEED).reset_index(drop=True)
-    
-    print('\nNew Balanced Train counts:')
-    print(balanced_train['label_level_1'].value_counts())
-    
-    # Reassemble complete dataset (val, test, external test untouched)
-    full_balanced = pd.concat([balanced_train, val_df, test_df, ext_df], ignore_index=True)
-    assert_zero_leakage_and_conflict(full_balanced, "English Balanced")
-    
-    out_path = output_dir / 'modeling_data.csv'
-    full_balanced.to_csv(out_path, index=False, encoding='utf-8')
-    print(f'Saved balanced modeling data to: {out_path}')
-    
-    # Save split summary
-    summary = full_balanced.groupby(['split', 'label_level_1']).size().rename('rows').reset_index()
-    summary.to_csv(output_dir / 'split_summary.csv', index=False)
-    print('\nSplit summary:')
-    print(summary.to_string(index=False))
 
-if __name__ == '__main__':
-    root = Path(__file__).resolve().parent.parent
-    balance_vietnamese_dataset(root, target_per_class=500)
-    balance_english_dataset(root, target_per_class=2000)
+def balance_vietnamese(project_root: Path, augment: bool, max_per_row: int) -> None:
+    print("\n" + "=" * 60 + "\nVIETNAMESE TRAINING SET\n" + "=" * 60)
+    src = project_root / "data" / "processed_vi_3class" / "modeling_data.csv"
+    df = add_aug_columns(pd.read_csv(src, dtype=str, keep_default_na=False))
+    df["is_augmented"] = False
+    print(f"Loaded {len(df):,} rows from {src}")
+    train = df[df["split"] == "train"]
+    print("Real train:", train["label_level_1"].value_counts().to_dict())
+    parts = [df]
+    if augment:
+        rng = random.Random(RANDOM_SEED)
+        aug = augment_vietnamese(train, df, ["scam", "spam"], max_per_row, rng)
+        if not aug.empty:
+            parts.append(aug)
+            print("Augmentation ops used:", aug["aug_ops"].value_counts().to_dict())
+    out = pd.concat(parts, ignore_index=True)
+    out = out[out["split"].isin(ACTIVE_SPLITS)].reset_index(drop=True)
+    assert_integrity(out, "Vietnamese")
+    save(out, project_root / "data" / "processed_vi_balanced", "Vietnamese")
 
+
+# ---------------------------------------------------------------------------
+# English
+# ---------------------------------------------------------------------------
+def balance_english(project_root: Path, scam_cap: int) -> None:
+    print("\n" + "=" * 60 + "\nENGLISH TRAINING SET\n" + "=" * 60)
+    src = project_root / "data" / "processed" / "modeling_data.csv"
+    df = add_aug_columns(pd.read_csv(src, dtype=str, keep_default_na=False))
+    df["is_augmented"] = False
+    print(f"Loaded {len(df):,} rows from {src}")
+    train = df[df["split"] == "train"]
+    print("Real train:", train["label_level_1"].value_counts().to_dict())
+    scam = train[train["label_level_1"] == "scam"]
+    drop_index = pd.Index([])
+    if len(scam) > scam_cap:
+        # proportional allocation per scam_type (largest remainder), at least 1 per type
+        counts = scam["scam_type"].value_counts()
+        raw = counts / counts.sum() * scam_cap
+        alloc = np.floor(raw).astype(int).clip(lower=1)
+        for t in (raw - np.floor(raw)).sort_values(ascending=False).index:
+            if alloc.sum() >= scam_cap:
+                break
+            alloc[t] += 1
+        kept = pd.concat([
+            scam[scam["scam_type"] == t].sample(n=min(int(n), int(counts[t])), random_state=RANDOM_SEED)
+            for t, n in alloc.items()
+        ])
+        drop_index = scam.index.difference(kept.index)
+        print(f"Scam capped {len(scam):,} -> {len(kept):,} (stratified by scam_type):",
+              kept["scam_type"].value_counts().to_dict())
+    out = df.drop(index=drop_index)
+    out = out[out["split"].isin(ACTIVE_SPLITS)].reset_index(drop=True)
+    assert_integrity(out, "English")
+    save(out, project_root / "data" / "processed_en_balanced", "English")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--lang", choices=["vi", "en", "both"], default="both")
+    parser.add_argument("--no-vi-augment", action="store_true", help="Vietnamese real data only")
+    parser.add_argument("--vi-max-aug-per-row", type=int, default=2)
+    parser.add_argument("--en-scam-cap", type=int, default=4000)
+    args = parser.parse_args()
+    if args.lang in ("vi", "both"):
+        balance_vietnamese(ROOT, augment=not args.no_vi_augment, max_per_row=args.vi_max_aug_per_row)
+    if args.lang in ("en", "both"):
+        balance_english(ROOT, scam_cap=args.en_scam_cap)
+
+
+if __name__ == "__main__":
+    main()
