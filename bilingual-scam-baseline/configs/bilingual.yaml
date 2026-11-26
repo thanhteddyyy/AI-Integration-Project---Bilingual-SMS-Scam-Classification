@@ -49,9 +49,10 @@ models:
     kernels: [3, 4, 5, 7]
     dropout: 0.35
     batch_size: 64
-    epochs: 15
+    epochs: 30
+    min_epochs: 5
     learning_rate: 0.001
     weight_decay: 0.0001
-    patience: 3
+    patience: 5
     class_weight: balanced
 

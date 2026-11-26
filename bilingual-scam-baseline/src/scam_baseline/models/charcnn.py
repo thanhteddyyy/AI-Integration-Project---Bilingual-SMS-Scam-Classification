@@ -173,6 +173,16 @@ def train_charcnn(frame: pd.DataFrame, config: dict) -> dict[str, dict]:
         weight_decay=float(model_cfg["weight_decay"]),
     )
     artifact_dir = ensure_dir(Path(config["paths"]["artifacts_dir"]) / "charcnn")
+    # Early stopping uses the same metric as model selection (evaluation.selection_metric,
+    # scam F2 by default) so CharCNN is compared with NB/SVM on equal terms; macro F1 breaks ties.
+    eval_cfg = config.get("evaluation", {})
+    selection_metric = str(eval_cfg.get("selection_metric", "scam_f2"))
+    tie_breaker = str(eval_cfg.get("tie_breaker", "macro_f1"))
+    # Warm-up: in the first epochs the network flags almost everything as scam (high recall, low
+    # precision), which F2 over-rewards; those epochs are neither selectable nor count for patience.
+    # (2026-11-26: first Kaggle run picked epoch 1 and stopped at epoch 4 without this.)
+    min_epochs = min(int(model_cfg.get("min_epochs", 1)), int(model_cfg["epochs"]))
+    best_score = (-1.0, -1.0)
     best_macro_f1 = -1.0
     best_epoch = 0
     patience_counter = 0
@@ -199,9 +209,14 @@ def train_charcnn(frame: pd.DataFrame, config: dict) -> dict[str, dict]:
                 "epoch": epoch,
                 "train_loss": total_loss / max(1, len(train_dataset)),
                 "validation_macro_f1": val_metrics["macro_f1"],
+                f"validation_{selection_metric}": val_metrics.get(selection_metric),
             }
         )
-        if val_metrics["macro_f1"] > best_macro_f1 + 1e-8:
+        if epoch < min_epochs:
+            continue
+        score = (float(val_metrics.get(selection_metric) or 0.0), float(val_metrics.get(tie_breaker) or 0.0))
+        if score[0] > best_score[0] + 1e-8 or (abs(score[0] - best_score[0]) <= 1e-8 and score[1] > best_score[1] + 1e-8):
+            best_score = score
             best_macro_f1 = val_metrics["macro_f1"]
             best_epoch = epoch
             patience_counter = 0
@@ -213,6 +228,8 @@ def train_charcnn(frame: pd.DataFrame, config: dict) -> dict[str, dict]:
                     "model_config": model_cfg,
                     "best_epoch": best_epoch,
                     "best_validation_macro_f1": best_macro_f1,
+                    "selection_metric": selection_metric,
+                    f"best_validation_{selection_metric}": best_score[0],
                 },
                 best_path,
             )
@@ -227,6 +244,10 @@ def train_charcnn(frame: pd.DataFrame, config: dict) -> dict[str, dict]:
         {
             "best_epoch": best_epoch,
             "best_validation_macro_f1": best_macro_f1,
+            "selection_metric": selection_metric,
+            f"best_validation_{selection_metric}": best_score[0],
+            "min_epochs": min_epochs,
+            "epochs_run": len(history),
             "device": str(device),
             "training_rows": len(train),
             "vocabulary_size": len(vocabulary),
@@ -275,6 +296,14 @@ def _predict_ids(model, loader, device, torch) -> list[int]:
 
 
 def predict_charcnn(model_path: str | Path, texts: list[str], device_name: str = "auto") -> list[str]:
+    probabilities, class_order = predict_charcnn_proba(model_path, texts, device_name)
+    return [class_order[int(row.argmax())] for row in probabilities]
+
+
+def predict_charcnn_proba(
+    model_path: str | Path, texts: list[str], device_name: str = "auto"
+) -> tuple[np.ndarray, list[str]]:
+    """Softmax probabilities, shape (n_texts, n_classes), columns in the returned class order."""
     torch, SmsDataset, CharCNN = _build_torch_components()
     if device_name == "auto":
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -298,5 +327,11 @@ def predict_charcnn(model_path: str | Path, texts: list[str], device_name: str =
     loader = torch.utils.data.DataLoader(
         dataset, batch_size=int(cfg["batch_size"]), shuffle=False, num_workers=0
     )
-    return [class_order[index] for index in _predict_ids(model, loader, device, torch)]
+    model.eval()
+    batches = []
+    with torch.no_grad():
+        for inputs, _ in loader:
+            batches.append(torch.softmax(model(inputs.to(device)), dim=1).cpu().numpy())
+    probabilities = np.concatenate(batches) if batches else np.zeros((0, len(class_order)))
+    return probabilities, list(class_order)
 

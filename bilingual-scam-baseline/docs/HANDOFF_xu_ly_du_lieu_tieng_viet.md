@@ -157,6 +157,9 @@ Quy tắc bổ sung người dùng đã chốt (những chỗ định nghĩa ch�
 | 8 | F2/MCC ✅, train NB/SVM ✅, **CharCNN ⬜ (Kaggle)**, Giai đoạn 2 ⬜, demo ⬜ | 6 (7 cho GĐ2) | 3.5 |
 | 9 | (mới) Rà nhãn EN theo định nghĩa rồi áp | – | ✅ 3.4f |
 
+> Danh sách việc còn lại của **cả đồ án** (GĐ2, demo, CharCNN, phân tích lỗi, meta-features, báo cáo) và thứ tự đề xuất:
+> xem mục 5 của [`NHAT_KY_THAY_DOI_DU_LIEU.md`](NHAT_KY_THAY_DOI_DU_LIEU.md) – cập nhật file đó mỗi khi xong một việc.
+
 ### 3.1 ~~Chờ trả lời A2~~ – ĐÃ XONG (63 HỎI chốt ở v2, áp lại theo `definition.md` ở v3)
 
 Ghi chú: `review_scam_type` của các tin **vốn đã scam** đang lấy từ phân loại tự động, có chỗ sai (vd "con cấp cứu" đang `banking_finance`). Rà lại khi làm **Giai đoạn 2**.

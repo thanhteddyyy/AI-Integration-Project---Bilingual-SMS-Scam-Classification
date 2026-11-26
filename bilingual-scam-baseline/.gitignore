@@ -17,3 +17,6 @@ crawl_data_scam.zip
 *.zip
 
 data/processed_vi_exp_*/
+
+# backups made before re-running the pipeline
+data/_before_*/

@@ -16,6 +16,8 @@ def package_project():
     
     # We also include data/processed_bilingual so Colab can train immediately without preprocessing
     include_data_dirs = ['data/processed_bilingual', 'data/processed_en_balanced', 'data/processed_vi_balanced']
+    # full real-scam Vietnamese crawl set, scored outside the pipeline (scripts/score_vi_crawl_full.py)
+    include_data_files = ['data/raw/vi_crawl_external_full.csv']
     
     total_files = 0
     with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
@@ -47,6 +49,11 @@ def package_project():
                     arcname = f"bilingual-scam-baseline/{rel.as_posix()}"
                     zipf.write(fpath, arcname)
                     total_files += 1
+        for fname in include_data_files:
+            fpath = root / fname
+            if fpath.exists():
+                zipf.write(fpath, f"bilingual-scam-baseline/{fname}")
+                total_files += 1
 
     size_mb = zip_path.stat().st_size / (1024 * 1024)
     print(f"Successfully packaged {total_files} files into: {zip_path}")

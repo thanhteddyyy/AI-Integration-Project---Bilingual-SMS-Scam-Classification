@@ -14,10 +14,18 @@ Rules:
   * drop duplicates inside the crawl (pipeline template key)
   * drop rows of the same template family as ANY Tuan message (train or test): word 3-gram
     Jaccard >= --family-jaccard, the same rule as apply_vi_labels_v3.py (option B)
+  * keep one row per template family inside the crawl (same rule; the longest row is kept),
+    so a template reprinted by several papers is counted once
 
 Outputs:
-  data/raw/vi_crawl_external.csv                 rows for the pipeline (dataset name: vi_crawl)
-  data/review/vi_crawl_external_excluded.csv     every skipped row with the reason
+  data/raw/vi_crawl_external.csv                 CLEAN set for the pipeline (dataset name: vi_crawl):
+                                                 --channels only, no Tuan template family
+  data/review/vi_crawl_external_excluded.csv     every skipped row of the clean set with the reason
+  data/raw/vi_crawl_external_full.csv            FULL set (decision 2026-11-26): every chat channel, rows of
+                                                 a Tuan template family KEPT (column tuan_family=True), still
+                                                 one row per family inside the crawl. NOT a pipeline dataset –
+                                                 the pipeline would drop Tuan train/test rows of those families.
+                                                 Score it with scripts/score_vi_crawl_full.py.
 """
 from __future__ import annotations
 
@@ -78,7 +86,12 @@ def load_input(path: Path, include_maybe: bool) -> pd.DataFrame:
     return out
 
 
-def build(inputs: list[Path], channels: set[str], include_maybe: bool, threshold: float) -> tuple[pd.DataFrame, pd.DataFrame]:
+ALL_CHANNELS = {"sms", "zalo", "messenger", "telegram", "whatsapp", "viber", "unknown"}
+FULL_OUT = ROOT / "data" / "raw" / "vi_crawl_external_full.csv"
+
+
+def build(inputs: list[Path], channels: set[str], include_maybe: bool, threshold: float,
+          keep_tuan_family: bool = False) -> tuple[pd.DataFrame, pd.DataFrame]:
     frames = [load_input(p, include_maybe) for p in inputs]
     if not frames:
         raise SystemExit("no reviewed crawl files found in data/review/")
@@ -111,10 +124,27 @@ def build(inputs: list[Path], channels: set[str], include_maybe: bool, threshold
         best_text.append(tuan["message"].iat[i][:160])
     df["overlap_tuan_sim"] = best_sim
     df["overlap_tuan_nearest"] = best_text
-    df.loc[(df.skip_reason == "") & (df.overlap_tuan_sim >= threshold), "skip_reason"] = "same_family_as_tuan"
+    df["tuan_family"] = df.overlap_tuan_sim >= threshold
+    if not keep_tuan_family:
+        df.loc[(df.skip_reason == "") & df.tuan_family, "skip_reason"] = "same_family_as_tuan"
+
+    # one row per template family inside the crawl itself (same Jaccard rule): the press often
+    # reprints one scam template with another bank name / OCR noise, which an exact key misses.
+    # Keep the longest (most complete) row of each family.
+    df["family_rep"] = ""
+    reps: list[tuple[int, set]] = []
+    for idx in sorted(df.index[df.skip_reason == ""], key=lambda i: -len(df.at[i, "message"])):
+        s = shingles(df.at[idx, "message"])
+        hit = next((r for r, rs in reps if s | rs and len(s & rs) / len(s | rs) >= threshold), None)
+        if hit is None:
+            reps.append((idx, s))
+        else:
+            df.at[idx, "skip_reason"] = "same_family_in_crawl"
+            df.at[idx, "family_rep"] = df.at[hit, "crawl_id"]
 
     kept = df[df.skip_reason == ""].reset_index(drop=True)
-    cols = ["crawl_id", "message", "label_3class", "scam_type", "channel", "source_url", "input_file", "overlap_tuan_sim"]
+    cols = ["crawl_id", "message", "label_3class", "scam_type", "channel", "source_url", "input_file",
+            "overlap_tuan_sim", "tuan_family"]
     return kept[cols], df[df.skip_reason != ""].reset_index(drop=True)
 
 
@@ -125,17 +155,32 @@ def main() -> None:
     parser.add_argument("--include-maybe", action="store_true")
     parser.add_argument("--family-jaccard", type=float, default=FAMILY_JACCARD)
     parser.add_argument("--out", type=Path, default=ROOT / "data" / "raw" / "vi_crawl_external.csv")
+    parser.add_argument("--excluded-out", type=Path,
+                        help="default: data/review/vi_crawl_external_excluded.csv, or <out>_excluded.csv when --out is given")
+    parser.add_argument("--full-out", type=Path, default=FULL_OUT)
+    parser.add_argument("--no-full", action="store_true", help="do not write the full set")
     args = parser.parse_args()
+    default_out = ROOT / "data" / "raw" / "vi_crawl_external.csv"
+    excluded_out = args.excluded_out or (
+        REVIEW / "vi_crawl_external_excluded.csv" if args.out.resolve() == default_out.resolve()
+        else args.out.with_name(args.out.stem + "_excluded.csv"))
 
     inputs = args.inputs or default_inputs()
     kept, excluded = build(inputs, set(args.channels), args.include_maybe, args.family_jaccard)
     kept.to_csv(args.out, index=False, encoding="utf-8-sig")
-    excluded.to_csv(REVIEW / "vi_crawl_external_excluded.csv", index=False, encoding="utf-8-sig")
+    excluded.to_csv(excluded_out, index=False, encoding="utf-8-sig")
     print("inputs:", [p.name for p in inputs])
-    print(f"kept {len(kept)} rows -> {args.out}")
+    print(f"kept {len(kept)} rows -> {args.out}  (excluded -> {excluded_out})")
     print("  by label:", kept["label_3class"].value_counts().to_dict())
     print("  scam_type:", kept.loc[kept.label_3class == "scam", "scam_type"].value_counts().to_dict())
     print("excluded:", excluded["skip_reason"].value_counts().to_dict())
+
+    if not args.no_full:
+        full, _ = build(inputs, ALL_CHANNELS, args.include_maybe, args.family_jaccard, keep_tuan_family=True)
+        full.to_csv(args.full_out, index=False, encoding="utf-8-sig")
+        print(f"FULL set {len(full)} rows -> {args.full_out}")
+        print("  by label x channel:", full.groupby(["label_3class", "channel"]).size().to_dict())
+        print("  scam rows of a Tuan family:", int((full.tuan_family & full.label_3class.eq("scam")).sum()))
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 split,label_level_1,is_augmented,rows
-external_test,legitimate,False,2712
-external_test,scam,False,4
+external_test,legitimate,False,2714
+external_test,scam,False,22
 external_test,spam,False,160
 test,legitimate,False,323
 test,scam,False,104

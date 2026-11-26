@@ -9,7 +9,8 @@ excluded,vie_sms_dev,legitimate,240
 excluded,vie_sms_dev,spam,28
 excluded,vie_sms_holdout,legitimate,353
 excluded,vie_sms_holdout,spam,30
-external_test,vi_crawl,scam,4
+external_test,vi_crawl,legitimate,2
+external_test,vi_crawl,scam,22
 external_test,vie_sms_holdout,legitimate,2712
 external_test,vie_sms_holdout,spam,160
 test,spamscam_test,legitimate,323

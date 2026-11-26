@@ -2,8 +2,8 @@ split,language,label_level_1,rows
 external_test,en,legitimate,605
 external_test,en,scam,163
 external_test,en,spam,255
-external_test,vi,legitimate,2710
-external_test,vi,scam,4
+external_test,vi,legitimate,2712
+external_test,vi,scam,22
 external_test,vi,spam,160
 test,en,legitimate,657
 test,en,scam,1958
