@@ -20,3 +20,7 @@ data/processed_vi_exp_*/
 
 # backups made before re-running the pipeline
 data/_before_*/
+
+# demo bundle for the teammate (contains models, built by scripts/package_demo.py)
+demo_bundle/
+demo_bundle.zip
