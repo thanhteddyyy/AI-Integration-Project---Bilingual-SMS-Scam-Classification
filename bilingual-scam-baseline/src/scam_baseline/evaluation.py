@@ -170,7 +170,8 @@ def evaluate_predictions(
 def _save_confusion_matrix(
     matrix: np.ndarray, labels: list[str], path: Path, title: str
 ) -> None:
-    figure, axis = plt.subplots(figsize=(6.4, 5.4))
+    many = len(labels) > 4  # tier 2 has 9 long class names
+    figure, axis = plt.subplots(figsize=(9.5, 8.0) if many else (6.4, 5.4))
     image = axis.imshow(matrix, interpolation="nearest", cmap="Blues")
     figure.colorbar(image, ax=axis, fraction=0.046, pad=0.04)
     axis.set(
@@ -182,6 +183,8 @@ def _save_confusion_matrix(
         xlabel="Predicted label",
         title=title,
     )
+    if many:
+        plt.setp(axis.get_xticklabels(), rotation=40, ha="right", rotation_mode="anchor")
     threshold = matrix.max() / 2 if matrix.size else 0
     for row in range(matrix.shape[0]):
         for column in range(matrix.shape[1]):

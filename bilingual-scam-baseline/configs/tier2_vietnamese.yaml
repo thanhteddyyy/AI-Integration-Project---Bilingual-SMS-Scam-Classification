@@ -1,0 +1,109 @@
+# Tier 2 (Vietnamese): scam_type of a scam message, 9 classes (decision 2026-11-27,
+# docs/GIAI_THICH_TANG2_VA_META_FEATURES.md section 2.6). Run: scripts/train_tier2.py
+seed: 42
+
+paths:
+  processed_dir: data/processed_tier2_vi
+  reports_dir: reports/tier2_vi
+  artifacts_dir: artifacts/tier2_vi
+  # tier-1 model used for the chain evaluation (the chosen tier 1 = bilingual linear SVM)
+  tier1_model: artifacts/bilingual/svm/model.joblib
+
+data:
+  language: vi
+  # order of rows/columns in reports; must equal scam_baseline.data.scam_types.VI_TIER2_CLASSES
+  class_order:
+    - banking_finance
+    - gov_utility_services
+    - delivery_logistics
+    - job_task_scam
+    - investment
+    - loan_debt
+    - prize_lottery
+    - social_impersonation
+    - other_scam
+  # all scam rows of the Tuan set (v3 labels), incl. the train rows dropped by option B for tier 1
+  extra_datasets:
+    - name: spamscam_train
+      path: data/raw/train_dataset_spamscam_v3.csv
+      text_column: message
+      label_column: label_3class
+      scam_type_column: scam_type
+      id_column: message_id
+    - name: spamscam_test
+      path: data/raw/test_dataset_spamscam_v3.csv
+      text_column: message
+      label_column: label_3class
+      scam_type_column: scam_type
+      id_column: message_id
+    - name: spamscam_train_option_b_removed
+      path: data/review/vi_tuan_train_removed_family_overlap.csv
+      text_column: message
+      label_column: label_3class
+      scam_type_column: scam_type
+      id_column: message_id
+  # Real scams from news (decision 2026-11-27). Only the main scam message is kept, so chat messages
+  # (Zalo/Messenger) count like SMS. Runs 1-2 are ADDED TO TRAIN (validation/test stay Tuan-only);
+  # rows sharing a template with a tier-2 validation/test message are skipped (logged).
+  # Frozen copy built with:
+  #   scripts/build_vi_crawl_external.py --inputs data/review/vi_crawl_run1_clean.csv
+  #     data/review/vi_crawl_run2_reviewed.csv --out <tmp> --full-out data/raw/vi_crawl_tier2_train.csv
+  crawl_train:
+    - name: vi_crawl_run1_2
+      path: data/raw/vi_crawl_tier2_train.csv
+  # External test of tier 2 = the NEXT crawl run only (not used for training). Skipped until it exists:
+  #   scripts/build_vi_crawl_external.py --inputs data/review/vi_crawl_run3_reviewed.csv
+  #     --out <tmp> --full-out data/raw/vi_crawl_tier2_external.csv
+  crawl_external:
+    path: data/raw/vi_crawl_tier2_external.csv
+
+deduplication:
+  family_jaccard: 0.5
+
+# fractions of ROWS per class; whole template families stay in one split
+split:
+  train_fraction: 0.70
+  validation_fraction: 0.15
+  test_fraction: 0.15
+
+evaluation:
+  selection_metric: macro_f1   # every class counts the same, so small classes matter
+  tie_breaker: accuracy
+
+# NB / SVM: same hyper-parameters as tier 1 (configs/vietnamese_3class.yaml), not tuned for tier 2.
+# CharCNN: fewer rows (~400 train) -> smaller batch, more epochs, longer patience.
+models:
+  naive_bayes:
+    word_ngram_range: [1, 2]
+    min_df: 2
+    max_df: 0.995
+    max_features: 60000
+    sublinear_tf: true
+    alpha: 0.5
+    fit_prior: false
+  svm:
+    word_ngram_range: [1, 2]
+    char_ngram_range: [3, 5]
+    min_df: 2
+    max_df: 0.995
+    word_max_features: 60000
+    char_max_features: 100000
+    sublinear_tf: true
+    C: 1.0
+    class_weight: balanced
+  charcnn:
+    max_length: 256
+    max_vocab_size: 512
+    min_char_frequency: 1
+    embedding_dim: 64
+    channels: 128
+    kernels: [3, 4, 5, 7]
+    dropout: 0.35
+    batch_size: 32
+    epochs: 60
+    min_epochs: 5
+    learning_rate: 0.001
+    weight_decay: 0.0001
+    patience: 8
+    class_weight: balanced
+    device: auto
