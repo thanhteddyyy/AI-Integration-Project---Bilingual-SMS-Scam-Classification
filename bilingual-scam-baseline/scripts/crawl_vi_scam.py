@@ -189,16 +189,32 @@ JOURNALISM_MARKERS = re.compile(
 FIRST_PERSON_RE = re.compile(r"(?i)^\s*(tôi|mình|chúng tôi|lúc đó|khi đó|sau khi|thấy|thực tế)\b")
 ADVICE_RE = re.compile(r"(?i)^\s*(\d+\s*(là|\.|\))|thứ (nhất|hai|ba)|không (nên|được)|hãy|cần|nên)\b")
 
+# Tier-2 classes and priority decided 2026-11-27 (docs/NHAT_KY_TANG2.md section 2). Only a SUGGESTION:
+# the first matching rule wins, the reviewer always checks.
+_BANK_NAMES = (r"vietcombank|\bvcb\b|techcombank|bidv|agribank|vietinbank|mbbank|mb ?bank|vpbank|\bacb\b|sacombank|"
+               r"tpbank|napas|hdbank|\bshb\b|\bocb\b|eximbank|seabank|\bmsb\b|\bvib\b|momo|zalopay|vnpay|shopeepay")
+_TELECOM = r"thuê bao|thue bao|nhà mạng|nha mang|viettel|vinaphone|mobifone|\bvnpt\b|\bfpt\b|vtvcab|\bsim\b|\b4g\b|\b5g\b|cáp quang|cap quang"
+_REWARD = r"tặng|tang\b|thưởng|thuong|quà|qua tang|miễn phí|mien phi|đổi điểm|doi diem|điểm thưởng|diem thuong"
 SCAM_TYPE_RULES = [
     ("job_task_scam", r"việc làm|viec lam|cộng tác viên|cong tac vien|\bctv\b|nhiệm vụ|nhiem vu|hoa hồng|hoa hong|làm thêm|lam them|tuyển dụng|tuyen dung|chốt đơn"),
     ("investment", r"đầu tư|dau tu|lợi nhuận|loi nhuan|chứng khoán|chung khoan|tiền ảo|tien ao|\bcoin\b|\bsàn\b|forex"),
-    ("government_services", r"thuế|thue\b|vneid|căn cước|can cuoc|cccd|bhxh|bảo hiểm xã hội|phạt nguội|phat nguoi|vi phạm giao thông|vi pham giao thong|nộp phạt|nop phat|csgt|công an|cong an|điện lực|dien luc|evn|tòa án|toa an|dịch vụ công|dichvucong"),
+    # before banking: "mẹ chuyển giúp con ... STK Techcombank" / "sếp nhờ chuyển ... VietinBank" impersonate a PERSON
+    ("social_impersonation", r"người thân|nguoi than|cấp cứu|cap cuu|\bmượn\b|\bmuon\b|chuyển giúp|chuyen giup|\bsếp\b|\bsep nho\b|"
+                             r"\bcon\b.*\bmẹ\b|\bmẹ\b.*\bcon\b|hack (?:zalo|facebook)"),
+    # 1. a named bank / e-wallet -> banking (also loans / debts that name a bank)
+    ("banking_finance", _BANK_NAMES),
+    # 2. a named state body or essential service (power, water)
+    ("gov_utility_services", r"thuế|thue\b|vneid|căn cước|can cuoc|cccd|bhxh|bảo hiểm xã hội|phạt nguội|phat nguoi|vi phạm giao thông|vi pham giao thong|nộp phạt|nop phat|csgt|công an|cong an|điện lực|dien luc|evn|tòa án|toa an|dịch vụ công|dichvucong|cấp nước|cap nuoc|tiền nước|tien nuoc"),
+    # strong loan words before telecom ("[SIM CASH] ... khoản vay" is a lending app); a bare "nợ" ("nợ cước") is checked later
+    ("loan_debt", r"khoản vay|khoan vay|\bvay\b|giải ngân|giai ngan|nợ xấu|\bno xau\b|trả góp|tra gop|tín dụng đen"),
+    # 3. telecom: reward bait -> prize, otherwise (threats, offers) -> gov_utility_services
+    ("prize_lottery", rf"(?=.*(?:{_TELECOM}))(?=.*(?:{_REWARD}))"),
+    ("gov_utility_services", _TELECOM),
     ("delivery_logistics", r"giao hàng|giao hang|đơn hàng|don hang|shipper|bưu (?:điện|phẩm|kiện)|buu (?:dien|pham|kien)|vnpost|viet ?nam ?post|ghtk|\bghn\b|j&t|kiện hàng|kien hang"),
-    ("telecom_account", r"thuê bao|thue bao|nhà mạng|nha mang|viettel|vinaphone|mobifone|\bsim\b|\b4g\b|\b5g\b"),
+    # 4. loans / debt collection through an app or a lending company (no named bank)
+    ("loan_debt", r"\bnợ\b|đòi nợ|doi no|thu hồi nợ"),
     ("prize_lottery", r"trúng thưởng|trung thuong|quà tặng|qua tang|tri ân|tri an|giải thưởng|giai thuong|may mắn|may man|đổi quà|doi qua|lượt quay|luot quay|hũ|nổ hũ"),
-    # Checked before banking: "mẹ chuyển giúp con ... STK Techcombank" is impersonation, not a bank scam.
-    ("social_impersonation", r"người thân|nguoi than|cấp cứu|cap cuu|\bmượn\b|\bmuon\b|chuyển giúp|chuyen giup|\bcon\b.*\bmẹ\b|\bmẹ\b.*\bcon\b|hack (?:zalo|facebook)"),
-    ("banking_finance", r"ngân hàng|ngan hang|vietcombank|\bvcb\b|techcombank|bidv|agribank|vietinbank|mbbank|\bmb\b|vpbank|\bacb\b|sacombank|tpbank|napas|\bthẻ\b|the tin dung|khoản vay|khoan vay|\bvay\b|\botp\b|\bnợ\b|\bno xau\b"),
+    ("banking_finance", r"ngân hàng|ngan hang|\bthẻ\b|the tin dung|\botp\b"),
 ]
 SCAM_TYPE_RES = [(name, re.compile(rf"(?i){pattern}")) for name, pattern in SCAM_TYPE_RULES]
 
@@ -766,6 +782,40 @@ def load_state(out_dir: Path) -> tuple[set[str], set[str], list[set[str]], int]:
     return done, keys, pool, count
 
 
+def load_skip_sources(paths: list[Path]) -> tuple[set[str], set[str], list[set[str]]]:
+    """Articles / messages of EARLIER crawl runs (--skip-from), so a new run only collects new data.
+
+    A directory contributes its articles_done.txt and every *.csv with a `message` column (candidates,
+    reviewed files); a .txt file is a list of article URLs; a .csv contributes `message` and `source_url`.
+    Skipped data is NOT written to the new output."""
+    urls: set[str] = set()
+    keys: set[str] = set()
+    pool: list[set[str]] = []
+    files: list[Path] = []
+    for path in paths:
+        if path.is_dir():
+            files += sorted(path.glob("articles_done*.txt")) + sorted(path.glob("*.csv"))
+        elif path.exists():
+            files.append(path)
+        else:
+            print(f"[skip-from] WARNING: {path} not found")
+    for file in files:
+        if file.suffix == ".txt":
+            urls.update(file.read_text(encoding="utf-8").split())
+            continue
+        with file.open(encoding="utf-8-sig", newline="") as handle:
+            reader = csv.DictReader(handle)
+            if not reader.fieldnames or "message" not in reader.fieldnames:
+                continue
+            for row in reader:
+                if row.get("source_url"):
+                    urls.add(row["source_url"].strip())
+                if row.get("message"):
+                    keys.add(dedup_key(row["message"]))
+                    pool.append(shingles(row["message"]))
+    return urls, keys, pool
+
+
 def append_rows(path: Path, rows: list[dict]) -> None:
     new_file = not path.exists()
     with path.open("a", encoding="utf-8-sig" if new_file else "utf-8", newline="") as handle:
@@ -833,7 +883,7 @@ const KEY="vi_scam_review_"+ROWS.length;
 const saved=JSON.parse(localStorage.getItem(KEY)||"{}");
 ROWS.forEach(r=>Object.assign(r,saved[r.candidate_id]||{}));
 const LABELS=["","scam","spam","legitimate","drop"];
-const TYPES=["","banking_finance","delivery_logistics","government_services","telecom_account","social_impersonation","job_task_scam","investment","prize_lottery","other_scam"];
+const TYPES=["","banking_finance","gov_utility_services","delivery_logistics","job_task_scam","investment","loan_debt","prize_lottery","social_impersonation","other_scam"];
 const CH=["","sms","zalo","messenger","whatsapp","telegram","viber","unknown"];
 function opt(list,v){return list.map(x=>`<option ${x===v?"selected":""}>${x}</option>`).join("")}
 function esc(s){return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
@@ -883,6 +933,9 @@ def main() -> None:
     parser.add_argument("--no-ocr", dest="ocr", action="store_false")
     parser.add_argument("--max-images", type=int, default=4, help="screenshots OCR'd per article")
     parser.add_argument("--debug", action="store_true", help="also write rejected texts to rejected_debug.csv")
+    parser.add_argument("--skip-from", nargs="+", type=Path,
+                        help="earlier run folders / files (articles_done.txt, candidate or reviewed CSVs): their "
+                             "articles and messages are skipped, e.g. data/review/vi_crawl_seen_run1_2")
     args = parser.parse_args()
 
     out_dir: Path = args.out_dir
@@ -894,6 +947,12 @@ def main() -> None:
     done, seen_keys, shingle_pool, existing = load_state(out_dir)
     stats: Counter = Counter(json.loads(stats_path.read_text(encoding="utf-8")) if stats_path.exists() else {})
     print(f"[state] {len(done)} articles already processed, {existing} candidates on disk -> {out_dir}")
+    if args.skip_from:
+        skip_urls, skip_keys, skip_pool = load_skip_sources(args.skip_from)
+        done |= skip_urls
+        seen_keys |= skip_keys
+        shingle_pool += skip_pool
+        print(f"[skip-from] earlier runs: {len(skip_urls)} articles and {len(skip_keys)} messages will be skipped")
 
     ocr = None
     if args.ocr is not False:

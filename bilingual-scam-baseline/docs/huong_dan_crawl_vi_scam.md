@@ -165,3 +165,22 @@ tin các kênh khác để dành cho Giai đoạn 2.
 - OCR là bản nháp; 100% tin được người kiểm tra.
 - Giới hạn: tin trên báo là tin **đã được chọn để cảnh báo**, thiên về chiêu nổi bật; số lượng phụ thuộc
   số bài có ảnh chụp tin nhắn.
+
+---
+
+## Đợt 3 (27/11/2026) – external test của tầng 2
+
+Đợt 1–2 nay nằm trong **train của tầng 2**, nên đợt 3 phải là dữ liệu **mới**:
+
+1. Danh sách bài và tin của đợt 1–2 đã **nhúng sẵn trong notebook** – không cần tải gì lên Kaggle (sửa 27/11 sau khi lần chạy đầu
+   dừng ở ô 4a vì chưa gắn Dataset). Sinh lại notebook bằng `scripts/make_crawl_notebook.py` nếu thư mục `vi_crawl_seen_run1_2` thay đổi.
+2. Chạy notebook như cũ. Ô **4a** giải nén bản nhúng và truyền `--skip-from` → bỏ qua 2.502 bài và 239 tin của đợt 1–2.
+   (Chạy tay: `python scripts/crawl_vi_scam.py ... --skip-from data/review/vi_crawl_seen_run1_2`.)
+3. Tải `vi_scam_crawl_run3.zip`, mở `review.html`, duyệt (danh sách lớp đã là 9 lớp mới, có `loan_debt`), **Xuất CSV** →
+   lưu thành `data/review/vi_crawl_run3_reviewed.csv`.
+4. Dựng tập external tầng 2:
+   `py -3.11 scripts/build_vi_crawl_external.py --inputs data/review/vi_crawl_run3_reviewed.csv --out data/processed_tier2_vi/_run3_clean.csv --full-out data/raw/vi_crawl_tier2_external.csv`
+5. `$env:PYTHONPATH="src"; py -3.11 scripts/train_tier2.py` → báo cáo có thêm mục tin thật và chuỗi tầng 1 → tầng 2.
+
+Nên ưu tiên tìm thêm kiểu **"sếp/đồng nghiệp nhờ chuyển tiền"**, **"người quen mượn tiền"** (lớp `social_impersonation` còn ít khuôn).
+Chi tiết: [`NHAT_KY_TANG2.md`](NHAT_KY_TANG2.md) mục 5b.
