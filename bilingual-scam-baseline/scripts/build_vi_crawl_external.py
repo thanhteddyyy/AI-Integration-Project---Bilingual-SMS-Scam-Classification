@@ -40,6 +40,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 from scam_baseline.data.clean import template_duplicate_key  # noqa: E402
+from scam_baseline.data.scam_types import VI_TIER2_CLASSES, merge_vi_scam_type  # noqa: E402
 from apply_vi_labels_v3 import FAMILY_JACCARD, shingles  # noqa: E402
 
 
@@ -101,6 +102,10 @@ def build(inputs: list[Path], channels: set[str], include_maybe: bool, threshold
     df["message"] = df["message_in"].map(lambda t: mask_pii(str(t)).strip())
     df.loc[(df.skip_reason == "") & (df.message == ""), "skip_reason"] = "empty"
     df.loc[df.label_3class != "scam", "scam_type"] = "none"
+    df["scam_type"] = df["scam_type"].map(merge_vi_scam_type)
+    unknown = set(df.loc[(df.skip_reason == "") & (df.label_3class == "scam"), "scam_type"]) - set(VI_TIER2_CLASSES)
+    if unknown:
+        raise SystemExit(f"scam_type not in VI_TIER2_CLASSES: {sorted(unknown)}")
 
     keys = df["message"].map(template_duplicate_key)
     dup = keys.duplicated() & (df.skip_reason == "")

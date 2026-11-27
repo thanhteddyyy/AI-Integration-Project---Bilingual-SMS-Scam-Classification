@@ -68,8 +68,8 @@ COM_009,"Tai khoan cua ban dang duoc dang nhap tren thiet bi khac, neu khong pha
 COM_010,"Tai khoan cua ban dang duoc dang nhap tren thiet bi khac, neu khong phai ban dang nhap vui long vao https://techcombank.vn-ctt .vip de sua doi mat khau hoac thoat khoi thiet bi kia",1,scam,banking_finance,review_v3_label1,fam_e133553e,28/05/2026
 COM_011,UNG DUNG VCB DIGIBANK cua ban duoc PHAT HIEN KICH HOAT tren thiet bi la. Neu KHONG PHAI BAN KICH HOAT vui long bam vao https://vietcombank.vn-nng.top de doi thiet bi hoac huy de tranh mat tai san,1,scam,banking_finance,review_v3_label1,fam_3033cf66,28/05/2026
 COM_014,"Tai khoan cua ban dang duoc dang nhap tren thiet bi khac, neu khong phai ban dang nhap vui long vao https://vietcombank.vn-utt.xyz de sua doi mat khau hoac thoat khoi thiet bi kia",1,scam,banking_finance,review_v3_label1,fam_e133553e,28/05/2026
-TE_038,Vui long truy cap de thanh toan tien phat giao thong thang nay va tranh phi phat do nop tre : vndichvucong-gov.com,1,scam,government_services,review_v3_label1,fam_16b30490,28/05/2026
-TE_049,Vui long truy cap de thanh toan tien phat giao thong thang nay va tranh phi phat do nop tre: govvn-dichvucong.com,1,scam,government_services,review_v3_label1,fam_16b30490,28/05/2026
+TE_038,Vui long truy cap de thanh toan tien phat giao thong thang nay va tranh phi phat do nop tre : vndichvucong-gov.com,1,scam,gov_utility_services,review_v3_label1,fam_16b30490,28/05/2026
+TE_049,Vui long truy cap de thanh toan tien phat giao thong thang nay va tranh phi phat do nop tre: govvn-dichvucong.com,1,scam,gov_utility_services,review_v3_label1,fam_16b30490,28/05/2026
 NEW_057,UNG DUNG VCB DIGIBANK cua ban duoc PHAT HIEN KICH HOAT tren thiet bi la. Neu KHONG PHAI BAN KICH HOAT vui long bam vao https://vietcombank.vn-ms.top de doi thiet bi hoac huy de tranh mat tai san,1,scam,banking_finance,review_v3_label1,fam_3033cf66,4/6/2026
 COM_065,"Våo ngay pkwin link http://casino-5-euro-no-deposit-bonus-[NUMBER].expertinvisalign.online dang ki tai khoan nhan code [MONEY], nap dau tang 100% trai nghiem casino,no hu hay nhat.",1,scam,prize_lottery,review_v3_label1,fam_fe50b649,11/6/2026
 COM_079,"Xin chào, tôi là trưởng phòng nhân sự của Cty HVS hiện tại Cty đang tuyển dụng nhân viên bán thời gian. Tiền lương được trả hàng ngày. Bạn có thể làm việc tại nhà và thu nhập từ [MONEY] đến [MONEY] một tháng bình quân [MONEY]-[MONEY]/ngày , 
@@ -89,10 +89,10 @@ Nhận tiền trong ngày .
 Liên hệ
 zalo: zalo.me/[NUMBER]
 zalo: [NUMBER]",1,scam,job_task_scam,review_v3_label1,fam_75992a5a,18/06/2026
-COM_1414,"Phương tiện biển số [TIME]-329.52 của bạn vi phạm tốc độ, mức phạt [MONEY]. Tra cứu và nộp phạt, liên hệ [NUMBER].",1,scam,government_services,review_v3_label1,fam_b7e30766,18/07/2026
-COM_1478,Vui long truy cap de thanh toan tien phat giao thong thang nay va tranh phi phat do nop tre: gov-dichvucong.com,1,scam,government_services,review_v3_label1,fam_16b30490,21/07/2026
+COM_1414,"Phương tiện biển số [TIME]-329.52 của bạn vi phạm tốc độ, mức phạt [MONEY]. Tra cứu và nộp phạt, liên hệ [NUMBER].",1,scam,gov_utility_services,review_v3_label1,fam_b7e30766,18/07/2026
+COM_1478,Vui long truy cap de thanh toan tien phat giao thong thang nay va tranh phi phat do nop tre: gov-dichvucong.com,1,scam,gov_utility_services,review_v3_label1,fam_16b30490,21/07/2026
 COM_1479,"Thong bao: Quy khach con mot khoan phat giao thong chua duoc thanh toan. Vui long thanh toan som de tranh cac khoan phi phat phat sinh: 
-dichvuconggov-vn.com",1,scam,government_services,review_v3_label1,fam_41966e55,21/07/2026
+dichvuconggov-vn.com",1,scam,gov_utility_services,review_v3_label1,fam_41966e55,21/07/2026
 COM_1484,"Con đang cấp cứu ở bệnh viện sau tai nạn, cần đóng viện phí gấp [MONEY]. Bố/mẹ chuyển vào STK 7553087040089 TPBank giúp con, số con bị hỏng rồi ạ.",1,scam,social_impersonation,review_v3_label1,fam_434dbd07,21/07/2026
 COM_1485,Đơn hàng [NUMBER] đang giữ tại bưu cục do thiếu cước [MONEY]. Vui lòng thanh toán vào STK [NUMBER] (VPBank) trước [TIME] hôm nay để được giao.,1,scam,delivery_logistics,review_v3_label1,fam_73401dfc,21/07/2026
 COM_1487,Đơn hàng [NUMBER] đang giữ tại bưu cục do thiếu cước [MONEY]. Vui lòng thanh toán vào STK [NUMBER] (VPBank) trước [TIME] hôm nay để được giao.,1,scam,delivery_logistics,review_v3_label1,fam_73401dfc,21/07/2026
@@ -105,7 +105,7 @@ COM_1767,"Nhóm tư vấn chứng khoán miễn phí của thầy đang mở th�
 COM_1768,"Thế Giới Di Động SALE lớn: giảm tới 50% toàn bộ sản phẩm, freeship toàn quốc. Soạn DK gửi 8x51 để nhận mã giảm giá.",1,spam,none,review_v3_label1,fam_6495da52,24/07/2026
 COM_1769,Đơn hàng [NUMBER] đang giữ tại bưu cục do thiếu cước [MONEY]. Vui lòng thanh toán vào STK [NUMBER] (ACB) trước [TIME] hôm nay để được giao.,1,scam,delivery_logistics,review_v3_label1,fam_73401dfc,24/07/2026
 COM_1771,"Nhóm tư vấn chứng khoán miễn phí của thầy đang mở thêm slot, tỉ lệ khuyến nghị thắng cao. Anh/chị quan tâm thêm Zalo [NUMBER] để vào nhóm trải nghiệm.",1,scam,investment,review_v3_label1,fam_479f16c2,24/07/2026
-COM_1772,"Khoản vay của bạn đã quá hạn. Vui lòng thanh toán hôm nay, nếu không chúng tôi sẽ thông báo tới toàn bộ danh bạ của bạn. LH [NUMBER].",1,scam,banking_finance,review_v3_label1,fam_f6920d2e,24/07/2026
+COM_1772,"Khoản vay của bạn đã quá hạn. Vui lòng thanh toán hôm nay, nếu không chúng tôi sẽ thông báo tới toàn bộ danh bạ của bạn. LH [NUMBER].",1,scam,loan_debt,review_v3_label1,fam_f6920d2e,24/07/2026
 COM_1773,"Việc nhẹ lương cao, làm nhiệm vụ like video nhận tiền liền. Inbox Zalo [NUMBER], hỗ trợ rút tiền trong ngày.",1,scam,job_task_scam,review_v3_label1,fam_b8044b04,24/07/2026
 COM_1774,"TUYỂN CTV chốt đơn Lazada tại nhà, lương 300-[MONEY]/ngày, không cần cọc. Kết bạn WhatsApp số [NUMBER] để nhận việc ngay.",1,scam,job_task_scam,review_v3_label1,fam_5d6e5dac,24/07/2026
 COM_1775,"Cần người cho thuê tài khoản ngân hàng, 5-[MONEY]/tháng, an toàn. Quan tâm nhắn Zalo [NUMBER] trao đổi.",1,scam,banking_finance,review_v3_label1,fam_e401f2bd,24/07/2026
@@ -115,8 +115,8 @@ COM_1778,"Bất động sản giá gốc CĐT, chiết khấu 15% + quà [MONEY]
 COM_1779,Khoản vay [MONEY] của bạn đã được phê duyệt. Vui lòng đóng phí bảo hiểm khoản vay [MONEY] vào STK [NUMBER] Agribank để giải ngân trong hôm nay.,1,scam,banking_finance,review_v3_label1,fam_01d77b0b,24/07/2026
 COM_1781,"Hệ thống ghi nhận bạn nhận nhầm 1 khoản tiền. Liên hệ [NUMBER] (Zalo) để được hướng dẫn hoàn trả, tránh liên đới pháp lý.",1,scam,banking_finance,review_v3_label1,fam_6fef307f,24/07/2026
 COM_1782,"VPBank thông báo: thẻ của quý khách vừa phát sinh giao dịch [MONEY] lúc [TIME]. Nếu không phải quý khách, gọi ngay [NUMBER] để khóa thẻ.",1,scam,banking_finance,review_v3_label1,fam_48d30074,24/07/2026
-COM_1783,"Thông báo từ Bộ Công an: thuê bao của bạn liên quan đến một vụ án rửa tiền. Gọi ngay [NUMBER] trong [TIME] để làm việc, nếu không sẽ bị khởi tố.",1,scam,government_services,review_v3_label1,fam_3e6fadf8,24/07/2026
-COM_1784,"Thông báo từ Bộ Công an: thuê bao của bạn liên quan đến một vụ án rửa tiền. Gọi ngay [NUMBER] trong [TIME] để làm việc, nếu không sẽ bị khởi tố.",1,scam,government_services,review_v3_label1,fam_3e6fadf8,24/07/2026
+COM_1783,"Thông báo từ Bộ Công an: thuê bao của bạn liên quan đến một vụ án rửa tiền. Gọi ngay [NUMBER] trong [TIME] để làm việc, nếu không sẽ bị khởi tố.",1,scam,gov_utility_services,review_v3_label1,fam_3e6fadf8,24/07/2026
+COM_1784,"Thông báo từ Bộ Công an: thuê bao của bạn liên quan đến một vụ án rửa tiền. Gọi ngay [NUMBER] trong [TIME] để làm việc, nếu không sẽ bị khởi tố.",1,scam,gov_utility_services,review_v3_label1,fam_3e6fadf8,24/07/2026
 COM_1785,"Bên em là kế toán cty, lỡ chuyển dư [MONEY] cho anh/chị. Phiền chuyển lại giúp em qua số [NUMBER] (VPBank) ạ, em cảm ơn.",1,scam,banking_finance,review_v3_label1,fam_7b4f6f46,24/07/2026
 COM_1787,"Phí kích hoạt tài khoản nhận hoa hồng là [MONEY], chuyển vào [NUMBER] (Sacombank). Sau khi nạp bạn nhận lại gấp đôi.",1,scam,job_task_scam,review_v3_label1,fam_b41f1aff,24/07/2026
 COM_1788,[Techcombank] Nhân viên CSKH sẽ gọi xác minh trong ít phút. Vui lòng đọc mã 6 số vừa gửi để hoàn tất nâng cấp bảo mật miễn phí.,1,scam,banking_finance,review_v3_label1,fam_3485da2e,24/07/2026
@@ -143,13 +143,13 @@ COM_1811,Hồ sơ vay [MONEY] đã duyệt. Vui lòng nộp phí bảo hiểm kh
 COM_1812,"Bên em là kế toán cty, lỡ chuyển dư [MONEY] cho anh/chị. Phiền chuyển lại giúp em qua số 1637681278144 (MB Bank) ạ, em cảm ơn.",1,scam,banking_finance,review_v3_label1,fam_7b4f6f46,24/07/2026
 COM_1813,"Anh ơi em đang kẹt viện phí cho mẹ [MONEY], mai em gửi lại liền. Anh chuyển gấp giúp em số [NUMBER] Agribank với, em cảm ơn anh nhiều.",1,scam,banking_finance,review_v3_label1,fam_0b36980a,24/07/2026
 COM_1814,[Vietcombank] Nhân viên CSKH sẽ gọi xác minh trong ít phút. Vui lòng đọc mã 6 số vừa gửi để hoàn tất nâng cấp bảo mật miễn phí.,1,scam,banking_finance,review_v3_label1,fam_3485da2e,24/07/2026
-COM_1815,"Khoản vay của bạn đã quá hạn. Vui lòng thanh toán hôm nay, nếu không chúng tôi sẽ thông báo tới toàn bộ danh bạ của bạn. LH [NUMBER].",1,scam,banking_finance,review_v3_label1,fam_f6920d2e,24/07/2026
+COM_1815,"Khoản vay của bạn đã quá hạn. Vui lòng thanh toán hôm nay, nếu không chúng tôi sẽ thông báo tới toàn bộ danh bạ của bạn. LH [NUMBER].",1,scam,loan_debt,review_v3_label1,fam_f6920d2e,24/07/2026
 COM_1816,"VAY GẤP trong ngày, chỉ cần CMND + SĐT, hạn mức [MONEY], không thẩm định người thân. Gọi/Zalo [NUMBER] gặp Long.",1,spam,none,review_v3_label1,fam_efe85649,24/07/2026
-COM_1817,"Để nhận tiền hoàn thuế [MONEY], bạn cần chuyển trước phí xử lý [MONEY] vào STK [NUMBER] (MB Bank) chủ TK THẢO. Sau 15p tiền sẽ về.",1,scam,government_services,review_v3_label1,fam_90dbca35,24/07/2026
+COM_1817,"Để nhận tiền hoàn thuế [MONEY], bạn cần chuyển trước phí xử lý [MONEY] vào STK [NUMBER] (MB Bank) chủ TK THẢO. Sau 15p tiền sẽ về.",1,scam,gov_utility_services,review_v3_label1,fam_90dbca35,24/07/2026
 COM_1819,"Techcombank thông báo: thẻ của quý khách vừa phát sinh giao dịch [MONEY] lúc [TIME]. Nếu không phải quý khách, gọi ngay [NUMBER] để khóa thẻ.",1,scam,banking_finance,review_v3_label1,fam_48d30074,24/07/2026
 COM_1820,"Mẹ ơi con bị tạm giữ ở đồn, thầy giáo nói cần [MONEY] lo việc gấp, mẹ chuyển vào [NUMBER] (VPBank) đừng gọi con nha.",1,scam,social_impersonation,review_v3_label1,fam_a3346b8b,24/07/2026
 COM_1821,"Anh ơi em kẹt tiền viện phí cho mẹ [MONEY], lát em gửi lại. Anh chuyển gấp giúp em số 5919269780429 Sacombank với, đang gấp lắm.",1,scam,banking_finance,review_v3_label1,fam_8ba36ede,24/07/2026
-COM_1822,"Bạn là người bảo lãnh khoản vay của Trang đã bể nợ. Gọi [NUMBER] ngay để xử lý, tránh bị khởi kiện.",1,scam,banking_finance,review_v3_label1,fam_93f9c262,24/07/2026
+COM_1822,"Bạn là người bảo lãnh khoản vay của Trang đã bể nợ. Gọi [NUMBER] ngay để xử lý, tránh bị khởi kiện.",1,scam,loan_debt,review_v3_label1,fam_93f9c262,24/07/2026
 COM_1823,"[MB Bank] Để hủy giao dịch đáng ngờ, vui lòng đọc mã xác thực 6 số vừa gửi cho nhân viên đang gọi đến máy bạn. Tuyệt đối không cung cấp cho người khác.",1,scam,banking_finance,review_v3_label1,fam_afbfb890,24/07/2026
 COM_1824,Đơn hàng của bạn cần thanh toán phí lưu kho [MONEY] vào STK 9844763092290 (Vietinbank) trước [TIME] hôm nay nếu không sẽ hoàn trả.,1,scam,delivery_logistics,review_v3_label1,fam_0c86f2df,24/07/2026
 COM_1825,"Nhóm tư vấn chứng khoán miễn phí của thầy đang mở thêm slot, tỉ lệ khuyến nghị thắng cao. Anh/chị quan tâm thêm Zalo [NUMBER] để vào nhóm trải nghiệm.",1,scam,investment,review_v3_label1,fam_479f16c2,24/07/2026
@@ -161,7 +161,7 @@ COM_1831,"Cần người cho thuê tài khoản ngân hàng, 5-[MONEY]/tháng, a
 COM_1832,"Bên em là kế toán cty, lỡ chuyển dư [MONEY] cho anh/chị. Phiền chuyển lại giúp em qua số 5472973364256 (Vietcombank) ạ, em cảm ơn.",1,scam,banking_finance,review_v3_label1,fam_7b4f6f46,24/07/2026
 COM_1833,"TUYỂN CTV chốt đơn Lazada tại nhà, lương 300-[MONEY]/ngày, không cần cọc. Kết bạn Zalo số [NUMBER] để nhận việc ngay.",1,scam,job_task_scam,review_v3_label1,fam_5d6e5dac,24/07/2026
 COM_1835,Hồ sơ vay [MONEY] đã duyệt. Vui lòng nộp phí bảo hiểm khoản vay [MONEY] vào TK 6123937403259 VPBank để giải ngân ngay.,1,scam,banking_finance,review_v3_label1,fam_e40a3fa0,24/07/2026
-COM_1836,"Để nhận tiền hoàn thuế [MONEY], bạn cần chuyển trước phí xử lý [MONEY] vào STK [NUMBER] (MB Bank) chủ TK MAI. Sau 15p tiền sẽ về.",1,scam,government_services,review_v3_label1,fam_90dbca35,24/07/2026
+COM_1836,"Để nhận tiền hoàn thuế [MONEY], bạn cần chuyển trước phí xử lý [MONEY] vào STK [NUMBER] (MB Bank) chủ TK MAI. Sau 15p tiền sẽ về.",1,scam,gov_utility_services,review_v3_label1,fam_90dbca35,24/07/2026
 COM_1837,"Con đang cấp cứu ở bệnh viện sau tai nạn, cần đóng viện phí gấp [MONEY]. Bố/mẹ chuyển ngay vào STK [NUMBER] MB Bank giúp con, số con bị hỏng rồi.",1,scam,social_impersonation,review_v3_label1,fam_434dbd07,24/07/2026
 COM_1838,"Con đang cấp cứu ở bệnh viện sau tai nạn, cần đóng viện phí gấp [MONEY]. Bố/mẹ chuyển ngay vào STK 4242349798309 MB Bank giúp con, số con bị hỏng rồi.",1,scam,social_impersonation,review_v3_label1,fam_434dbd07,24/07/2026
 COM_1839,"Mẹ ơi con làm rớt điện thoại xuống nước rồi, đây là số bạn con. Con cần đóng học phí gấp [MONEY], mẹ chuyển giúp con vào STK [NUMBER] Vietcombank nha.",1,scam,social_impersonation,review_v3_label1,fam_55fdec96,24/07/2026
@@ -169,22 +169,22 @@ COM_1840,Đơn hàng của bạn cần thanh toán phí lưu kho [MONEY] vào ST
 COM_1841,Bạn được tặng 1 phần quà tri ân. Liên hệ Telegram [NUMBER] gặp NV Mai để xác nhận địa chỉ nhận hàng.,1,scam,prize_lottery,review_v3_label1,fam_a8fd7dc0,24/07/2026
 COM_1842,"Xin lỗi, tôi vừa chuyển nhầm [MONEY] vào tài khoản của bạn. Mong bạn hoàn lại vào STK [NUMBER] Techcombank, cảm ơn nhiều!",1,scam,banking_finance,review_v3_label1,fam_ae600959,24/07/2026
 COM_1843,"[VPBank] Để hủy giao dịch đáng ngờ, vui lòng đọc mã xác thực 6 số vừa gửi cho nhân viên đang gọi đến máy bạn. Tuyệt đối không cung cấp cho người khác.",1,scam,banking_finance,review_v3_label1,fam_afbfb890,24/07/2026
-COM_1845,"Khoản vay của bạn đã quá hạn. Vui lòng thanh toán hôm nay, nếu không chúng tôi sẽ thông báo tới toàn bộ danh bạ của bạn. LH [NUMBER].",1,scam,banking_finance,review_v3_label1,fam_f6920d2e,24/07/2026
+COM_1845,"Khoản vay của bạn đã quá hạn. Vui lòng thanh toán hôm nay, nếu không chúng tôi sẽ thông báo tới toàn bộ danh bạ của bạn. LH [NUMBER].",1,scam,loan_debt,review_v3_label1,fam_f6920d2e,24/07/2026
 COM_1846,"BIDV thông báo: thẻ của quý khách vừa phát sinh giao dịch [MONEY] lúc [TIME]. Nếu không phải quý khách, gọi ngay [NUMBER] để khóa thẻ.",1,scam,banking_finance,review_v3_label1,fam_48d30074,24/07/2026
 COM_1848,Bạn được tặng 1 phần quà tri ân. Liên hệ Telegram [NUMBER] gặp NV Hà để xác nhận địa chỉ nhận hàng.,1,scam,prize_lottery,review_v3_label1,fam_a8fd7dc0,24/07/2026
 COM_1849,"VAY GẤP trong ngày, chỉ cần CMND + SĐT, hạn mức [MONEY], không thẩm định người thân. Gọi/Zalo [NUMBER] gặp Tâm.",1,spam,none,review_v3_label1,fam_efe85649,24/07/2026
 COM_1850,"Việc nhẹ lương cao, làm nhiệm vụ like video nhận tiền liền. Inbox Zalo [NUMBER], hỗ trợ rút tiền trong ngày.",1,scam,job_task_scam,review_v3_label1,fam_b8044b04,24/07/2026
 COM_1851,"Để hủy giao dịch lạ, đọc mã [NUMBER] cho nhân viên ngân hàng đang gọi cho bạn. Tuyệt đối không tắt máy giữa chừng.",1,scam,banking_finance,review_v3_label1,fam_5626696e,24/07/2026
 COM_1853,"Xin lỗi, tôi vừa chuyển nhầm [MONEY] vào tài khoản của bạn. Mong bạn hoàn lại vào STK 6736341933700 Sacombank, cảm ơn nhiều!",1,scam,banking_finance,review_v3_label1,fam_ae600959,24/07/2026
-COM_1854,"Để nhận tiền hoàn thuế [MONEY], bạn cần chuyển trước phí xử lý [MONEY] vào STK [NUMBER] (Techcombank) chủ TK THẢO. Sau 15p tiền sẽ về.",1,scam,government_services,review_v3_label1,fam_90dbca35,24/07/2026
+COM_1854,"Để nhận tiền hoàn thuế [MONEY], bạn cần chuyển trước phí xử lý [MONEY] vào STK [NUMBER] (Techcombank) chủ TK THẢO. Sau 15p tiền sẽ về.",1,scam,gov_utility_services,review_v3_label1,fam_90dbca35,24/07/2026
 COM_1855,"Sếp nhờ chút: anh đang họp không tiện nghe máy, em chuyển tạm [MONEY] cho đối tác vào STK 6308494394318 Vietinbank, lát anh hoàn lại.",1,scam,social_impersonation,review_v3_label1,fam_2e2f4263,24/07/2026
 COM_1856,"Bất động sản giá gốc CĐT, chiết khấu 15% + quà [MONEY]. Liên hệ [NUMBER] (Mr Long) nhận bảng giá & vị trí.",1,spam,none,review_v3_label1,fam_bb4d3bd1,24/07/2026
-COM_1857,"Phương tiện biển số 51A-934.48 của bạn vi phạm tốc độ, mức phạt [MONEY]. Tra cứu và nộp phạt, liên hệ [NUMBER].",1,scam,government_services,review_v3_label1,fam_b7e30766,24/07/2026
+COM_1857,"Phương tiện biển số 51A-934.48 của bạn vi phạm tốc độ, mức phạt [MONEY]. Tra cứu và nộp phạt, liên hệ [NUMBER].",1,scam,gov_utility_services,review_v3_label1,fam_b7e30766,24/07/2026
 COM_1858,"Mẹ ơi con bị tạm giữ ở đồn, thầy giáo nói cần [MONEY] lo việc gấp, mẹ chuyển vào [NUMBER] (BIDV) đừng gọi con nha.",1,scam,social_impersonation,review_v3_label1,fam_a3346b8b,24/07/2026
-COM_1859,"Để nhận tiền hoàn thuế [MONEY], bạn cần chuyển trước phí xử lý [MONEY] vào STK [NUMBER] (BIDV) chủ TK DŨNG. Sau 15p tiền sẽ về.",1,scam,government_services,review_v3_label1,fam_90dbca35,24/07/2026
+COM_1859,"Để nhận tiền hoàn thuế [MONEY], bạn cần chuyển trước phí xử lý [MONEY] vào STK [NUMBER] (BIDV) chủ TK DŨNG. Sau 15p tiền sẽ về.",1,scam,gov_utility_services,review_v3_label1,fam_90dbca35,24/07/2026
 COM_1860,"Bạn đã trúng thưởng [MONEY] chương trình tri ân. Để nhận, đóng phí hồ sơ [MONEY] vào STK [NUMBER] MB Bank, chủ TK Phạm Mai.",1,scam,prize_lottery,review_v3_label1,fam_0f47caa1,24/07/2026
 COM_1861,"TUYỂN CTV chốt đơn Shopee tại nhà, lương 300-[MONEY]/ngày, không cần cọc. Kết bạn Zalo số [NUMBER] để nhận việc ngay.",1,scam,job_task_scam,review_v3_label1,fam_5d6e5dac,24/07/2026
-COM_1862,"Thông báo từ Bộ Công an: thuê bao của bạn liên quan đến một vụ án rửa tiền. Gọi ngay [NUMBER] trong [TIME] để làm việc, nếu không sẽ bị khởi tố.",1,scam,government_services,review_v3_label1,fam_3e6fadf8,24/07/2026
+COM_1862,"Thông báo từ Bộ Công an: thuê bao của bạn liên quan đến một vụ án rửa tiền. Gọi ngay [NUMBER] trong [TIME] để làm việc, nếu không sẽ bị khởi tố.",1,scam,gov_utility_services,review_v3_label1,fam_3e6fadf8,24/07/2026
 COM_1864,"ACB: thẻ tín dụng của bạn vừa bị quẹt [MONEY] tại nước ngoài. Nếu không phải bạn, gọi gấp [NUMBER] để khóa thẻ.",1,scam,banking_finance,review_v3_label1,fam_fea8344c,24/07/2026
 COM_1865,"VAY GẤP trong ngày, chỉ cần CMND + SĐT, hạn mức [MONEY], không thẩm định người thân. Gọi/Zalo [NUMBER] gặp Phương.",1,spam,none,review_v3_label1,fam_efe85649,24/07/2026
 COM_1868,"Chào bạn, mình lỡ tay chuyển nhầm [MONEY] vào tài khoản của bạn. Bạn kiểm tra giúp và hoàn lại vào STK [NUMBER] Agribank nhé, cảm ơn bạn nhiều.",1,scam,banking_finance,review_v3_label1,fam_726ec906,24/07/2026
@@ -195,25 +195,25 @@ COM_1873,"Con đang cấp cứu ở bệnh viện sau tai nạn, cần đóng vi
 COM_1874,Đơn hàng của bạn cần thanh toán phí lưu kho [MONEY] vào STK [NUMBER] (VPBank) trước [TIME] hôm nay nếu không sẽ hoàn trả.,1,scam,delivery_logistics,review_v3_label1,fam_0c86f2df,24/07/2026
 COM_1875,Đơn hàng [NUMBER] đang giữ tại bưu cục do thiếu cước [MONEY]. Vui lòng thanh toán vào STK [NUMBER] (ACB) trước [TIME] hôm nay để được giao.,1,scam,delivery_logistics,review_v3_label1,fam_73401dfc,24/07/2026
 COM_1876,"Chào bạn, mình lỡ tay chuyển nhầm [MONEY] vào tài khoản của bạn. Bạn kiểm tra giúp và hoàn lại vào STK [NUMBER] ACB nhé, cảm ơn bạn nhiều.",1,scam,banking_finance,review_v3_label1,fam_726ec906,24/07/2026
-COM_1877,"[Mobifone] Thuê bao của quý khách chưa chuẩn hóa thông tin theo quy định, sẽ bị khóa 1 chiều sau [TIME]. Vui lòng gọi [NUMBER] để cập nhật.",1,scam,telecom_account,review_v3_label1,fam_e81d47bc,24/07/2026
+COM_1877,"[Mobifone] Thuê bao của quý khách chưa chuẩn hóa thông tin theo quy định, sẽ bị khóa 1 chiều sau [TIME]. Vui lòng gọi [NUMBER] để cập nhật.",1,scam,gov_utility_services,review_v3_label1,fam_e81d47bc,24/07/2026
 COM_1878,"Anh ơi em đang kẹt viện phí cho mẹ [MONEY], mai em gửi lại liền. Anh chuyển gấp giúp em số [NUMBER] TPBank với, em cảm ơn anh nhiều.",1,scam,banking_finance,review_v3_label1,fam_0b36980a,24/07/2026
 COM_1879,"Hệ thống ghi nhận bạn nhận nhầm 1 khoản tiền. Liên hệ [NUMBER] (Zalo) để được hướng dẫn hoàn trả, tránh liên đới pháp lý.",1,scam,banking_finance,review_v3_label1,fam_6fef307f,24/07/2026
-COM_1880,"Phương tiện biển số 30E-716.34 của bạn vi phạm tốc độ, mức phạt [MONEY]. Tra cứu và nộp phạt, liên hệ [NUMBER].",1,scam,government_services,review_v3_label1,fam_b7e30766,24/07/2026
+COM_1880,"Phương tiện biển số 30E-716.34 của bạn vi phạm tốc độ, mức phạt [MONEY]. Tra cứu và nộp phạt, liên hệ [NUMBER].",1,scam,gov_utility_services,review_v3_label1,fam_b7e30766,24/07/2026
 COM_1883,"Xin lỗi, tôi vừa chuyển nhầm [MONEY] vào tài khoản của bạn. Mong bạn hoàn lại vào STK [NUMBER] Agribank, cảm ơn nhiều!",1,scam,banking_finance,review_v3_label1,fam_ae600959,24/07/2026
 COM_1884,"Bên em là kế toán cty, lỡ chuyển dư [MONEY] cho anh/chị. Phiền chuyển lại giúp em qua số [NUMBER] (Sacombank) ạ, em cảm ơn.",1,scam,banking_finance,review_v3_label1,fam_7b4f6f46,24/07/2026
 COM_1885,"Spa Hùng ưu đãi 70% gói chăm sóc da dịp lễ, tặng kèm 2 buổi trị liệu. Gọi [NUMBER] đặt lịch ngay hôm nay.",1,spam,none,review_v3_label1,fam_f8a5da21,24/07/2026
 COM_1886,"Bất động sản giá gốc CĐT, chiết khấu 15% + quà [MONEY]. Liên hệ [NUMBER] (Mr Tâm) nhận bảng giá & vị trí.",1,spam,none,review_v3_label1,fam_bb4d3bd1,24/07/2026
-COM_1887,"Tòa án thông báo: có lệnh bắt tạm giam liên quan CMND của bạn. Gọi [NUMBER] ngay để trình bày, giữ bí mật tuyệt đối với người khác.",1,scam,government_services,review_v3_label1,fam_27bb63ed,24/07/2026
+COM_1887,"Tòa án thông báo: có lệnh bắt tạm giam liên quan CMND của bạn. Gọi [NUMBER] ngay để trình bày, giữ bí mật tuyệt đối với người khác.",1,scam,gov_utility_services,review_v3_label1,fam_27bb63ed,24/07/2026
 COM_1888,Hồ sơ vay [MONEY] đã duyệt. Vui lòng nộp phí bảo hiểm khoản vay [MONEY] vào TK [NUMBER] TPBank để giải ngân ngay.,1,scam,banking_finance,review_v3_label1,fam_e40a3fa0,24/07/2026
 COM_1889,"Bất động sản giá gốc CĐT, chiết khấu 15% + quà [MONEY]. Liên hệ [NUMBER] (Mr Trang) nhận bảng giá & vị trí.",1,spam,none,review_v3_label1,fam_bb4d3bd1,24/07/2026
 COM_1890,Đơn hàng của bạn cần thanh toán phí lưu kho [MONEY] vào STK [NUMBER] (BIDV) trước [TIME] hôm nay nếu không sẽ hoàn trả.,1,scam,delivery_logistics,review_v3_label1,fam_0c86f2df,24/07/2026
 COM_1891,"Để hủy giao dịch lạ, đọc mã [NUMBER] cho nhân viên ngân hàng đang gọi cho bạn. Tuyệt đối không tắt máy giữa chừng.",1,scam,banking_finance,review_v3_label1,fam_5626696e,24/07/2026
-COM_1892,"Bộ Công an thông báo: có lệnh bắt tạm giam liên quan CMND của bạn. Gọi [NUMBER] ngay để trình bày, giữ bí mật tuyệt đối với người khác.",1,scam,government_services,review_v3_label1,fam_27bb63ed,24/07/2026
+COM_1892,"Bộ Công an thông báo: có lệnh bắt tạm giam liên quan CMND của bạn. Gọi [NUMBER] ngay để trình bày, giữ bí mật tuyệt đối với người khác.",1,scam,gov_utility_services,review_v3_label1,fam_27bb63ed,24/07/2026
 COM_1893,"Xin lỗi, tôi vừa chuyển nhầm [MONEY] vào tài khoản của bạn. Mong bạn hoàn lại vào STK [NUMBER] MB Bank, cảm ơn nhiều!",1,spam,none,review_v3_label1,fam_ae600959,24/07/2026
 COM_1894,"[Vietcombank] Để hủy giao dịch đáng ngờ, vui lòng đọc mã xác thực 6 số vừa gửi cho nhân viên đang gọi đến máy bạn. Tuyệt đối không cung cấp cho người khác.",1,scam,banking_finance,review_v3_label1,fam_afbfb890,24/07/2026
 COM_1895,"Bên em là kế toán cty, lỡ chuyển dư [MONEY] cho anh/chị. Phiền chuyển lại giúp em qua số [NUMBER] (Vietinbank) ạ, em cảm ơn.",1,scam,banking_finance,review_v3_label1,fam_7b4f6f46,24/07/2026
 COM_1896,"Xin lỗi, tôi vừa chuyển nhầm [MONEY] vào tài khoản của bạn. Mong bạn hoàn lại vào STK [NUMBER] Sacombank, cảm ơn nhiều!",1,scam,banking_finance,review_v3_label1,fam_ae600959,24/07/2026
-COM_1897,"Thông báo từ Tòa án: thuê bao của bạn liên quan đến một vụ án rửa tiền. Gọi ngay [NUMBER] trong [TIME] để làm việc, nếu không sẽ bị khởi tố.",1,scam,government_services,review_v3_label1,fam_3e6fadf8,24/07/2026
+COM_1897,"Thông báo từ Tòa án: thuê bao của bạn liên quan đến một vụ án rửa tiền. Gọi ngay [NUMBER] trong [TIME] để làm việc, nếu không sẽ bị khởi tố.",1,scam,gov_utility_services,review_v3_label1,fam_3e6fadf8,24/07/2026
 COM_1898,"Cần người cho thuê tài khoản ngân hàng, 5-[MONEY]/tháng, an toàn. Quan tâm nhắn Telegram [NUMBER] trao đổi.",1,scam,banking_finance,review_v3_label1,fam_e401f2bd,24/07/2026
 COM_1899,Số thuê bao của quý khách may mắn nằm trong danh sách nhận quà tri ân: 1 xe máy SH hoặc [MONEY] tiền mặt. Liên hệ [NUMBER] để làm thủ tục.,1,scam,prize_lottery,review_v3_label1,fam_1326c6c4,24/07/2026
 COM_1900,"Mẹ ơi con làm rớt điện thoại xuống nước rồi, đây là số bạn con. Con cần đóng học phí gấp [MONEY], mẹ chuyển giúp con vào STK [NUMBER] Sacombank nha.",1,scam,social_impersonation,review_v3_label1,fam_55fdec96,24/07/2026

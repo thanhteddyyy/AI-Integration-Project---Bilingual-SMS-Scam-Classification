@@ -42,6 +42,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from scam_baseline.data.clean import clean_text, stable_hash, template_duplicate_key  # noqa: E402
+from scam_baseline.data.scam_types import VI_TIER2_CLASSES, merge_vi_scam_type  # noqa: E402
 
 RAW = ROOT / "data" / "raw"
 REVIEW = ROOT / "data" / "review"
@@ -105,6 +106,11 @@ def tuan_final_labels(full: pd.DataFrame) -> pd.DataFrame:
             if not out.loc[mask, "label_3class"].eq("scam").all():
                 raise ValueError(f"{type_path.name}: {ids} are not all scam – fix the override")
             out.loc[mask, "scam_type"] = row["scam_type"]
+    # tier-2 class list (2026-11-27): merge classes too small to learn
+    out["scam_type"] = out["scam_type"].map(merge_vi_scam_type)
+    unknown = set(out.loc[out["label_3class"] == "scam", "scam_type"]) - set(VI_TIER2_CLASSES)
+    if unknown:
+        raise ValueError(f"scam_type not in VI_TIER2_CLASSES: {sorted(unknown)}")
 
     unresolved = out["label_3class"].isna()
     if unresolved.any():

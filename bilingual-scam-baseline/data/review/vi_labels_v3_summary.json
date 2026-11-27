@@ -28,25 +28,25 @@
       "scam": 123
     },
     "train_v3_scam_type": {
-      "prize_lottery": 79,
-      "other_scam": 74,
-      "banking_finance": 71,
-      "government_services": 54,
+      "prize_lottery": 81,
+      "other_scam": 73,
+      "gov_utility_services": 61,
+      "banking_finance": 53,
       "investment": 49,
       "job_task_scam": 40,
+      "loan_debt": 17,
       "delivery_logistics": 15,
-      "telecom_account": 7,
       "social_impersonation": 1
     },
     "test_v3_scam_type": {
-      "banking_finance": 57,
+      "banking_finance": 44,
       "prize_lottery": 22,
-      "government_services": 17,
+      "gov_utility_services": 16,
+      "loan_debt": 15,
       "job_task_scam": 12,
       "social_impersonation": 6,
       "delivery_logistics": 5,
-      "investment": 3,
-      "telecom_account": 1
+      "investment": 3
     }
   },
   "vie_sms_corpus": {
