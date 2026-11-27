@@ -136,6 +136,8 @@ Không tin hợp lệ nào của crawl bị báo nhầm (chỉ 2–4 tin, không
 
 ## 5. Trạng thái đồ án và việc còn lại (cập nhật 25/11/2026)
 
+> **Bản tổng kết mới nhất (26/11):** [`TONG_KET_TIEN_DO.md`](TONG_KET_TIEN_DO.md) – tầng 1 đã chốt Linear SVM song ngữ, danh sách việc tiếp theo.
+
 ### Đã hoàn thành
 - **Dữ liệu:** nhãn VI + EN rà theo `definition.md`; sửa rò rỉ họ mẫu, lối tắt "có dấu = scam", lối tắt placeholder EN;
   rà `scam_type` VI; pipeline chạy lại được toàn bộ, 29 test.
@@ -156,3 +158,13 @@ Không tin hợp lệ nào của crawl bị báo nhầm (chỉ 2–4 tin, không
 
 **Thứ tự đề xuất:** làm 2 → 3 trong lúc chờ crawl (người dùng chạy 4 trên Colab, bắt đầu viết chương dữ liệu) →
 khi crawl xong làm 1 → 5, 6 → hoàn thiện 7.
+
+## 6. Thay đổi 27/11/2026 (chi tiết: [`NHAT_KY_TANG2.md`](NHAT_KY_TANG2.md))
+- **`scam_type` tiếng Việt → 9 lớp:** thêm `loan_debt` (vay/đòi nợ qua app, không nêu tên ngân hàng cụ thể); `government_services` đổi tên
+  `gov_utility_services` và gộp `telecom_account`; nhà mạng mồi thưởng → `prize_lottery`. Sửa qua `data/review/vi_scam_type_overrides.csv`
+  (ánh xạ tên cũ → mới trong `src/scam_baseline/data/scam_types.py`); 1 tin crawl → `loan_debt`; COM_1477 banking → gov_utility.
+  Chỉ cột `scam_type` đổi; dữ liệu tầng 1 được kiểm tra giống hệt → **không train lại tầng 1**. Sao lưu: `data/_before_scamtype9_2026-11-27/`.
+- `modeling_data_with_meta.csv` cũ thiếu 20 tin crawl đợt 2 → đã dựng lại, khớp `modeling_data.csv` (24.215 dòng).
+- Tầng 2 có dữ liệu riêng `data/processed_tier2_vi/` (565 tin Tuấn + 41 tin crawl đợt 1–2 trong train); bản đóng băng crawl dùng train
+  tầng 2: `data/raw/vi_crawl_tier2_train.csv`; danh sách bài/tin đợt 1–2 để đợt 3 bỏ qua: `data/review/vi_crawl_seen_run1_2/`.
+- Mới: nhận diện ngôn ngữ (C1), `predict_pipeline` + gói demo (C2).
