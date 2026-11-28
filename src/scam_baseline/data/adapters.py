@@ -1,0 +1,301 @@
+from __future__ import annotations
+
+import json
+import re
+from pathlib import Path
+from typing import Any
+
+import pandas as pd
+
+from .overrides import apply_label_overrides
+
+
+LEVEL1_MAP = {
+    "ham": "legitimate",
+    "legitimate": "legitimate",
+    "spam": "spam",
+    "smishing": "scam",
+}
+
+IMC_SCAM_TYPE_MAP = {
+    "banking": "banking_finance",
+    "delivery": "delivery_logistics",
+    "government": "government_services",
+    "telecom": "telecom_account",
+    "wrong number": "social_impersonation",
+    "hey mum/dad": "social_impersonation",
+    "others": "other_scam",
+}
+
+
+# ---------------------------------------------------------------------------
+# English placeholder normalisation (data.normalize_en_placeholders)
+# ---------------------------------------------------------------------------
+# IMC25 ships text already anonymised with Presidio tags (<PHONE_NUMBER>, <NAMED_ENTITY>, ...)
+# while sms_phishing / SmishX contain raw numbers and links. Without normalisation a model can
+# learn "has a <TAG> => scam/spam" because IMC25 has no legitimate messages. We map every source
+# to the same small tag set and apply the same regex masking to all English rows.
+EN_TAG_MAP = {
+    "URL": "<URL>", "IP_ADDRESS": "<URL>",
+    "PHONE_NUMBER": "<PHONE>", "PHONE": "<PHONE>",
+    "EMAIL_ADDRESS": "<EMAIL>", "EMAIL": "<EMAIL>",
+    "DATE_TIME": "<DATE_TIME>", "TIME": "<DATE_TIME>", "DATE": "<DATE_TIME>",
+    # identifiers / numbers
+    "US_DRIVER_LICENSE": "<NUMBER>", "US_BANK_NUMBER": "<NUMBER>", "UK_NHS": "<NUMBER>",
+    "US_PASSPORT": "<NUMBER>", "MEDICAL_LICENSE": "<NUMBER>", "US_SSN": "<NUMBER>",
+    "CREDIT_CARD": "<NUMBER>", "US_ITIN": "<NUMBER>", "IBAN_CODE": "<NUMBER>",
+    "DECIMAL": "<NUMBER>", "NUMBER": "<NUMBER>",
+}
+# NER tags (<NAMED_ENTITY>, <LOCATION>, <NRP>, <PERSON>, ...) cannot be reproduced on the other
+# sources, so any tag not in EN_TAG_MAP is removed.
+_EN_TAG_RE = re.compile(r"<([A-Za-z_]+)>")
+_EN_URL_RE = re.compile(
+    r"(?i)\b(?:https?://|www\.)\S+|\b[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:com|net|org|co|uk|io|ly|me|info|biz|"
+    r"xyz|top|vip|club|online|site|link|app|us|in|ru|cn)(?:/\S*)?"
+)
+_EN_EMAIL_RE = re.compile(r"\b[\w.+-]+@[\w-]+\.[\w.-]+\b")
+_EN_TIME_RE = re.compile(r"(?i)\b\d{1,2}[:.]\d{2}(?:\s?[ap]\.?m\.?)?\b|\b\d{1,2}\s?[ap]\.?m\b")
+_EN_DATE_RE = re.compile(r"\b\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?\b")
+_EN_PHONE_RE = re.compile(r"(?<![\w$£€])\+?\d[\d\s().-]{7,}\d(?![\w%])")
+_EN_LONG_NUMBER_RE = re.compile(r"(?<![\w$£€.,])\d{5,}(?![\w%])")
+
+
+def normalize_en_placeholders(text: str) -> str:
+    def tag(match: re.Match) -> str:
+        return f" {EN_TAG_MAP.get(match.group(1).upper(), '')} "
+
+    value = _EN_TAG_RE.sub(tag, str(text))
+    value = _EN_EMAIL_RE.sub(" <EMAIL> ", value)
+    value = _EN_URL_RE.sub(" <URL> ", value)
+    value = _EN_TIME_RE.sub(" <DATE_TIME> ", value)
+    value = _EN_DATE_RE.sub(" <DATE_TIME> ", value)
+    value = _EN_PHONE_RE.sub(" <PHONE> ", value)
+    value = _EN_LONG_NUMBER_RE.sub(" <NUMBER> ", value)
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def _metadata_json(row: pd.Series, columns: list[str]) -> str:
+    data = {
+        column: None if pd.isna(row.get(column)) else str(row.get(column))
+        for column in columns
+    }
+    return json.dumps(data, ensure_ascii=False, sort_keys=True)
+
+
+def _base_frame(
+    raw: pd.DataFrame,
+    *,
+    source_dataset: str,
+    text_column: str,
+    label_column: str,
+    language: str,
+    metadata_columns: list[str],
+) -> pd.DataFrame:
+    output = pd.DataFrame(index=raw.index)
+    output["source_dataset"] = source_dataset
+    output["source_record_id"] = [f"{source_dataset}:{idx}" for idx in raw.index]
+    output["text_raw"] = raw[text_column].astype("string")
+    output["language"] = language
+    output["label_original"] = raw[label_column].astype("string")
+    output["metadata_json"] = raw.apply(
+        _metadata_json, axis=1, columns=metadata_columns
+    )
+    return output.reset_index(drop=True)
+
+
+def load_sms_phishing(path: str | Path) -> pd.DataFrame:
+    raw = pd.read_csv(path, dtype="string", keep_default_na=True)
+    required = {"LABEL", "TEXT", "URL", "EMAIL", "PHONE"}
+    _require_columns(raw, required, "SMS Phishing")
+    output = _base_frame(
+        raw,
+        source_dataset="sms_phishing",
+        text_column="TEXT",
+        label_column="LABEL",
+        language="en",
+        metadata_columns=["URL", "EMAIL", "PHONE"],
+    )
+    normalized = output["label_original"].str.strip().str.casefold()
+    output["label_level_1"] = normalized.map(LEVEL1_MAP)
+    output["scam_type"] = "unknown"
+    return output
+
+
+def load_smishx(path: str | Path) -> pd.DataFrame:
+    raw = pd.read_csv(path, dtype="string", keep_default_na=True)
+    required = {"SMS", "label", "if_URL", "if_phone", "if_email"}
+    _require_columns(raw, required, "SmishX")
+    output = _base_frame(
+        raw,
+        source_dataset="smishx",
+        text_column="SMS",
+        label_column="label",
+        language="en",
+        metadata_columns=["if_URL", "if_phone", "if_email"],
+    )
+    normalized = output["label_original"].str.strip().str.casefold()
+    output["label_level_1"] = normalized.map(LEVEL1_MAP)
+    output["scam_type"] = "unknown"
+    return output
+
+
+def load_imc25(path: str | Path, language_filter: str = "English") -> pd.DataFrame:
+    raw = pd.read_csv(path, dtype="string", keep_default_na=True, low_memory=False)
+    required = {
+        "text",
+        "language",
+        "scam_type",
+        "time",
+        "sender_id",
+        "telephone_number_type",
+        "original_network_name",
+        "original_network_country",
+        "url_shortener",
+        "named_entity",
+        "lure_principles",
+    }
+    _require_columns(raw, required, "IMC25")
+    selected = raw[
+        raw["language"].str.strip().str.casefold().eq(language_filter.casefold())
+    ].copy()
+    selected = selected.reset_index().rename(columns={"index": "_source_index"})
+    output = pd.DataFrame(index=selected.index)
+    output["source_dataset"] = "imc25"
+    output["source_record_id"] = selected["_source_index"].map(
+        lambda idx: f"imc25:{idx}"
+    )
+    output["text_raw"] = selected["text"].astype("string")
+    output["language"] = "en"
+    output["label_original"] = selected["scam_type"].astype("string")
+    original = output["label_original"].str.strip().str.casefold()
+    output["label_level_1"] = original.where(original.eq("spam"), "scam")
+    output.loc[original.isna(), "label_level_1"] = pd.NA
+    output["scam_type"] = original.map(IMC_SCAM_TYPE_MAP).fillna("unknown")
+    metadata_columns = [
+        "time",
+        "sender_id",
+        "telephone_number_type",
+        "original_network_name",
+        "original_network_country",
+        "url_shortener",
+        "named_entity",
+        "lure_principles",
+    ]
+    output["metadata_json"] = selected.apply(
+        _metadata_json, axis=1, columns=metadata_columns
+    )
+    return output.reset_index(drop=True)
+
+
+def load_custom_dataset(spec: dict[str, Any], project_root: str | Path) -> pd.DataFrame:
+    """Load a custom CSV/TSV through a config mapping."""
+    required = {
+        "name",
+        "path",
+        "text_column",
+        "label_column",
+        "language",
+        "label_mapping",
+    }
+    missing = required - set(spec)
+    if missing:
+        raise ValueError(f"Custom dataset spec missing keys: {sorted(missing)}")
+    path = Path(spec["path"])
+    if not path.is_absolute():
+        path = Path(project_root) / path
+
+    read_kwargs: dict[str, Any] = {
+        "dtype": "string",
+        "keep_default_na": True,
+        "encoding": spec.get("encoding", "utf-8-sig"),
+    }
+    if "sep" in spec:
+        read_kwargs["sep"] = spec["sep"]
+    elif "delimiter" in spec:
+        read_kwargs["delimiter"] = spec["delimiter"]
+    if "header" in spec:
+        read_kwargs["header"] = spec["header"]
+    if "names" in spec:
+        read_kwargs["names"] = spec["names"]
+
+    raw = pd.read_csv(path, **read_kwargs)
+    _require_columns(
+        raw,
+        {spec["text_column"], spec["label_column"]},
+        str(spec["name"]),
+    )
+    output = _base_frame(
+        raw,
+        source_dataset=str(spec["name"]),
+        text_column=str(spec["text_column"]),
+        label_column=str(spec["label_column"]),
+        language=str(spec["language"]),
+        metadata_columns=list(spec.get("metadata_columns", [])),
+    )
+    mapping = {
+        str(key).strip().casefold(): str(value)
+        for key, value in spec["label_mapping"].items()
+    }
+    normalized = output["label_original"].str.strip().str.casefold()
+    output["label_level_1"] = normalized.map(mapping)
+    output["scam_type"] = "unknown"
+    scam_type_column = spec.get("scam_type_column")
+    if scam_type_column:
+        _require_columns(raw, {scam_type_column}, str(spec["name"]))
+        scam_type = raw[scam_type_column].reset_index(drop=True).astype("string").str.strip()
+        is_scam = output["label_level_1"].eq("scam")
+        output.loc[is_scam, "scam_type"] = scam_type[is_scam].fillna("unknown").replace("", "unknown")
+    return output
+
+
+def load_all_sources(config: dict[str, Any]) -> pd.DataFrame:
+    paths = config.get("paths", {})
+    data_cfg = config["data"]
+    project_root = Path(config.get("_project_root", "."))
+    frames = []
+
+    if "sms_phishing" in paths:
+        p = Path(paths["sms_phishing"])
+        p = p if p.is_absolute() else project_root / p
+        if p.exists():
+            frames.append(load_sms_phishing(p))
+
+    if "smishx" in paths:
+        p = Path(paths["smishx"])
+        p = p if p.is_absolute() else project_root / p
+        if p.exists():
+            frames.append(load_smishx(p))
+
+    if "imc25" in paths:
+        p = Path(paths["imc25"])
+        p = p if p.is_absolute() else project_root / p
+        if p.exists():
+            frames.append(load_imc25(p, language_filter=data_cfg.get("imc_language", "English")))
+
+    for spec in data_cfg.get("extra_datasets", []):
+        frames.append(load_custom_dataset(spec, project_root))
+
+    if not frames:
+        raise ValueError("No datasets could be loaded. Please check your data paths.")
+    frame = pd.concat(frames, ignore_index=True)
+    if data_cfg.get("normalize_en_placeholders"):
+        english = frame["language"].eq("en")
+        frame.loc[english, "text_raw"] = (
+            frame.loc[english, "text_raw"].fillna("").map(normalize_en_placeholders).astype("string")
+        )
+    if data_cfg.get("label_overrides"):
+        frame, override_report = apply_label_overrides(
+            frame, list(data_cfg["label_overrides"]), project_root
+        )
+        frame.attrs["label_overrides"] = override_report
+    return frame
+
+
+def _require_columns(
+    frame: pd.DataFrame, required: set[str], dataset_name: str
+) -> None:
+    missing = required - set(frame.columns)
+    if missing:
+        raise ValueError(
+            f"{dataset_name} is missing required columns: {sorted(missing)}"
+        )

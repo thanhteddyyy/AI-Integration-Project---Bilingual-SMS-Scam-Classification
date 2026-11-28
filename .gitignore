@@ -1,0 +1,29 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+.venv_*/
+venv/
+artifacts/*
+!artifacts/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+reports/*
+!reports/.gitkeep
+
+
+crawl_data_scam/
+crawl_data_scam.zip
+*.zip
+# raw crawler output downloaded from Kaggle (reviewed rows live in data/review/)
+results_v*/
+
+data/processed_vi_exp_*/
+
+# backups made before re-running the pipeline
+data/_before_*/
+
+# demo bundle for the teammate (contains models, built by scripts/package_demo.py)
+demo_bundle/
+demo_bundle.zip
