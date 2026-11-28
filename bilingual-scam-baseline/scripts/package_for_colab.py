@@ -16,9 +16,22 @@ def package_project():
     
     # We also include data/processed_bilingual so Colab can train immediately without preprocessing
     include_data_dirs = ['data/processed_bilingual', 'data/processed_en_balanced', 'data/processed_vi_balanced']
-    # full real-scam Vietnamese crawl set, scored outside the pipeline (scripts/score_vi_crawl_full.py)
-    include_data_files = ['data/raw/vi_crawl_external_full.csv']
+    include_data_files = [
+        # full real-scam Vietnamese crawl set runs 1-2, scored outside the pipeline (scripts/score_vi_crawl_full.py)
+        'data/raw/vi_crawl_external_full.csv',
+        # tier 2 (scripts/train_tier2.py, configs/tier2_vietnamese.yaml): every Tuan scam row (v3 labels) ...
+        'data/raw/train_dataset_spamscam_v3.csv',
+        'data/raw/test_dataset_spamscam_v3.csv',
+        'data/review/vi_tuan_train_removed_family_overlap.csv',
+        # ... + crawl runs 1-2 added to tier-2 train, crawl run 3 = tier-2 external test
+        'data/raw/vi_crawl_tier2_train.csv',
+        'data/raw/vi_crawl_tier2_external.csv',
+    ]
     
+    missing = [f for f in include_data_files if not (root / f).exists()]
+    if missing:
+        raise SystemExit(f"missing data files (build them first): {missing}")
+
     total_files = 0
     with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
         # Add root files
@@ -50,10 +63,8 @@ def package_project():
                     zipf.write(fpath, arcname)
                     total_files += 1
         for fname in include_data_files:
-            fpath = root / fname
-            if fpath.exists():
-                zipf.write(fpath, f"bilingual-scam-baseline/{fname}")
-                total_files += 1
+            zipf.write(root / fname, f"bilingual-scam-baseline/{fname}")
+            total_files += 1
 
     size_mb = zip_path.stat().st_size / (1024 * 1024)
     print(f"Successfully packaged {total_files} files into: {zip_path}")

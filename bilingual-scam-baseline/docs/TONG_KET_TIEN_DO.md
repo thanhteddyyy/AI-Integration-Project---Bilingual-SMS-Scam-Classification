@@ -119,9 +119,9 @@ Model trên máy: `artifacts/<thiết lập>/{svm,naive_bayes}/model.joblib`, `a
 |---|---|---|---|
 | 1 | **Tầng 2 tiếng Việt** | Agent | 🟡 27/11: 9 lớp đã áp, code xong, **chọn SVM** (CV 81,8). Còn: quy tắc nhà mạng, 2 thí nghiệm social, train model cuối. Nhật ký: [`NHAT_KY_TANG2.md`](NHAT_KY_TANG2.md) |
 | 2 | **Bộ nhận diện ngôn ngữ** (vi / en, kể cả tiếng Việt không dấu) | Agent | ✅ 27/11: test 99,5%, bỏ dấu 97,5% (`reports/langid/summary.md`) |
-| 3 | **Đánh giá cả chuỗi** tầng 1 → tầng 2 | Agent (code sẵn) + người dùng crawl đợt 3 | ⬜ Chờ đợt crawl 3 làm external tầng 2 |
+| 3 | **Đánh giá cả chuỗi** tầng 1 → tầng 2 | Agent (code sẵn) + người dùng crawl đợt 3 | 🟡 28/11: đợt 3 duyệt sơ bộ (AI) còn 9 tin (`data/review/vi_crawl_run3_reviewed.csv`, chờ người dùng xác nhận); tầng 2 đúng 6/9, cả chuỗi 5/9 ([`PHAN_TICH_LOI.md`](PHAN_TICH_LOI.md) mục 7) |
 | 4 | **Demo Gradio** + thư mục `demo/` tự chạy được | **Thành viên khác**; agent viết `predict_pipeline` | 🟡 27/11: `predict_pipeline` + `demo_bundle.zip` xong (`demo/README.md`); còn giao diện Gradio |
-| 5 | **Phân tích lỗi** | Agent | ⬜ Tin giọng cá nhân/"mượn tiền", link lạ (quy tắc X4), nhầm ngân hàng ↔ điện/nước/nhà mạng |
+| 5 | **Phân tích lỗi** | Agent | ✅ 28/11: [`PHAN_TICH_LOI.md`](PHAN_TICH_LOI.md), `scripts/error_analysis.py`. Chờ người dùng quyết sửa quy tắc 1 (mục 6.2) |
 | 6 | **Tầng 2 tiếng Anh** (phương án B) | Người dùng rà ~200–300 tin IMC25, agent train | ⬜ Nhãn loại IMC25 chưa rà, có lỗi thấy rõ |
 | 7 | Meta-features cho SVM | Agent | ⬜ Tùy chọn, nếu còn thời gian |
 | 8 | **Báo cáo + slide** | **Thành viên khác** | ⬜ Viết được chương dữ liệu, tầng 1, phần lớn tầng 2 |

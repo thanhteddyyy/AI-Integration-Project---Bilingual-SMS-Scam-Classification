@@ -1,0 +1,676 @@
+﻿candidate_id,message,label_suggested,scam_type_suggested,label_reason,channel_suggested,sms_score,evidence_type,source_name,source_url,article_title,published_date,article_tier,article_relevance,collected_at,image_url,image_path,image_rank,context_snippet,ocr_raw,review_label,review_scam_type,review_channel,reject_reason,review_note,from_run,orig_idx,message_crawler,ai_confidence,sim_run1_2,nearest_run1_2
+vi_crawl_8dafafe0d5e1,"Có đứa cháu đang đi thi tiếng anh, nhờ vào đây xem rổi like giúp đó mà https://byvn.net/HHn4 [DATE]",scam,other_scam,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,zalo,2,ocr,kenh14,https://kenh14.vn/cong-an-canh-bao-tat-ca-nguoi-dan-co-tai-khoan-zalo-chu-y-khi-nhan-duoc-tin-nhan-voi-noi-dung-sau-tu-nguoi-than-ban-be-dong-nghiep-215261127080256086.chn,"Công an cảnh báo tất cả người dân có tài khoản Zalo: Chú ý khi nhận được tin nhắn với nội dung sau từ người thân, bạn bè, đồng nghiệp",2026-11-27,2,9,2026-11-27T15:22:53+07:00,https://kenh14cdn.com/203336854389633024/2026/11/27/photo-1795709411904-17957094122271732579887-1795741331345-17957413316451897653012.png,images/004c258bde34fc65.png,1,"ebsite giả mạo hoặc thực hiện yêu cầu xác thực đăng nhập, kẻ gian có thể chiếm quyền kiểm soát tài khoản Zalo. Sau đó, chúng tiếp tục mạo danh chủ tài khoản để nhắn tin vay tiền, nhờ chuyển khoản hoặc phát tán đường link độc hại tới những người khác.","09-58 Hôm nay
+Chào a
+Chao người đẹp!
+10.08
+Có đứa cháu đang đi thi
+tiếng
+anh,
+nhờ vào đây xem rổi like giúp đó mà
+https:llbyvn.net/HHn4
+10-02
+Người nhận từ chối
+Cuộc gọi thoại
+GoLLA
+(0*09
+Tin nhắn",drop,,zalo,duplicate,"[AI, tin cậy cao] Ảnh Zalo thật nhưng TRÙNG Y HỆT tin đợt 1–2 ('Chao người đẹp! Có đứa cháu… like giúp… byvn.net/HHn4'), đã nằm trong train tầng 2",run3,0,"Có đứa cháu đang đi thi tiếng anh, nhờ vào đây xem rổi like giúp đó mà https://byvn.net/HHn4 [DATE]",cao,0.842,"Chao người đẹp! Có đứa cháu đang đi thi tiếng anh, nhờ vào đây xem rồi like giúp đó mà htt"
+vi_crawl_b1b6e9b3bcd9,"[NAPASI Cảnh báo bào mật: Hệ thống thanh toán NAPAS phát hiện thẻ tín dụng cùa Quý khách có hoạt động giao dịch bất thường: Vì lý do bảo mật tài khoàn, một số chức năng thè tín dụng sẽ tạm thời bị hạn chể. Vui lòng sớm hoàn tât xác minh bào mật thẻ tín dung https://napas iculcom vn",scam,banking_finance,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,sms,4,ocr,vietnamplus,https://www.vietnamplus.vn/canh-bao-hang-loat-chieu-tro-mao-danh-napas-va-ngan-hang-de-lua-dao-post1150499.vnp,Cảnh báo hàng loạt chiêu trò mạo danh NAPAS và ngân hàng để lừa đảo,2026-11-25,1,9,2026-11-27T15:22:55+07:00,https://media.vietnamplus.vn/images/0-cwcTQTpXvo_DsmX2A4vI_Kixb4IzyxHaU3pVQqxyU/1.png,images/9ca78eb9afa7cdef.png,0,"Ảnh chụp màn hình tin nhắn SMS giả mạo NAPAS gửi đến nhiều người dân hát hành. NAPAS là đơn vị quản lý các tiêu chuẩn kỹ thuật của thẻ, đảm bảo tuân thủ bộ tiêu chuẩn cơ sở về thẻ chip nội địa do Ngân hàng Nhà nước ban hành, không có chức năng phát hành thẻ và quản lý hoạt động giao dịch thanh toán ","11:12 4
+5G
+NAPAS
+Tin nhan van ban
+SMS
+10*50 Hom nay
+[NAPASI
+Cảnh báo bào mật:
+Hệ thống thanh toán NAPAS
+phát hiện thẻ tín dụng cùa Quý
+khách có hoạt động giao dịch
+bất thường: Vì lý do bảo mật tài
+năng
+khoàn, một số chức
+cùa
+thè tín dụng sẽ tạm thời bị hạn
+chể. Vui
+lòng
+sớm hoàn tât xác
+minh bào mật thẻ tín
+dung https:IInapas iculcom vn",drop,,sms,duplicate,"[AI, tin cậy cao] Ảnh SMS thật nhưng TRÙNG Y HỆT tin NAPAS của đợt 1–2 (đã nằm trong train tầng 2)",run3,1,"[NAPASI Cảnh báo bào mật: Hệ thống thanh toán NAPAS phát hiện thẻ tín dụng cùa Quý khách có hoạt động giao dịch bất thường: Vì lý do bảo mật tài khoàn, một số chức năng thè tín dụng sẽ tạm thời bị hạn chể. Vui lòng sớm hoàn tât xác minh bào mật thẻ tín dung https://napas iculcom vn",cao,0.864,[NAPAS] Cảnh báo bảo mật: Hệ thống thanh toán NAPAS phát hiện thẻ tín dụng của Quý khách c
+vi_crawl_ec798d2b20fb,"Bé gái sống sót sau vụ cháy Tai Po ôm con búp bê cháy xém, khóc nấc: ‘Nhà con không còn nữa...’ Một gia đình bảy người bị bỏng nặng, cần 200.000 HKD viện phí để duy trì sự sống",scam,other_scam,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,sms,1,text,znews,https://znews.vn/lua-dao-no-ro-sau-vu-chay-chung-cu-hong-kong-post1607365.html,Lừa đảo nở rộ sau vụ cháy chung cư Hong Kong,2025-12-01,1,4,2026-11-27T15:23:16+07:00,,,,"Một trong các tin nhắn lừa đảo viết: “Bé gái sống sót sau vụ cháy Tai Po ôm con búp bê cháy xém, khóc nấc: ‘Nhà con không còn nữa...’ Một gia đình bảy người bị bỏng nặng, cần 200.000 HKD viện phí để duy trì sự sống”.",,drop,,unknown,other,"[AI, tin cậy cao] Tin lừa đảo ở Hồng Kông, báo dịch sang tiếng Việt; đọc như tiêu đề tin tức, không phải tin nhắn tiếng Việt thật",run3,2,"Bé gái sống sót sau vụ cháy Tai Po ôm con búp bê cháy xém, khóc nấc: ‘Nhà con không còn nữa...’ Một gia đình bảy người bị bỏng nặng, cần 200.000 HKD viện phí để duy trì sự sống",cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_f33d851f7f29,Nghệ sĩ/MC Quyền Linh bị Công an TPHCM ra lệnh bắt tạm giam,scam,gov_utility_services,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,unknown,1,text,cand,https://cand.vn/chung-tay-ngan-ngua-toi-pham-lua-dao-su-dung-ai-tao-thong-tin-gia-post822313.html,Chung tay ngăn ngừa tội phạm lừa đảo sử dụng AI tạo thông tin giả,2026-09-17,1,4,2026-11-27T15:23:28+07:00,,,,"Đầu năm 2026, mạng xã hội lan truyền nhiều bài viết, hình ảnh, video với nội dung “Nghệ sĩ/MC Quyền Linh bị Công an TPHCM ra lệnh bắt tạm giam”. Qua xác minh, Phòng An ninh mạng và phòng chống tội phạm sử dụng công nghệ cao (Công an TP Hồ Chí Minh) xác định đây là thông tin hoàn toàn sai sự thật, đư",,drop,,unknown,journalism,"[AI, tin cậy cao] Tiêu đề tin giả trên mạng xã hội, không phải tin nhắn",run3,3,Nghệ sĩ/MC Quyền Linh bị Công an TPHCM ra lệnh bắt tạm giam,cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_74f34c56f1a0,CẢNH SÁT = GIAO THÔNG Thông ! ban đă vi phạm. báo: Phương Truy tiện của để tra cứu và nộp phạt. cập link Bạn có minh được không? chuyển tiển giúp https://csgt-gov xYZ GIÁ CHỈ TRIỆU BẢO HlỂM XÃ HỘl Cập nhật thông ' lòng đăng nhập theo tin VssID. link: https://vssid-_gov xyz Chuyển khoản thành công ĐỪNG ĐỂ MẤT TIÊN VÌ NHỮNG LỜI MỜI GỌl TƯỞNG NHƯ RẤT THẬT,scam,gov_utility_services,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,sms,4,ocr,thanhnien,https://thanhnien.vn/hang-loat-chieu-tro-lua-dao-truc-tuyen-moi-185260915184444746.htm,Hàng loạt chiêu trò lừa đảo trực tuyến mới,2026-09-16,1,5,2026-11-27T15:24:22+07:00,https://images2.thanhnien.vn/528068263637045248/2026/9/15/a1-1789472503574322201826.jpg,images/8e54633df418cf81.jpg,0,"Hàng loạt chiêu trò lừa đảo mới đang bủa vây người dân ành ""mồi câu"" hấp dẫn. Tưởng rằng mình mua được xe với giá hời, anh L. chuyển trước [MONEY] đồng vào tài khoản do đối tượng cung cấp. Ngay sau đó, các tài khoản liên quan lập tức xóa tin nhắn, hủy kết bạn và cắt liên lạc với các nạn nhân liên qu","9,41
+AI
+CẢNH SÁT =
+GIAO
+THÔNG
+Thông !
+báo:
+Phương
+tiện của
+ban đă vi phạm.
+thể
+Truy
+Bạn có
+để tra cứu và
+cập link
+chuyển tiển giúp
+nộp phạt.
+minh được không?
+https:llcsgt-gov xYZ
+GIÁ CHỈ
+BẢO HlỂM XÃ HỘl
+TRIỆU
+530
+Cập nhật
+thông '
+tin VssID.
+Vui
+lòng
+đăng nhập theo
+link:
+https:llvssid-_gov xyz
+khoản
+thành
+công
+Chuyển
+7no
+GIA
+ĐỪNG ĐỂ MẤT TIÊN VÌ NHỮNG LỜI MỜI GỌl TƯỞNG NHƯ RẤT THẬT",drop,,unknown,not_message,"[AI, tin cậy cao] Ảnh minh họa do AI vẽ (poster người phụ nữ + các khung CSGT/BHXH giả), không phải ảnh chụp tin thật; OCR trộn nhiều khung",run3,4,CẢNH SÁT = GIAO THÔNG Thông ! ban đă vi phạm. báo: Phương Truy tiện của để tra cứu và nộp phạt. cập link Bạn có minh được không? chuyển tiển giúp https://csgt-gov xYZ GIÁ CHỈ TRIỆU BẢO HlỂM XÃ HỘl Cập nhật thông ' lòng đăng nhập theo tin VssID. link: https://vssid-_gov xyz Chuyển khoản thành công ĐỪNG ĐỂ MẤT TIÊN VÌ NHỮNG LỜI MỜI GỌl TƯỞNG NHƯ RẤT THẬT,cao,0.029,Ong/Ba da co quyet dinh xu phat VPHC so G01.869.308.0 Ong/Ba co the tra cuu va nop phat tr
+vi_crawl_4639ccbff10a,"Cái người tự nhận là Lee Dong Wook giống như đã tỏ tình với tôi vậy đó. Bọn tôi thậm chí còn bàn chuyện tới thăm bố mẹ và để gia đình 2 bên chính thức gặp mặt nhau. Mọi chuyện đã tiến triển đến mức đó đấy. Có thể nói là bọn tôi đã vướng vào 1 mối quan hệ tình cảm. Anh ấy nói với tôi rằng ‘Anh yêu em, em yêu’. Còn tôi gọi anh ấy là ‘anh yêu’. Bọn tôi trò chuyện với nhau như vậy khoảng 1 năm trời. Tôi thậm chí còn rút cả tiền tiết kiệm và dùng tiền sinh hoạt phí của mình để đưa cho anh ấy. Tổng cộng, tôi đã đưa cho đối phương [MONEY] won (khoảng [MONEY] đồng)”.",scam,other_scam,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,unknown,2,text,kenh14,https://kenh14.vn/su-that-tin-lee-dong-wook-lua-tinh-700-trieu-thu-doan-vo-cung-tinh-vi-215260917093753944.chn,"Sự thật tin Lee Dong Wook lừa tình 700 triệu, thủ đoạn vô cùng tinh vi?",2026-09-17,1,5,2026-11-27T15:47:11+07:00,,,,“Cái người tự nhận là Lee Dong Wook giống như đã tỏ tình với tôi vậy đó. Bọn tôi thậm chí còn bàn chuyện tới thăm bố mẹ và để gia đình 2 bên chính thức gặp mặt nhau. Mọi chuyện đã tiến triển đến mức đó đấy. Có thể nói là bọn tôi đã vướng vào 1 mối quan hệ tình cảm. Anh ấy nói với tôi rằng ‘Anh yêu e,,drop,,unknown,journalism,"[AI, tin cậy cao] Lời kể của nạn nhân (phỏng vấn)",run3,5,"Cái người tự nhận là Lee Dong Wook giống như đã tỏ tình với tôi vậy đó. Bọn tôi thậm chí còn bàn chuyện tới thăm bố mẹ và để gia đình 2 bên chính thức gặp mặt nhau. Mọi chuyện đã tiến triển đến mức đó đấy. Có thể nói là bọn tôi đã vướng vào 1 mối quan hệ tình cảm. Anh ấy nói với tôi rằng ‘Anh yêu em, em yêu’. Còn tôi gọi anh ấy là ‘anh yêu’. Bọn tôi trò chuyện với nhau như vậy khoảng 1 năm trời. Tôi thậm chí còn rút cả tiền tiết kiệm và dùng tiền sinh hoạt phí của mình để đưa cho anh ấy. Tổng cộng, tôi đã đưa cho đối phương [MONEY] won (khoảng [MONEY] đồng)”.",cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_ce4d57d95353,"Các nghệ sĩ thuộc công ty chúng tôi không bao giờ yêu cầu khán giả chuyển tiền bạc, các khoản thanh toán, thông tin cá nhân hay bất kỳ tài sản giá trị nào khác thông qua các ứng dụng nhắn tin và tài khoản mạng xã hội. Đồng thời, chúng tôi kêu gọi công chúng hãy thật tỉnh táo và báo cáo lại cho công ty bất kỳ trường hợp nào mà các bạn nghi ngờ là giả mạo nghệ sĩ”.",scam,other_scam,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,sms,2,text,kenh14,https://kenh14.vn/su-that-tin-lee-dong-wook-lua-tinh-700-trieu-thu-doan-vo-cung-tinh-vi-215260917093753944.chn,"Sự thật tin Lee Dong Wook lừa tình 700 triệu, thủ đoạn vô cùng tinh vi?",2026-09-17,1,5,2026-11-27T15:47:11+07:00,,,,"“Các nghệ sĩ thuộc công ty chúng tôi không bao giờ yêu cầu khán giả chuyển tiền bạc, các khoản thanh toán, thông tin cá nhân hay bất kỳ tài sản giá trị nào khác thông qua các ứng dụng nhắn tin và tài khoản mạng xã hội. Đồng thời, chúng tôi kêu gọi công chúng hãy thật tỉnh táo và báo cáo lại cho công",,drop,,unknown,journalism,"[AI, tin cậy cao] Thông cáo của công ty giải trí",run3,6,"Các nghệ sĩ thuộc công ty chúng tôi không bao giờ yêu cầu khán giả chuyển tiền bạc, các khoản thanh toán, thông tin cá nhân hay bất kỳ tài sản giá trị nào khác thông qua các ứng dụng nhắn tin và tài khoản mạng xã hội. Đồng thời, chúng tôi kêu gọi công chúng hãy thật tỉnh táo và báo cáo lại cho công ty bất kỳ trường hợp nào mà các bạn nghi ngờ là giả mạo nghệ sĩ”.",cao,0.01,NETFLIX : Khoan thanh toan cuoi cung cua ban da bi tu choi. Xac nhan thong tin thanh toan 
+vi_crawl_f0e629a836e6,"Ngành viễn thông cũng không nằm ngoài xu hướng này. Mua eSIM qua ứng dụng chính thức của nhà mạng là cách an toàn nhất giúp người dùng tránh nguy cơ truy cập nhầm các trang web giả mạo"".",scam,gov_utility_services,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,unknown,1,text,vietnamnet,https://vietnamnet.vn/thu-doan-lua-dao-esim-goi-cuoc-du-lieu-nguoi-sap-di-du-lich-can-luu-y-2537980.html,"Thủ đoạn lừa đảo eSIM, gói cước di động, người sắp đi du lịch cần lưu ý",2026-07-22,1,2,2026-11-27T16:00:26+07:00,,,,"""Ngành viễn thông cũng không nằm ngoài xu hướng này. Mua eSIM qua ứng dụng chính thức của nhà mạng là cách an toàn nhất giúp người dùng tránh nguy cơ truy cập nhầm các trang web giả mạo"".",,drop,,unknown,journalism,"[AI, tin cậy cao] Lời chuyên gia",run3,7,"Ngành viễn thông cũng không nằm ngoài xu hướng này. Mua eSIM qua ứng dụng chính thức của nhà mạng là cách an toàn nhất giúp người dùng tránh nguy cơ truy cập nhầm các trang web giả mạo"".",cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_ef899ffad464,"Thứ tư, gửi tin nhắn hoặc email giả mạo trúng thưởng.",scam,prize_lottery,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,sms,1,text,genk,https://genk.vn/mot-ngan-hang-lon-canh-bao-ke-lua-dao-co-the-chiem-doat-tien-trong-tai-khoan-nguoi-dung-bang-5-cach-nay-can-dac-biet-luu-y-20250623143207426.chn,"Một ngân hàng lớn cảnh báo: Kẻ lừa đảo có thể chiếm đoạt tiền trong tài khoản người dùng bằng 5 cách này, cần đặc biệt lưu ý",2025-06-23,1,5,2026-11-27T16:37:22+07:00,,,,"Thứ tư, gửi tin nhắn hoặc email giả mạo trúng thưởng.",,drop,,unknown,journalism,"[AI, tin cậy cao] Câu liệt kê trong bài",run3,8,"Thứ tư, gửi tin nhắn hoặc email giả mạo trúng thưởng.",cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_a9e12b9133fa,"Gói giao dịch của anh nhận được là gói lợi nhuận cao số 6 có mức đầu tư vốn khởi đầu cần 50000 điểm giao dịch (tương đương với [MONEY] đồng). Sau khi mình hoàn thành giao dịch nhận về số lãi thêm là 75000 (tương đương với [MONEY] đồng). Hiện tại mình đang có 20000 điểm giao dịch cọc trước trên hệ thống rồi, thì mình chỉ cần bổ sung thêm 30000 điểm giao dịch nữa là có thể bắt đầu gói giao dịch lợi nhuận cao mã MOMO06 anh nhé",scam,banking_finance,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,messenger,2,ocr,genk,https://genk.vn/ham-loi-nhuan-lam-nhiem-vu-tren-ung-dung-nguoi-dan-ong-bi-lua-hon-300-trieu-dong-20250520145242234.chn,"Ham lợi nhuận làm nhiệm vụ trên ứng dụng, người đàn ông bị lừa hơn 300 triệu đồng",2025-05-20,1,2,2026-11-27T17:18:32+07:00,https://genk.mediacdn.vn/139269124445442048/2025/5/20/lua-dao-717-2965-1747727423901-17477274240061317372931.jpg,images/f6e0c5b0de63c487.jpg,0,"Tin nhắn lừa đảo. TPO - Một người đàn ông ở Hà Nội bị lừa hơn [MONEY] đồng sau khi nhận được tin nhắn qua ứng dụng Messenger với nội dung thông báo mã trúng thưởng từ ứng dụng ""MoMo Pro"" và làm nhiệm vụ để hưởng hoa hồng cao.","THONG BẺO GOI QUỸ LƠI NHU-N CAO
+Gói giao dich cúa anh nhân
+MOMO PRO
+đưac là gói lợi nhuán cao sỗ
+có mức dáu t vỗn khởi đaú
+QÙỸLỢl NHUiN C4O SỖ 6
+GoI
+cân 50D00 điẽm giao dich
+(Iưong duang với SOtr dông)
+HỘl VIÉN : Doquoctung102
+Sau khi minh hoàn thành giao
+dịch nhận về sỖlãi thêm là
+MA THAM GIA
+63235c
+75000 (tưong duong vỞi 75tr
+ĐẢ TRUNG GIAO DIC =
+GỖl QUỸ LỢI
+đồng) Hien Iại minh dang có
+NHUAN CAO So
+TFONG KY NHAN
+MA
+20000 điẽm giao dịch coc
+GIAO DICH QUY LOI NHUAN UU
+truoc trén hé thóng roi, thi
+ĐẪl HÒM NAY HÊTHONG TÁNG BAN
+minh chi can bo sung thêm
+QUA UU Đ7I
+888 000 ĐÒNG VHO TA
+30000 đỉẽm giao dịch nữa là
+KHOAN ĐAU TU CUA BAN SAU KHI
+có thẽ bẳt đâu gói giao dịch
+BẠN HOAN THANH GÓI ĐAU TƯ QUỸ
+lợi nhuan cao ma MOMOO6
+LQI NHUÁN CAO SỖ
+BAN HẢY Bổ
+SUNG ĐU VON KHOI ĐZU GOI QUỸ LƠI
+anh nhe
+NHUAN CAO SO
+LA S00OO DIEM
+GIAO DICH VÀ LIÊN HÈ ĐẶT LỊCH
+HƯỞNG DAN HOAN THANH GOI QUỸ
+Foopao
+OaodoiphvclIAYE
+ĐUƠC NHAN TRONG NGAY HÔM NAY
+CÁM ON QUY KHACH HANG ĐÒNG
+HANHVA PHAT TRIEN CỦNG HẺ
+THỔNG",scam,banking_finance,messenger,,"[AI, tin cậy trung bình] Ảnh chụp Messenger thật (bong bóng phải). Chép lại theo ảnh; đầu bong bóng bị cắt nên câu đầu suy ra. CA RANH GIỚI: kịch bản là nạp vốn 'gói lợi nhuận' (investment/job_task), nhưng mạo danh ví MoMo ('MoMo Pro', mã MOMO06) → theo quy tắc 1 (tên ngân hàng/ví cụ thể) = banking_finance. Cần người dùng chốt. | NGƯỜI DÙNG XÁC NHẬN 28/11 (giữ 3/4/8; MoMo = banking_finance)",run3,9,"cân 50D00 điẽm giao dich (Iưong duang với SOtr dông) Sau khi minh hoàn thành giao 75000 (tưong duong vỞi [MONEY] đồng) Hien Iại minh dang có 20000 điẽm giao dịch coc truoc trén hé thóng roi, thi minh chi can bo sung thêm 30000 đỉẽm giao dịch nữa là có thẽ bẳt đâu gói giao dịch lợi nhuan cao ma MOMOO6 anh nhe",trung bình,0.008,THONG BAO KHAN: Ho so BHYT ATK cua Ong/Ba da bi loi trên he thong VssID. Dê khong bi mất q
+vi_crawl_2d6a1941e613,BIDV Quý khách nhận điểm thưởng 1.0O0.OOOđ. Truy cập: wwwbidv-uu-daicom để nhận thưởng!,scam,banking_finance,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,sms,2,ocr,tuoitre,https://tuoitre.vn/ngan-hang-canh-bao-nong-ve-thu-doan-danh-trao-chip-tren-the-thanh-toan-de-giao-dich-trai-phep-100260815180819319.htm,Ngân hàng cảnh báo 'nóng' về thủ đoạn đánh tráo chip trên thẻ thanh toán để giao dịch trái phép,2026-08-15,1,7,2026-11-27T17:25:43+07:00,https://cdn2.tuoitre.vn/471584752817336320/2026/8/15/ngan-hang-canh-bao--ai-1786791353712259573242.png,images/ccbd462f2ac7536c.png,0,"Ngân hàng đồng loạt cảnh báo thủ đoạn mới khiến khách hàng mất tiền - Ảnh do AI tạo Đánh tráo chip thẻ, giả tin nhắn ngân hàng, dùng AI dựng website giả... là những thủ đoạn có thể khiến khách hàng mất tiền hoặc lộ thông tin bảo mật. Một loạt ngân hàng vừa cảnh báo tới khách.","10
+0 ;
+1
+981 8 8 ;
+1
+0
+VPBank !
+i8
+3456
+9012
+5678
+CẢNH BÁO
+1234
+BIDV
+12/25
+ilin
+CARDHOLDER
+JhFu
+Quý khách nhận
+LỪA ĐẢO
+điểm thưởng 1.0O0.OOOđ.
+Truy cập:
+wwwbidv-uu-daicom
+để nhận thưởng!
+GIẢ
+MẠO
+ĐÁNH TRÁO
+TIN NHẮN
+WEBSITE GIẢ
+=
+CHIP THẺ
+GIẢ MAO
+DÙNG Al",drop,,unknown,not_message,"[AI, tin cậy cao] Ảnh do AI tạo (chú thích bài báo ghi rõ 'Ảnh do AI tạo'), khung BIDV là hình vẽ minh họa",run3,10,BIDV Quý khách nhận điểm thưởng 1.0O0.OOOđ. Truy cập: wwwbidv-uu-daicom để nhận thưởng!,cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_b7d9da0b9531,2. Đăng bài tuyển nhân viên đủ các vị trí nghe thật hấp dẫn với nhiều Slogan (khẩu hiệu) giật gân. Để lại địa chỉ liên hệ nhìn vào đã biết sim rác cá nhân,scam,gov_utility_services,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,unknown,1,text,genk,https://genk.vn/giam-doc-benh-vien-dh-y-ha-noi-canh-bao-chieu-tro-lua-dao-tuong-ngay-ngo-nhung-chac-chan-da-co-nguoi-mac-bay-20250419140937206.chn,Giám đốc Bệnh viện ĐH Y Hà Nội cảnh báo chiêu trò lừa đảo “Tưởng ngây ngô nhưng chắc chắn đã có người mắc bẫy!”,2025-04-19,1,3,2026-11-27T18:10:42+07:00,,,,2. Đăng bài tuyển nhân viên đủ các vị trí nghe thật hấp dẫn với nhiều Slogan (khẩu hiệu) giật gân. Để lại địa chỉ liên hệ nhìn vào đã biết sim rác cá nhân,,drop,,unknown,journalism,"[AI, tin cậy cao] Câu liệt kê thủ đoạn trong bài",run3,11,2. Đăng bài tuyển nhân viên đủ các vị trí nghe thật hấp dẫn với nhiều Slogan (khẩu hiệu) giật gân. Để lại địa chỉ liên hệ nhìn vào đã biết sim rác cá nhân,cao,0.02,Vietnam post:Sai địa chỉ. Vui lòng kiểm tra và sửa lại địa chỉ để chúng tôi giao hàng cho 
+vi_crawl_b66f80c8ef52,3. Khi có người liên hệ sẽ nhắn tin hẹn họp qua zoom hoặc trực tuyến mà không đến BV vào phòng tổ chức hành chính,scam,other_scam,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,sms,1,text,genk,https://genk.vn/giam-doc-benh-vien-dh-y-ha-noi-canh-bao-chieu-tro-lua-dao-tuong-ngay-ngo-nhung-chac-chan-da-co-nguoi-mac-bay-20250419140937206.chn,Giám đốc Bệnh viện ĐH Y Hà Nội cảnh báo chiêu trò lừa đảo “Tưởng ngây ngô nhưng chắc chắn đã có người mắc bẫy!”,2025-04-19,1,3,2026-11-27T18:10:42+07:00,,,,3. Khi có người liên hệ sẽ nhắn tin hẹn họp qua zoom hoặc trực tuyến mà không đến BV vào phòng tổ chức hành chính,,drop,,unknown,journalism,"[AI, tin cậy cao] Câu liệt kê thủ đoạn trong bài",run3,12,3. Khi có người liên hệ sẽ nhắn tin hẹn họp qua zoom hoặc trực tuyến mà không đến BV vào phòng tổ chức hành chính,cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_51ad881faa0e,4. Đề nghị thu phí phỏng vấn và có thể dám thu cả tiền dịch vụ của những ứng viên ngây ngô. Tiền chuyển vào Tài khoản cá nhân và sẽ mất hút sau đó.,scam,other_scam,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,unknown,3,text,genk,https://genk.vn/giam-doc-benh-vien-dh-y-ha-noi-canh-bao-chieu-tro-lua-dao-tuong-ngay-ngo-nhung-chac-chan-da-co-nguoi-mac-bay-20250419140937206.chn,Giám đốc Bệnh viện ĐH Y Hà Nội cảnh báo chiêu trò lừa đảo “Tưởng ngây ngô nhưng chắc chắn đã có người mắc bẫy!”,2025-04-19,1,3,2026-11-27T18:10:42+07:00,,,,"4. Đề nghị thu phí phỏng vấn và có thể dám thu cả tiền dịch vụ của những ứng viên ngây ngô. Tiền chuyển vào Tài khoản cá nhân và sẽ mất hút sau đó.""",,drop,,unknown,journalism,"[AI, tin cậy cao] Câu liệt kê thủ đoạn trong bài",run3,13,4. Đề nghị thu phí phỏng vấn và có thể dám thu cả tiền dịch vụ của những ứng viên ngây ngô. Tiền chuyển vào Tài khoản cá nhân và sẽ mất hút sau đó.,cao,0.022,Chào ong bo đẹp trai . Hiện tại con gái à đang bị chúng tôi giữ . Muốn chuộc con gái và kh
+vi_crawl_7e6a902cea0f,[Ngân hàng BIDV] Thông báo khách hàng. Ưu đãi có thời hạn!12.500 điểm thưởng thẻ tín dụng của bạn hết hạn hôm nay.Nhận ngay phần thưởng độc quyền của bạn:https://bidv.cam/vn,scam,banking_finance,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,sms,3,ocr,kenh14,https://kenh14.vn/ngan-hang-canh-bao-3-chieu-lua-dao-lot-sach-tai-khoan-nguoi-dung-215260817042057571.chn,Ngân hàng cảnh báo 3 chiêu lừa đảo lột sạch tài khoản người dùng,2026-08-17,1,4,2026-11-27T19:12:50+07:00,https://kenh14cdn.com/203336854389633024/2026/8/16/screenshot2026-07-22185440-203907-1786915068162-17869150684101732184226.jpg,images/1c0268ed5456f2c5.jpg,1,"Ảnh: BIDV  dùng nhập thông tin cá nhân. Thực chất, đây là cạm bẫy nhằm đánh cắp dữ liệu thẻ và thông tin đăng nhập ngân hàng điện tử. Phía ngân hàng khẳng định tuyệt đối không bao giờ gửi tin nhắn kèm đường link yêu cầu cung cấp các thông tin bảo mật nhạy cảm.","Hp
+BIDV
+[Ngân hàng BIDv J
+'u1g báo
+khách
+hàng:
+Ưu đãi có thời
+hạn! 12.500 diểm thường thè
+tín dụng của bạn hết hạn
+hôm nay Nhận ngay phẩn
+thường độc quyển cùa
+bạn:https:Ilbidv camlvn
+[Ngân hàng BIDV] Thông báo
+khách hàng: Ưu đãi có thời
+hạn!12.500 diểm thường thẻ
+tín dụng của bạn hết hạn
+hôm nay Nhận ngay phẩn
+thường độc quyển cùa
+bạn:https:llbidv camlvn",scam,banking_finance,sms,,"[AI, tin cậy cao] Ảnh SMS thật (2 bong bóng giống nhau → 1 tin). Cùng khuôn '12.500 điểm thưởng' với tin VIB đợt 1–2 → build sẽ gắn cờ trùng khuôn | CÙNG KHUÔN với tin đợt 1–2 (Jaccard 0.818) → không tính là khuôn mới cho tầng 2 | NGƯỜI DÙNG XÁC NHẬN 28/11 (giữ 3/4/8; MoMo = banking_finance)",run3,14,[Ngân hàng BIDv J BIDV 'u1g báo khách hàng: Ưu đãi có thời hạn! 12.500 diểm thường thè tín dụng của bạn hết hạn hôm nay Nhận ngay phẩn thường độc quyển cùa bạn:https://bidv camlvn [Ngân hàng BIDV] Thông báo khách hàng: Ưu đãi có thời hạn!12.500 diểm thường thẻ tín dụng của bạn hết hạn hôm nay Nhận ngay phẩn thường độc quyển cùa bạn:https://bidv camlvn,cao,0.818,[Ngân hàng VIB] Thông báo khách hàng. Ưu đãi có thời hạn!12.500 điểm thưởng thẻ tín dụng c
+vi_crawl_c57b57783547,Quý khách đang thực hiện giao dịch nạp tiền điện tử trên hệ thống Ibanking với số tiền nhận là xxx triệu đồng. Mã OTP sẽ được xác nhận để hoàn tất giao dịch,scam,banking_finance,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,sms,3,text,genk,https://genk.vn/cong-an-canh-bao-thao-tac-rut-tien-tu-nuoc-ngoai-ve-tai-khoan-ca-nhan-nhung-thuc-chat-lai-dang-chuyen-khoan-cho-ke-lua-dao-20250322091958764.chn,Công an cảnh báo thao tác rút tiền từ nước ngoài về tài khoản cá nhân nhưng thực chất lại đang chuyển khoản cho kẻ lừa đảo,2025-03-22,1,3,2026-11-27T19:18:56+07:00,,,,"Để hoàn tất công việc này, đối tượng lừa đảo sẽ phải có mã OTP của bị hại, do đó chúng sẽ tiếp tục giả mạo tin nhắn của Western Union với nội dung: “Quý khách đang thực hiện giao dịch nạp tiền điện tử trên hệ thống Ibanking với số tiền nhận là xxx triệu đồng. Mã OTP sẽ được xác nhận để hoàn tất giao",,scam,banking_finance,sms,,"[AI, tin cậy trung bình] Báo trích nguyên văn (trong ngoặc kép) tin giả Western Union gửi OTP; 'xxx triệu' là báo che số tiền. Cùng vụ với tin OCR cd3eb38e0d09 | NGƯỜI DÙNG XÁC NHẬN 28/11 (giữ 3/4/8; MoMo = banking_finance)",run3,15,Quý khách đang thực hiện giao dịch nạp tiền điện tử trên hệ thống Ibanking với số tiền nhận là xxx triệu đồng. Mã OTP sẽ được xác nhận để hoàn tất giao dịch,trung bình,0.013,THONG BAO KHAN: Ho so BHYT ATK cua Ong/Ba da bi loi trên he thong VssID. Dê khong bi mất q
+vi_crawl_cd3eb38e0d09,Western Union TB: ( MB BANK of Vietnam) : [NUMBER] : [NAME] : Nhận + [MONEY]. [DATE]. Mgd: [NUMBER]. Quý khách hàng nhận giao dịch nhận tiền tại website:https://biolink.com.vn/chuyenvanhantienquocte18,scam,other_scam,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,sms,4,ocr,genk,https://genk.vn/cong-an-canh-bao-thao-tac-rut-tien-tu-nuoc-ngoai-ve-tai-khoan-ca-nhan-nhung-thuc-chat-lai-dang-chuyen-khoan-cho-ke-lua-dao-20250322091958764.chn,Công an cảnh báo thao tác rút tiền từ nước ngoài về tài khoản cá nhân nhưng thực chất lại đang chuyển khoản cho kẻ lừa đảo,2025-03-22,1,3,2026-11-27T19:18:56+07:00,https://genk.mediacdn.vn/139269124445442048/2025/3/22/anh-3-1742459518018902283044-1742462052294-1742462052347429764885-1742609931925-1742609932415645677405.jpg,images/63e920e26d69362d.jpg,0,"Tin nhắn và đường link giả mạo Western Union để chiếm đoạt tiền khi người bán hàng nhập thông tin cá nhân tiền”. Trong lúc đó, đối tượng lừa đảo cũng thực hiện lệnh rút tiền của nạn nhân, đồng thời ngân hàng sẽ gửi mã OTP vào điện thoại của bị hại. Khi bị hại nhập OTP này vào website giả mạo thì đồn","Tin nhản ván bản
+11:18
+16*02, Hôm nay
+Wesxern Union TB:
+MB BANK of
+Dịch vụ nhận tiên
+Vietnarks)
+0963832682
+NGUYEN
+ThI THU
+Jhận + 785.000 VND.
+16/03/2025
+""d: 105748. Quý khách
+wEẵE
+hàng
+nhận giao àẠh nhận tiên tại
+website:https:llbiolin
+comvnl
+MONE
+TRANSFER
+chuyenvanhantienquoc
+v18
+Quý khách vui
+1g chọn ngân hàng
+VietinBa
+Têr
+dăng nhập
+Nhập tên đăng nhập
+Mật khẩu
+Nhập mật khẩu
+giao dịch
+23615
+Sai tên đăng Vhập hoặc mật khẩu
+Đăn:
+nhập
+hnel2nonesvercelapp
+AA
+Tin nhắn văn bản",scam,banking_finance,sms,,"[AI, tin cậy cao] Ảnh SMS thật (nửa trái). Giả Western Union + nêu MB BANK → quy tắc 1. Chép lại theo ảnh, tên người nhận giữ như ảnh (đã che SĐT/số) | 28/11 người dùng duyệt: che tay ""NGUYEN THI THU""→[NAME] | NGƯỜI DÙNG XÁC NHẬN 28/11 (giữ 3/4/8; MoMo = banking_finance)",run3,16,"NGUYEN Jhận + [MONEY]. [DATE] ""d: [NUMBER]. Quý khách hàng nhận giao àẠh nhận tiên tại website:https://biolin comvnl chuyenvanhantienquoc",cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_9b7f5ecee2a3,Quý khách vui 1g chọn ngân hàng VietinBa dăng nhập Nhập tên đăng nhập Mật khẩu Nhập mật khẩu,scam,banking_finance,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,sms,2,ocr,genk,https://genk.vn/cong-an-canh-bao-thao-tac-rut-tien-tu-nuoc-ngoai-ve-tai-khoan-ca-nhan-nhung-thuc-chat-lai-dang-chuyen-khoan-cho-ke-lua-dao-20250322091958764.chn,Công an cảnh báo thao tác rút tiền từ nước ngoài về tài khoản cá nhân nhưng thực chất lại đang chuyển khoản cho kẻ lừa đảo,2025-03-22,1,3,2026-11-27T19:18:56+07:00,https://genk.mediacdn.vn/139269124445442048/2025/3/22/anh-3-1742459518018902283044-1742462052294-1742462052347429764885-1742609931925-1742609932415645677405.jpg,images/63e920e26d69362d.jpg,0,"Tin nhắn và đường link giả mạo Western Union để chiếm đoạt tiền khi người bán hàng nhập thông tin cá nhân tiền”. Trong lúc đó, đối tượng lừa đảo cũng thực hiện lệnh rút tiền của nạn nhân, đồng thời ngân hàng sẽ gửi mã OTP vào điện thoại của bị hại. Khi bị hại nhập OTP này vào website giả mạo thì đồn","Tin nhản ván bản
+11:18
+16*02, Hôm nay
+Wesxern Union TB:
+MB BANK of
+Dịch vụ nhận tiên
+Vietnarks)
+0963832682
+NGUYEN
+ThI THU
+Jhận + 785.000 VND.
+16/03/2025
+""d: 105748. Quý khách
+wEẵE
+hàng
+nhận giao àẠh nhận tiên tại
+website:https:llbiolin
+comvnl
+MONE
+TRANSFER
+chuyenvanhantienquoc
+v18
+Quý khách vui
+1g chọn ngân hàng
+VietinBa
+Têr
+dăng nhập
+Nhập tên đăng nhập
+Mật khẩu
+Nhập mật khẩu
+giao dịch
+23615
+Sai tên đăng Vhập hoặc mật khẩu
+Đăn:
+nhập
+hnel2nonesvercelapp
+AA
+Tin nhắn văn bản",drop,,unknown,not_message,"[AI, tin cậy cao] Nửa phải của ảnh là TRANG WEB giả (form đăng nhập VietinBank), không phải tin nhắn",run3,17,Quý khách vui 1g chọn ngân hàng VietinBa dăng nhập Nhập tên đăng nhập Mật khẩu Nhập mật khẩu,cao,0.017,Quy khach co don hang [NUMBER] (tien COD: [MONEY]) gui tu Bao Kiem toan [NUMBER] da duoc n
+vi_crawl_1185c6aeb196,"Nếu bạn nhận được cuộc gọi, tin nhắn, hoặc bưu gửi yêu cầu thanh toán 'phí ship', 'phí hồ sơ', 'phí nhận tài liệu' dưới tên Đại học Hùng Vương TP.HCM, hãy tuyệt đối không cung cấp thông tin cá nhân, không chuyển khoản và liên hệ xác minh ngay với nhà trường"".",legitimate,,cảnh báo/thông báo chính thức,sms,2,text,znews,https://znews.vn/canh-bao-lua-dao-tuyen-sinh-post1570201.html,Cảnh báo lừa đảo tuyển sinh,2025-07-20,1,4,2026-11-27T19:24:33+07:00,,,,"""Nếu bạn nhận được cuộc gọi, tin nhắn, hoặc bưu gửi yêu cầu thanh toán 'phí ship', 'phí hồ sơ', 'phí nhận tài liệu' dưới tên Đại học Hùng Vương TP.HCM, hãy tuyệt đối không cung cấp thông tin cá nhân, không chuyển khoản và liên hệ xác minh ngay với nhà trường"".",,drop,,unknown,journalism,"[AI, tin cậy cao] Lời cảnh báo của nhà trường, không phải tin nhắn",run3,18,"Nếu bạn nhận được cuộc gọi, tin nhắn, hoặc bưu gửi yêu cầu thanh toán 'phí ship', 'phí hồ sơ', 'phí nhận tài liệu' dưới tên Đại học Hùng Vương TP.HCM, hãy tuyệt đối không cung cấp thông tin cá nhân, không chuyển khoản và liên hệ xác minh ngay với nhà trường"".",cao,0.005,"Xin chào, tôi là thám tử tư, được sự ủy thác của khách hàng và sếp giao nhiệm vụ theo dõi "
+vi_crawl_e098e91662c1,Vui lòng cung cấp tài khoản hưởng thụ của bạn,scam,other_scam,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,sms,1,text,genk,https://genk.vn/dat-phong-resort-dip-tet-lai-trung-page-gia-mao-nguoi-phu-nu-chuyen-khoan-6-lan-len-den-1-ty-dong-ke-lua-dao-con-trach-cu-mot-dieu-20250206081310775.chn,"Đặt phòng resort dịp Tết lại trúng page giả mạo, người phụ nữ chuyển khoản 6 lần lên đến 1 tỷ đồng, kẻ lừa đảo còn trách cứ một điều!",2025-02-06,1,2,2026-11-27T19:24:45+07:00,,,,"Hàng loạt kẽ hở như sai ngày, sai diện tích phòng rồi cú pháp tin nhắn ""Vui lòng cung cấp tài khoản hưởng thụ của bạn""... nhưng người phụ nữ vẫn không nhận ra hành vi lừa đảo",,drop,,messenger,fragment,"[AI, tin cậy cao] Một câu lẻ trong hội thoại với fanpage giả (Messenger), không đủ thành tin",run3,19,Vui lòng cung cấp tài khoản hưởng thụ của bạn,cao,0.02,[VNPost] Vui lòng cung cấp địa chỉ đầy đủ Bưu kiện của Quý khách (Mã vận đơn: SP6347829150
+vi_crawl_bc670bbf40cf,Bạn từng tham gia nhiều chương trình sống còn trước đây. Việc tham gia một chương trình như thế này ở Việt Nam có khiến bạn cảm thấy áp lực hay khó khăn không?,scam,other_scam,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,unknown,1,text,kenh14,https://kenh14.vn/nhan-loi-moi-tu-tinh-ha-say-hi-ivan-suyt-tuong-la-lua-dao-215260828010649614.chn,"IVAN: Lúc nhận lời mời từ Tinh Hà Say Hi, mình suýt tưởng là… lừa đảo",2026-08-28,1,4,2026-11-27T19:25:34+07:00,,,,Bạn từng tham gia nhiều chương trình sống còn trước đây. Việc tham gia một chương trình như thế này ở Việt Nam có khiến bạn cảm thấy áp lực hay khó khăn không?,,drop,,unknown,journalism,"[AI, tin cậy cao] Câu hỏi phỏng vấn",run3,20,Bạn từng tham gia nhiều chương trình sống còn trước đây. Việc tham gia một chương trình như thế này ở Việt Nam có khiến bạn cảm thấy áp lực hay khó khăn không?,cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_711bc07bc5cf,Hóa đơn tiền điện tháng 1 chưa thanh toán. Điện lực sẽ cúp điện trong 2 giờ tới nếu không nhận được tiền,scam,gov_utility_services,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,sms,1,text,sggp,https://www.sggp.org.vn/canh-giac-ma-tran-lua-dao-online-dip-tet-post837903.html,"Cảnh giác ""ma trận"" lừa đảo online dịp Tết",2026-02-10,1,5,2026-11-27T19:25:51+07:00,,,,"Người dân cũng cần cảnh giác những tin nhắn kiểu như: ""Hóa đơn tiền điện tháng 1 chưa thanh toán. Điện lực sẽ cúp điện trong 2 giờ tới nếu không nhận được tiền"" hay ""Cục Thuế thông báo nợ thuế cuối năm 2025, đề nghị đóng phạt ngay để tránh bị cấm xuất cảnh dịp tết"" khiến người nhận rơi vào tâm lý ho",,scam,gov_utility_services,sms,,"[AI, tin cậy trung bình] Báo trích trong ngoặc kép như ví dụ ('tin nhắn kiểu như…') → có thể đã được báo rút gọn. Mạo danh Điện lực, đe dọa cắt điện → quy tắc 3 | NGƯỜI DÙNG XÁC NHẬN 28/11 (giữ 3/4/8; MoMo = banking_finance)",run3,21,Hóa đơn tiền điện tháng 1 chưa thanh toán. Điện lực sẽ cúp điện trong 2 giờ tới nếu không nhận được tiền,trung bình,0.017,[TTDLQG - Bộ Công an] Thông báo yêu cầu nộp phạt vi phạm đúng thời hạn Phương tiện của Quý
+vi_crawl_3c81ef67ddbd,"Cảnh sát giao thông Việt Nam - Thông báo vi phạm giao thông Số vi phạm: [NUMBER] Ngày thông báo: 15 tháng 7 năm 2026 Kính gửi chủ xe: Hệ thống phát hiện xe của quý vị chạy quá tốc độ trong khu vực giới hạn tốc độ. Theo Điều 19 Luật Giao thông đường bộ, hành vi này cấu thành vi phạm giao thông và hiện đang trong giai đoạn xử lý cuối cùng. Vui lòng hoàn tất thanh toán trước 0 giờ ngày 15 tháng 7 để tránh trách nhiệm pháp lý và các hậu quả liên quan: Thanh toán chậm sẽ bị tính phí phạt khoảng 8,51%/ngày. Điều này sẽ ảnh hưởng đến việc kiểm định xe hàng năm của quý vị. Quyền sở hữu xe không được chuyển nhượng.",scam,gov_utility_services,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,sms,2,ocr,cand,https://cand.vn/canh-bao-thu-doan-gia-mao-cong-dich-vu-cong-de-lua-dao-phat-nguoi-post817312.html,Cảnh báo thủ đoạn giả mạo Cổng Dịch vụ công để lừa đảo “phạt nguội”,2026-07-20,1,6,2026-11-27T19:47:02+07:00,https://cdn.cand.vn/images/9DtWg-P8oT4cHARya3IKmH31wt4pGzYNdKwIayS9MkqY0qyA8TmbNAKvGm1H6Gjr/1000008031.jpg,images/fbbd12aae2d4c13d.jpg,0,"Tin nhắn giả mạo các đối tượng thường sử dụng. ắn SMS với nội dung thông báo phương tiện vi phạm giao thông, yêu cầu người nhận truy cập vào đường dẫn để tra cứu hoặc nộp phạt. Các trang web giả mạo được thiết kế có giao diện gần giống với cổng thông tin chính thức, khiến nhiều người dễ nhầm lẫn.","Cảnh sát giao thông Việt Nam
+Thông báo vi phạm giao thông
+088
+Số vi phạm: 202607018823
+Tin nhane
+Ngày thông báo: 15 tháng 7 năm
+15.04, Homra
+2026
+Thông báo: Phương tiện
+Kính gửi chủ xe: Hệ thống phát hiện
+của bạn có vi phạm giao
+xe của quý vị
+chạy
+quá
+tốc độ trong
+giới
+khu vực
+hạn tốc độ. Theo Điêu
+thông: Vui
+lòng
+truy cập
+19 Luật Giao thông đường bộ, hành
+vi này cấu thành vi phạm giao thông
+https:IL
+và hiện đang trong giai đoan xử lý
+csgt boconganweb idlvnl
+cuối cùng. Vui
+lòng
+hoàn tất thanh
+để tra cứu và nộp phạt.
+toán trước 0 giờ ngày 15 tháng 7 để
+tránh trách nhiệm pháp lý và các hậu
+quả liên quan:
+Nếu bạn không kỳ vọng nhận được tin
+Cr
+từ một người gửi không xác định do
+Thanh toán chậm sẽ bị tính phí phạt
+tin nhắn rác.
+khoảng 8,51%/ngàỵ.
+Báo cáo tin ra<
+Điêu này sẽ ảnh hưởng đến việc kiểm
+định xe hàng năm của quý vị-
+Quyên sở hữu xe không được chuyển
+nhượng.",scam,gov_utility_services,sms,,"[AI, tin cậy cao] Ảnh SMS thật (nửa phải, bong bóng xám). Chép lại theo ảnh; OCR làm lệch câu 'chạy quá tốc độ trong khu vực' | NGƯỜI DÙNG XÁC NHẬN 28/11 (giữ 3/4/8; MoMo = banking_finance)",run3,22,"Cảnh sát giao thông Việt Nam Thông báo vi phạm giao thông Số vi phạm: [NUMBER] Ngày thông báo: 15 tháng 7 năm 2026 Kính gửi chủ xe: Hệ thống phát hiện xe của quý vị khu vực giới hạn tốc độ. Theo Điêu chạy tốc độ trong 19 Luật Giao thông đường bộ, hành vi này cấu thành vi phạm giao thông và hiện đang trong giai đoan xử lý cuối cùng. Vui lòng hoàn tất thanh toán trước 0 giờ ngày 15 tháng 7 để tránh trách nhiệm pháp lý và các hậu quả liên quan: Thanh toán chậm sẽ bị tính phí phạt khoảng 8,51%/ngàỵ. Điêu này sẽ ảnh hưởng đến việc kiểm định xe hàng năm của quý vị- Quyên sở hữu xe không được chuyển nhượng.",cao,0.05,Cảnh sát Giao thông Việt Nam: Hồ sơ vi phạm giao thông được lưu trữ dưới tên của bạn. Để b
+vi_crawl_4a36529bf3ca,Thông báo: Phương tiện của bạn có vi phạm giao thông. Vui lòng truy cập https://csgt.bocongan.web.id/vn/ để tra cứu và nộp phạt.,scam,gov_utility_services,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,sms,4,ocr,cand,https://cand.vn/canh-bao-thu-doan-gia-mao-cong-dich-vu-cong-de-lua-dao-phat-nguoi-post817312.html,Cảnh báo thủ đoạn giả mạo Cổng Dịch vụ công để lừa đảo “phạt nguội”,2026-07-20,1,6,2026-11-27T19:47:02+07:00,https://cdn.cand.vn/images/9DtWg-P8oT4cHARya3IKmH31wt4pGzYNdKwIayS9MkqY0qyA8TmbNAKvGm1H6Gjr/1000008031.jpg,images/fbbd12aae2d4c13d.jpg,0,"Tin nhắn giả mạo các đối tượng thường sử dụng. ắn SMS với nội dung thông báo phương tiện vi phạm giao thông, yêu cầu người nhận truy cập vào đường dẫn để tra cứu hoặc nộp phạt. Các trang web giả mạo được thiết kế có giao diện gần giống với cổng thông tin chính thức, khiến nhiều người dễ nhầm lẫn.","Cảnh sát giao thông Việt Nam
+Thông báo vi phạm giao thông
+088
+Số vi phạm: 202607018823
+Tin nhane
+Ngày thông báo: 15 tháng 7 năm
+15.04, Homra
+2026
+Thông báo: Phương tiện
+Kính gửi chủ xe: Hệ thống phát hiện
+của bạn có vi phạm giao
+xe của quý vị
+chạy
+quá
+tốc độ trong
+giới
+khu vực
+hạn tốc độ. Theo Điêu
+thông: Vui
+lòng
+truy cập
+19 Luật Giao thông đường bộ, hành
+vi này cấu thành vi phạm giao thông
+https:IL
+và hiện đang trong giai đoan xử lý
+csgt boconganweb idlvnl
+cuối cùng. Vui
+lòng
+hoàn tất thanh
+để tra cứu và nộp phạt.
+toán trước 0 giờ ngày 15 tháng 7 để
+tránh trách nhiệm pháp lý và các hậu
+quả liên quan:
+Nếu bạn không kỳ vọng nhận được tin
+Cr
+từ một người gửi không xác định do
+Thanh toán chậm sẽ bị tính phí phạt
+tin nhắn rác.
+khoảng 8,51%/ngàỵ.
+Báo cáo tin ra<
+Điêu này sẽ ảnh hưởng đến việc kiểm
+định xe hàng năm của quý vị-
+Quyên sở hữu xe không được chuyển
+nhượng.",scam,gov_utility_services,sms,,"[AI, tin cậy cao] Ảnh SMS thật (nửa trái, giao diện Tin nhắn iPhone) | NGƯỜI DÙNG XÁC NHẬN 28/11 (giữ 3/4/8; MoMo = banking_finance)",run3,23,Thông báo: Phương tiện của bạn có vi phạm giao thông: Vui lòng truy cập https://csgt boconganweb idlvnl để tra cứu và nộp phạt.,cao,0.119,Cảnh sát Giao thông Việt Nam: Hồ sơ vi phạm giao thông được lưu trữ dưới tên của bạn. Để b
+vi_crawl_e5ae58eb3dde,"Tội phạm mạng có thể can thiệp vào trạm sạc công cộng bằng cách cài đặt phần cứng hoặc phần mềm đã sửa đổi. Từ đó, chúng có thể đánh cắp thông tin tài khoản email, tài khoản ngân hàng, dữ liệu trên máy để đòi tiền chuộc…. Ứng dụng tường lửa như Kaspersky Mobile Security có thể chặn đứng những hoạt động đáng nghi này, cảnh báo ngay đến người dùng",scam,banking_finance,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,unknown,1,text,genk,https://genk.vn/app-lua-dao-ho-tro-ke-khai-thue-khien-nguoi-dung-thiet-hai-nang-ne-20241206150330322.chn,App lừa đảo hỗ trợ kê khai thuế khiến người dùng thiệt hại nặng nề,2024-12-06,1,2,2026-11-27T20:14:54+07:00,,,,"Tội phạm mạng có thể can thiệp vào trạm sạc công cộng bằng cách cài đặt phần cứng hoặc phần mềm đã sửa đổi. Từ đó, chúng có thể đánh cắp thông tin tài khoản email, tài khoản ngân hàng, dữ liệu trên máy để đòi tiền chuộc…. Ứng dụng tường lửa như Kaspersky Mobile Security có thể chặn đứng những hoạt đ",,drop,,unknown,journalism,"[AI, tin cậy cao] Đoạn văn trong bài",run3,24,"Tội phạm mạng có thể can thiệp vào trạm sạc công cộng bằng cách cài đặt phần cứng hoặc phần mềm đã sửa đổi. Từ đó, chúng có thể đánh cắp thông tin tài khoản email, tài khoản ngân hàng, dữ liệu trên máy để đòi tiền chuộc…. Ứng dụng tường lửa như Kaspersky Mobile Security có thể chặn đứng những hoạt động đáng nghi này, cảnh báo ngay đến người dùng",cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_3a25ede37c93,"Các Website chính thức của Vinhomes: Hiện nay; các thông tin chính thức liên quan đến các sản phẩm; dịch vụ của Vinhomes đang được chúng tôi đăng tải trên các website thuộc sở hữu của Vinhomes như được liệt kê dưới đây: vinhomesvn boutiquehotelgrandworld.comvn diamondlegacy-vincomshophouse.vn grandworld-phuquoc.vn oceancityhanoi.vn shopvinwonders.com springhillstuyenquang.vn thecanopyresidencesvn thesakura.vn vincomshophouse.vn vincomshophouse-royalparkcom.vn vinholidays-phuquoc.com.vn Danh sách các website thuộc sở hữu của Vinhomes nêu trên có thể được chúng tôi cập nhật, bổ sung tại từng thời điểm (""Website Chính Thức Của Vinhomes"")",scam,other_scam,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,unknown,3,ocr,genk,https://genk.vn/cac-doanh-nghiep-cua-ty-phu-pham-nhat-vuong-dong-loat-canh-bao-tinh-trang-lua-dao-tai-chinh-tren-mang-20241212163330542.chn,Các doanh nghiệp của tỷ phú Phạm Nhật Vượng đồng loạt cảnh báo tình trạng lừa đảo tài chính trên mạng,2024-12-12,1,2,2026-11-27T20:39:00+07:00,https://genk.mediacdn.vn/139269124445442048/2024/12/12/screenshot-2024-12-12-145335-1733990924143-17339909243221831562871-1733995949973-17339959500651990883312.png,images/90964ea14bf4d706.png,1,Các website chính thức của Vinhomes. Vinhomes lưu ý các website chính thức gồm:,"Các Website chính thức của Vinhomes:
+Hiện nay; các thông tin chính thức liên quan đến các sản phẩm; dịch vụ của Vinhomes
+đang được chúng tôi đăng tải trên các website thuộc sở hữu của Vinhomes như được liệt
+kê dưới đây:
+vinhomesvn
+boutiquehotelgrandworld.comvn
+diamondlegacy-vincomshophouse.vn
+grandworld-phuquoc.vn
+oceancityhanoi.vn
+shopvinwonders.com
+springhillstuyenquang.vn
+thecanopyresidencesvn
+thesakura.vn
+vincomshophouse.vn
+vincomshophouse-royalparkcom.vn
+vinholidays-phuquoc.com.vn
+Danh sách các website thuộc sở hữu của Vinhomes nêu trên có thể được chúng tôi cập
+nhật, bổ sung tại từng thời điểm (""Website Chính Thức Của Vinhomes"")",drop,,unknown,not_message,"[AI, tin cậy cao] Ảnh chụp trang web Vinhomes (danh sách website chính thức), không phải tin nhắn",run3,25,"Các Website chính thức của Vinhomes: Hiện nay; các thông tin chính thức liên quan đến các sản phẩm; dịch vụ của Vinhomes đang được chúng tôi đăng tải trên các website thuộc sở hữu của Vinhomes như được liệt kê dưới đây: vinhomesvn boutiquehotelgrandworld.comvn diamondlegacy-vincomshophouse.vn grandworld-phuquoc.vn oceancityhanoi.vn shopvinwonders.com springhillstuyenquang.vn thecanopyresidencesvn thesakura.vn vincomshophouse.vn vincomshophouse-royalparkcom.vn vinholidays-phuquoc.com.vn Danh sách các website thuộc sở hữu của Vinhomes nêu trên có thể được chúng tôi cập nhật, bổ sung tại từng thời điểm (""Website Chính Thức Của Vinhomes"")",cao,0.008,Quy khach co don hang [NUMBER] (tien COD: [MONEY]) gui tu Bao Kiem toan [NUMBER] da duoc n
+vi_crawl_c47d6b39752a,"Đây là thông tin bị hại trong một phần máy tính thu giữ. Do đó, hiện cơ quan điều tra đang tiếp tục xác minh, ghi lời khai các bị hại bị lừa đến lúc hết tiền là bao nhiêu... thì mới xác định được tổng số tiền",scam,other_scam,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,messenger,1,text,genk,https://genk.vn/nam-sinh-vien-fpt-bi-lua-8-ty-vi-tin-tuong-kenh-facebook-tiktok-toan-sieu-xe-nha-o-dat-tien-cua-mr-pips-20241212072727056.chn,"Nam sinh viên FPT bị lừa 8 tỷ vì tin tưởng kênh Facebook, TikTok toàn siêu xe, nhà ở đắt tiền của Mr Pips",2024-12-12,1,2,2026-11-27T20:56:01+07:00,,,,"""Đây là thông tin bị hại trong một phần máy tính thu giữ. Do đó, hiện cơ quan điều tra đang tiếp tục xác minh, ghi lời khai các bị hại bị lừa đến lúc hết tiền là bao nhiêu... thì mới xác định được tổng số tiền""",,drop,,unknown,journalism,"[AI, tin cậy cao] Lời cơ quan điều tra",run3,26,"Đây là thông tin bị hại trong một phần máy tính thu giữ. Do đó, hiện cơ quan điều tra đang tiếp tục xác minh, ghi lời khai các bị hại bị lừa đến lúc hết tiền là bao nhiêu... thì mới xác định được tổng số tiền",cao,0.006,Mình giúp em đóng khoản quy đổi tiền : 3 % tương ứng với giá trị giải thưởng của mình là :
+vi_crawl_2966b46b8e15,Tài khoản của quý khách đang bị khóa,scam,other_scam,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,sms,3,text,thanhnien,https://thanhnien.vn/canh-bao-8-chieu-tro-lua-dao-nham-vao-nguoi-cao-tuoi-185260728154001279.htm,Cảnh báo: 8 chiêu trò lừa đảo nhắm vào người cao tuổi,2026-07-28,1,2,2026-11-27T21:21:08+07:00,,,,"Nhiều nạn nhân cao tuổi có thể nhận được tin nhắn như: ""Tài khoản của quý khách đang bị khóa"", ""Phát hiện đăng nhập bất thường"", ""Quý khách được hoàn tiền điện"", ""Nhận tiền hỗ trợ"", ""Chúc mừng trúng thưởng…"" Sau đó là một đường link yêu cầu bấm vào để xử lý.",,drop,,unknown,fragment,"[AI, tin cậy cao] Chỉ là 1 cụm ví dụ trong danh sách ('Tài khoản của quý khách đang bị khóa'), không phải tin đầy đủ",run3,27,Tài khoản của quý khách đang bị khóa,cao,0.12,"Vietcombank tran trong thong bao, tai khoan cua quy khach hien tai da bi khoa. Dang nhap h"
+vi_crawl_626610f966c2,Bố/mẹ chuyển giúp con vào tài khoản này,scam,social_impersonation,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,unknown,1,text,thanhnien,https://thanhnien.vn/canh-bao-8-chieu-tro-lua-dao-nham-vao-nguoi-cao-tuoi-185260728154001279.htm,Cảnh báo: 8 chiêu trò lừa đảo nhắm vào người cao tuổi,2026-07-28,1,2,2026-11-27T21:21:08+07:00,,,,"Kẻ gian có thể chiếm tài khoản của người thân hoặc tạo tài khoản giả giống họ, sau đó nhắn: ""Con cần thanh toán gấp"", ""Tài khoản con đang lỗi"", ""Bố/mẹ chuyển giúp con vào tài khoản này"". Nhưng nếu nhìn kỹ thì tài khoản nhận tiền lại đứng tên người khác.",,drop,,unknown,fragment,"[AI, tin cậy cao] Chỉ là 1 cụm ví dụ trong danh sách, không phải tin đầy đủ",run3,28,Bố/mẹ chuyển giúp con vào tài khoản này,cao,0.015,Chào ong bo đẹp trai . Hiện tại con gái à đang bị chúng tôi giữ . Muốn chuộc con gái và kh
+vi_crawl_126e74aeb134,[Ngân hàng Techcombank] Thông báo. Ưu đãi có thời hạn!12.500 điểm thưởng thẻ tín dụng của bạn hết hạn hôm nay.Nhận ngay phần thưởng độc quyền của bạn:https://techcombank.cfd/com.vn,scam,banking_finance,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,sms,3,ocr,kenh14,https://kenh14.vn/canh-bao-thu-doan-gia-mao-ngan-hang-de-chiem-doat-thong-tin-the-tin-dung-215260711091050061.chn,Cảnh báo thủ đoạn giả mạo ngân hàng để chiếm đoạt thông tin thẻ tín dụng,2026-07-11,1,17,2026-11-27T21:22:04+07:00,https://kenh14cdn.com/203336854389633024/2026/7/11/canh-bao-1783673278961118744614-1783735742918-17837357435901118615539.jpg,images/f7e582252bd940b2.jpg,0,"Nội dung tin nhắn giả mạo. Ảnh: Công an tỉnh Gia Lai. Nội dung tin nhắn thường được viết theo kiểu tạo cảm giác khẩn cấp: ""[Ngân hàng Techcombank] Thông báo. Ưu đãi có thời hạn! 12.500 điểm thưởng thẻ tín dụng của bạn hết hạn hôm nay. Nhận ngay phần thưởng độc quyền của bạn…"".","Text Message
+SMS
+Mon, 13 Apr at 15.13
+[Ngâr
+àng Techcombank] Thông báo.
+Uu đãi có .hời hạn'12.500 diểm thưòn
+thè tín dung cra bạn hết hạn hôm
+nay Nhận ngay phan thường đ
+quyên
+cùa ban:https:Iltcb lal
+Today 15:
+echcombank] Thông ba
+[Ngân hàn
+Uu đãi có thời han!12.500 điểm thưởng
+thẻ
+dụng cùa bạn hết hạn hôm
+nay Nhận ngay phẩn thường độc quyền
+của ban:https Iltechcombank cfdlcom vn",scam,banking_finance,sms,,"[AI, tin cậy cao] Ảnh SMS thật (2 tin cùng khuôn, lấy tin thứ 2 vì link đầy đủ). Cùng khuôn '12.500 điểm thưởng' với BIDV/VIB | CÙNG KHUÔN với tin đợt 1–2 (Jaccard 0.657) → không tính là khuôn mới cho tầng 2 | NGƯỜI DÙNG XÁC NHẬN 28/11 (giữ 3/4/8; MoMo = banking_finance)",run3,29,"Mon, 13 Apr at 15.13 [Ngâr àng Techcombank] Thông báo. Uu đãi có .hời hạn'12.500 diểm thưòn thè tín dung cra bạn hết hạn hôm nay Nhận ngay phan thường đ quyên cùa ban:https://tcb lal [Ngân hàn echcombank] Thông ba Uu đãi có thời han!12.500 điểm thưởng dụng cùa bạn hết hạn hôm nay Nhận ngay phẩn thường độc quyền của ban:https Iltechcombank cfdlcom vn",cao,0.657,[Ngân hàng VIB] Thông báo khách hàng. Ưu đãi có thời hạn!12.500 điểm thưởng thẻ tín dụng c
+vi_crawl_13a3af5eee70,https://www facebook comlgroupslicfix.vietnam Facebook Log in or sign up to view See posts; photos and more on Facebook.,scam,other_scam,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,messenger,2,ocr,genk,https://genk.vn/nguoi-dung-samsung-tai-viet-nam-bi-lua-khoa-dien-thoai-ngay-ca-nguoi-am-tuong-cong-nghe-cung-dinh-bay-20241128151612767.chn,"Người dùng Samsung tại Việt Nam bị lừa khóa điện thoại: Ngay cả người am tường công nghệ cũng ""dính bẫy""",2024-11-28,1,2,2026-11-27T21:48:18+07:00,https://genk.mediacdn.vn/139269124445442048/2024/11/28/screen-shot-2024-11-28-at-140944-173277781169063843497-1732781732968-17327817331481859646111.png,images/83244d17c687e6a9.png,7," dưới dạng tin nhắn báo mất của một chiếc điện thoại Samsung bị khóa, tất cả những gì chúng tôi nhận lại là một đường link tới nhóm ""ICFix Team Chợ"". Ngoài đường link trên, tài khoản Telegram này không phản hồi bất cứ tin nhắn nào khác của chúng tôi.","Quà Tặng Cuộc Sống Galaxy
+(341206)
+Quà Tặng Cuộc
+Sống
+Gal...
+last seen recently
+November 28
+tôi muon mơ Knoa điện thoại
+11.35
+alo
+11.35
+https:lIwww facebook comlgroupslicfix.vietnam
+Facebook
+Log in or sign up to view
+See posts; photos and more on Facebook.
+11.41",drop,,telegram,not_message,"[AI, tin cậy cao] Ảnh Telegram (không phải SMS/Zalo/Messenger); bong bóng chỉ là 1 link nhóm Facebook, không có nội dung lừa đảo",run3,30,https://www facebook comlgroupslicfix.vietnam Facebook Log in or sign up to view See posts; photos and more on Facebook.,cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_f7d4347a64a7,"Mình bị hack điện thoại vì Log-in vô web đăng ký One Ui 7 Beta. Đây là con S22 của mình là máy phụ chỉ để chơi game và làm một số việc , máy đã đăng nhập đây đủ Samsung Account chính chủ:. Chuyện là tuân trước lướt Reels có hiện quảng cáo đăng ký One Ui 7 Beta nên mình có ấn vô thử và log-in Account Samsung vào và được điêu hướng đến App Samsung Member và sau đó được thông báo máy không đủ điêu kiện. Giao diện đăng nhập của web này y hệt Samsung và do có điều hướng đến App Samsung Members nên mình cũng không nghi ngờ gì. Mình vẫn sử dụng bình thường và hôm nay máy báo bị khoá và để lại số liên lạc chỉ có 6 số như ảnh và mình không gọi lại được dù Sim mình trong máy vẫn còn tiên: Mình chưa rõ cách thức hoạt động và mong giải đáp ạ #vatvochiase",scam,gov_utility_services,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,unknown,2,ocr,genk,https://genk.vn/nguoi-dung-samsung-tai-viet-nam-bi-lua-khoa-dien-thoai-ngay-ca-nguoi-am-tuong-cong-nghe-cung-dinh-bay-20241128151612767.chn,"Người dùng Samsung tại Việt Nam bị lừa khóa điện thoại: Ngay cả người am tường công nghệ cũng ""dính bẫy""",2024-11-28,1,2,2026-11-27T21:48:18+07:00,https://genk.mediacdn.vn/139269124445442048/2024/11/28/screen-shot-2024-11-28-at-135530-17327769515001921355533-1732781727864-1732781728224416906908.png,images/e8c4627aa4067942.png,2,"hời gian sau đó (đôi khi có thể tính bằng ngày), điện thoại Samsung của người dùng sẽ bất ngờ bị khóa và yêu cầu nhập mã PIN 4 số. Mã PIN này không phải mật mã mở khóa màn hình thông thường, vì vậy người dùng sẽ không thể tiếp tục sử dụng điện thoại.","Nguyễn Tân
+25 November at 21:48
+Mình bị hack điện thoại vì Log-in vô web đăng ký One Ui 7 Beta.
+Đây là con S22 của mình
+là máy phụ chỉ để chơi game và làm một số việc , máy đã đăng nhập đây
+đủ Samsung Account chính chủ:.
+Chuyện là tuân trước lướt Reels có hiện quảng cáo đăng ký One Ui 7 Beta nên mình có ấn vô thử và
+log-in Account Samsung vào và được điêu hướng đến App Samsung Member và sau đó được thông
+báo máy không đủ điêu kiện.
+Giao diện đăng nhập của web này y hệt Samsung và do có điều hướng đến App Samsung Members
+nên mình cũng không nghi ngờ gì.
+Mình vẫn sử dụng bình thường và hôm nay máy báo bị khoá và để lại số liên lạc chỉ có 6 số như ảnh
+và mình không gọi lại được dù Sim mình trong máy vẫn còn tiên:
+Mình chưa rõ cách thức hoạt động và mong giải đáp ạ
+#vatvochiase
+Viettel
+Điện thoạl bỊ khóa.
+To ensure the security of your personal information,
+Ithls
+phone Request code: 850096
+we have locked
+Số của nguời sờ hữu
++847944
+Nhập mã PIN
+Mã PIN của bạn có ít nhất 4 chữ số.
+2
+3
+ABC
+Def
+4
+5
+6
+GHI
+JKL
+MNO
+7
+8
+9
+PQRS
+TUV
+WXYZ
+OK
+Cuôc gol khẩn cấp",drop,,unknown,not_message,"[AI, tin cậy cao] Bài đăng Facebook của nạn nhân kể chuyện (không phải tin nhắn)",run3,31,"Mình bị hack điện thoại vì Log-in vô web đăng ký One Ui 7 Beta. Đây là con S22 của mình là máy phụ chỉ để chơi game và làm một số việc , máy đã đăng nhập đây đủ Samsung Account chính chủ:. Chuyện là tuân trước lướt Reels có hiện quảng cáo đăng ký One Ui 7 Beta nên mình có ấn vô thử và log-in Account Samsung vào và được điêu hướng đến App Samsung Member và sau đó được thông báo máy không đủ điêu kiện. Giao diện đăng nhập của web này y hệt Samsung và do có điều hướng đến App Samsung Members nên mình cũng không nghi ngờ gì. Mình vẫn sử dụng bình thường và hôm nay máy báo bị khoá và để lại số liên lạc chỉ có 6 số như ảnh và mình không gọi lại được dù Sim mình trong máy vẫn còn tiên: Mình chưa rõ cách thức hoạt động và mong giải đáp ạ #vatvochiase",cao,0.006,Tài khoản còn đủ [MONEY] ko (không) cho mượn chuyển vào số này có tí việc. Sáng mai gởi lạ
+vi_crawl_b00e476f134f,(@fmmlocking) [[NUMBER]],scam,other_scam,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,unknown,2,ocr,genk,https://genk.vn/nguoi-dung-samsung-tai-viet-nam-bi-lua-khoa-dien-thoai-ngay-ca-nguoi-am-tuong-cong-nghe-cung-dinh-bay-20241128151612767.chn,"Người dùng Samsung tại Việt Nam bị lừa khóa điện thoại: Ngay cả người am tường công nghệ cũng ""dính bẫy""",2024-11-28,1,2,2026-11-27T21:48:18+07:00,https://genk.mediacdn.vn/139269124445442048/2024/11/28/screenshot-2024-11-28-at-112426-1732775777392675167913-1732781728781-17327817290502112679238.png,images/0f3a6713320b6ec0.png,3,,"Hoàng Thông
+Yesterday at 01:45
+Trong đêm bị knock 2 máy liên tục các bác ơi. Cứu iemmm
+Các bác cho em xin địa chỉ TTBH uy tín ở Biên Hòa hay ở HCM với ạ
+M
+Del
+End
+Pgon
+VN VINAPHONE
+Điện thoại bị khóa.
+This phone is secured. Unlock it vía
+Telegram
+(@fmmlocking) [846779830509]
+Dla khóa
+Inis phone is secured Unlock It via Telegram (@mmlocking)
+[99856683210]
+Nhập mã PIN
+Mã PIN của bạn có ít nhất 4 chữsố:
+Nhậpmã PIN
+Mà PIN cúa ban cólt nhãt 4 @hữ số
+1
+2
+3
+ABC
+5eF
+4
+5
+5
+Ghi
+e
+Ghi
+MNO
+Pors
+TU
+8
+PoRs
+TUV
+OK
+OK
+Cuôc goi khẩn cấp",drop,,unknown,not_message,"[AI, tin cậy cao] Ảnh màn hình khóa điện thoại (Telegram @fmmlocking), không phải tin nhắn; OCR chỉ còn mảnh",run3,32,(@fmmlocking) [[NUMBER]],cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_b4febb499944,Cổng tuyển sinh Dẵn dụ phụ huynh truy cập link lạ để đánh cẵp thông tin tài khoản ngân hàng .,scam,banking_finance,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,unknown,2,ocr,vtv,https://vtv.vn/canh-giac-thu-doan-gia-mao-tuyen-sinh-tren-khong-gian-mang-100260720151419044.htm,Cảnh giác thủ đoạn giả mạo tuyển sinh trên không gian mạng,2026-07-20,1,3,2026-11-27T22:08:16+07:00,https://cdn-images.vtv.vn/66349b6076cb4dee98746cf1/2026/07/20/anh-man-hinh-2026-07-20-luc-15-06-01-44112607535213272332490.png,images/e9154b4144726a53.png,0,"Ảnh: Công an tỉnh Bắc Ninh Các thủ đoạn nêu trên có tính chất tinh vi, đánh vào tâm lý lo lắng của phụ huynh trong thời gian ngắn phải hoàn tất hồ sơ, khiến nhiều người mất cảnh giác, cung cấp thông tin hoặc chuyển tiền trước khi kịp xác minh.","CẢNH GIÁC THỦ ĐOẠN LỪA ĐẢO TUYỂN SINH ĐẦU CẤP
+NHẬN DIỆN THỦ ĐOẠN LỪA ĐẢO
+BIỆN PHÁP PHÒNG NGỪA CẦN BlẾT
+Gửi đường link
+giả
+Chỉ tin dùng các kênh
+mạo
+thông tin chính thống
+Cổng tuyển sinh
+thông
+Theo dõi
+tin trực tiếp từ Sở
+không
+Dẵn dụ phụ huynh truy cập link lạ để
+GD&ĐT và nhà trường;
+vào link lạ
+đánh cẵp thông tin tài khoản ngân hàng .
+Xác minh trực tiếp
+Tuyệt
+Giả danh cán bộ nhà trường,
+đối không chuyển tiền
+cơ quan giáo dục
+Liên hệ nhà trường để kiểm chứng; không
+Gọi điện từ số lạ hoặc gửi tin nhẳn, phiếu
+cung cấp OTP hay mật khẩu cho người lạ.
+báo nhập học giả để gây áp lực.
+Yêu cầu chuyển tiền hoặc
+Kịp thời trình báo
+Cong AN
+cung cấp mã OTP
+cơ quan Công an
+Lấy lý do nộp phí ""giữ chỗ"" hoặc xác nhận
+Báo ngay cho cơ quan
+Công
+an nơi gần
+hồ sơ để chiếm đoạt tiền.
+nhất khi phát hiện dấu hiệu nghi vấn.",drop,,unknown,not_message,"[AI, tin cậy cao] Infographic cảnh báo của Công an (đồ họa), không phải tin nhắn",run3,33,Cổng tuyển sinh Dẵn dụ phụ huynh truy cập link lạ để đánh cẵp thông tin tài khoản ngân hàng .,cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_736db03b60a1,Xác minh trực tiếp Tuyệt đối không chuyển tiền Liên hệ nhà trường để kiểm chứng; không cung cấp OTP hay mật khẩu cho người lạ.,legitimate,,cảnh báo/thông báo chính thức,unknown,3,ocr,vtv,https://vtv.vn/canh-giac-thu-doan-gia-mao-tuyen-sinh-tren-khong-gian-mang-100260720151419044.htm,Cảnh giác thủ đoạn giả mạo tuyển sinh trên không gian mạng,2026-07-20,1,3,2026-11-27T22:08:16+07:00,https://cdn-images.vtv.vn/66349b6076cb4dee98746cf1/2026/07/20/anh-man-hinh-2026-07-20-luc-15-06-01-44112607535213272332490.png,images/e9154b4144726a53.png,0,"Ảnh: Công an tỉnh Bắc Ninh Các thủ đoạn nêu trên có tính chất tinh vi, đánh vào tâm lý lo lắng của phụ huynh trong thời gian ngắn phải hoàn tất hồ sơ, khiến nhiều người mất cảnh giác, cung cấp thông tin hoặc chuyển tiền trước khi kịp xác minh.","CẢNH GIÁC THỦ ĐOẠN LỪA ĐẢO TUYỂN SINH ĐẦU CẤP
+NHẬN DIỆN THỦ ĐOẠN LỪA ĐẢO
+BIỆN PHÁP PHÒNG NGỪA CẦN BlẾT
+Gửi đường link
+giả
+Chỉ tin dùng các kênh
+mạo
+thông tin chính thống
+Cổng tuyển sinh
+thông
+Theo dõi
+tin trực tiếp từ Sở
+không
+Dẵn dụ phụ huynh truy cập link lạ để
+GD&ĐT và nhà trường;
+vào link lạ
+đánh cẵp thông tin tài khoản ngân hàng .
+Xác minh trực tiếp
+Tuyệt
+Giả danh cán bộ nhà trường,
+đối không chuyển tiền
+cơ quan giáo dục
+Liên hệ nhà trường để kiểm chứng; không
+Gọi điện từ số lạ hoặc gửi tin nhẳn, phiếu
+cung cấp OTP hay mật khẩu cho người lạ.
+báo nhập học giả để gây áp lực.
+Yêu cầu chuyển tiền hoặc
+Kịp thời trình báo
+Cong AN
+cung cấp mã OTP
+cơ quan Công an
+Lấy lý do nộp phí ""giữ chỗ"" hoặc xác nhận
+Báo ngay cho cơ quan
+Công
+an nơi gần
+hồ sơ để chiếm đoạt tiền.
+nhất khi phát hiện dấu hiệu nghi vấn.",drop,,unknown,not_message,"[AI, tin cậy cao] Infographic cảnh báo (phần 'biện pháp phòng ngừa'), không phải tin nhắn",run3,34,Xác minh trực tiếp Tuyệt đối không chuyển tiền Liên hệ nhà trường để kiểm chứng; không cung cấp OTP hay mật khẩu cho người lạ.,cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_cb384b2c5198,"Giả danh cán bộ nhà trường, cơ quan giáo dục Gọi điện từ số lạ hoặc gửi tin nhẳn, phiếu báo nhập học giả để gây áp lực. Yêu cầu chuyển tiền hoặc cung cấp mã OTP Lấy lý do nộp phí ""giữ chỗ"" hoặc xác nhận hồ sơ để chiếm đoạt tiền.",scam,banking_finance,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,unknown,3,ocr,vtv,https://vtv.vn/canh-giac-thu-doan-gia-mao-tuyen-sinh-tren-khong-gian-mang-100260720151419044.htm,Cảnh giác thủ đoạn giả mạo tuyển sinh trên không gian mạng,2026-07-20,1,3,2026-11-27T22:08:16+07:00,https://cdn-images.vtv.vn/66349b6076cb4dee98746cf1/2026/07/20/anh-man-hinh-2026-07-20-luc-15-06-01-44112607535213272332490.png,images/e9154b4144726a53.png,0,"Ảnh: Công an tỉnh Bắc Ninh Các thủ đoạn nêu trên có tính chất tinh vi, đánh vào tâm lý lo lắng của phụ huynh trong thời gian ngắn phải hoàn tất hồ sơ, khiến nhiều người mất cảnh giác, cung cấp thông tin hoặc chuyển tiền trước khi kịp xác minh.","CẢNH GIÁC THỦ ĐOẠN LỪA ĐẢO TUYỂN SINH ĐẦU CẤP
+NHẬN DIỆN THỦ ĐOẠN LỪA ĐẢO
+BIỆN PHÁP PHÒNG NGỪA CẦN BlẾT
+Gửi đường link
+giả
+Chỉ tin dùng các kênh
+mạo
+thông tin chính thống
+Cổng tuyển sinh
+thông
+Theo dõi
+tin trực tiếp từ Sở
+không
+Dẵn dụ phụ huynh truy cập link lạ để
+GD&ĐT và nhà trường;
+vào link lạ
+đánh cẵp thông tin tài khoản ngân hàng .
+Xác minh trực tiếp
+Tuyệt
+Giả danh cán bộ nhà trường,
+đối không chuyển tiền
+cơ quan giáo dục
+Liên hệ nhà trường để kiểm chứng; không
+Gọi điện từ số lạ hoặc gửi tin nhẳn, phiếu
+cung cấp OTP hay mật khẩu cho người lạ.
+báo nhập học giả để gây áp lực.
+Yêu cầu chuyển tiền hoặc
+Kịp thời trình báo
+Cong AN
+cung cấp mã OTP
+cơ quan Công an
+Lấy lý do nộp phí ""giữ chỗ"" hoặc xác nhận
+Báo ngay cho cơ quan
+Công
+an nơi gần
+hồ sơ để chiếm đoạt tiền.
+nhất khi phát hiện dấu hiệu nghi vấn.",drop,,unknown,not_message,"[AI, tin cậy cao] Infographic cảnh báo, không phải tin nhắn",run3,35,"Giả danh cán bộ nhà trường, cơ quan giáo dục Gọi điện từ số lạ hoặc gửi tin nhẳn, phiếu báo nhập học giả để gây áp lực. Yêu cầu chuyển tiền hoặc cung cấp mã OTP Lấy lý do nộp phí ""giữ chỗ"" hoặc xác nhận hồ sơ để chiếm đoạt tiền.",cao,0.013,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_e13711e0d45e,Thầy Minh Làm Bùa Yêu Miễn Phí,scam,other_scam,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,messenger,1,text,znews,https://znews.vn/dieu-tra-vu-lua-dao-giai-bua-yeu-quang-cao-tren-mang-xa-hoi-post1538107.html,Điều tra vụ lừa đảo giải 'bùa yêu' quảng cáo trên mạng xã hội,2025-03-17,1,2,2026-11-27T22:46:31+07:00,,,,"Sau khi có người nhắn tin vào trang Facebook ""Thầy Minh Làm Bùa Yêu Miễn Phí"", các đối tượng sử dụng nhiều tài khoản mang tên ""Bùi Văn Minh"" hoặc ""Bùi Văn Hải"" với nhiều số điện thoại nhằm kết bạn nhắn tin tư vấn cho những người có nhu cầu làm ""bùa yêu', hàn gắn tình cảm, tình duyên, tài lộc...theo ",,drop,,unknown,not_message,"[AI, tin cậy cao] Tên trang Facebook, không phải tin nhắn",run3,36,Thầy Minh Làm Bùa Yêu Miễn Phí,cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_1afdd0df1c8b,"[QC] QK Du dieu kien mo the tin dung VIB Cashback han muc den [MONEY] dong, hoan tien 10% khong gioi han, nhan the sau 3Op. Soan VIBI 5998 (mien phi) de nhan thong tin dang ky mo the Tu choi soan TC VIB gui 1313",spam,,bước 2.2: bẫy cước đầu số,sms,5,ocr,cand,https://cand.vn/canh-giac-sms-gia-mao-ngan-hang-chiem-doat-tai-san-post827563.html,"Cảnh giác SMS giả mạo ngân hàng, chiếm đoạt tài sản",2026-11-13,2,18,2026-11-27T14:55:03+07:00,https://cdn.cand.vn/images/sU5IRebtkTmSHUNo4Jmo2Z85ImAZ4uFF4yN31U6zPU-UjerA9Mq9ftTQmIdQ2KgMlOK_M04t95ufhq0iRsyLcQ/img-20261111142230-958-1.jpg,../test_run/images/0e481e20b76a7df4.jpg,0,"Tin nhắn giả mạo có thể xuất hiện chung luồng hội thoại SMS với tin nhắn chính thức của ngân hàng. Ngày [DATE], Phòng An ninh mạng Công an TP Cần Thơ cho biết, tình trạng các đối tượng sử dụng tin nhắn SMS giả mạo thương hiệu ngân hàng (SMS Brandname) để lừa đảo, chiếm đoạt tài sản diễn biến phức tạ","gui 1313.
+VIB
+07:46 10 Z1y 9, 2025
+[QC] QK Du dieu kien mo
+the tin dung VIB Cashback
+han muc den 100 trieu
+dong, hoan tien 10% khong
+gioi han, nhan the sau 3Op.
+Soan VIBI
+gui
+5998 (mien
+phi) de nhan thong tin dang
+ky mo the
+Tu choi soan TC
+VIB gui 1313
+14.33, Hôm nay
+[Ngân hàng VIB] Thông
+báo khách hàng: Uu đãi có
+thời hạn!12.500 điểm
+thưởng thẻ tín dụng cùa
+bạn hết hạn hôm nay.Nhận
+ngay phẩn thưởng độc
+quyên của bạn:https:Il
+vib mobilcomvn",drop,,sms,duplicate,"[AI, tin cậy cao] Ảnh SMS thật (VIB [QC] + cú pháp từ chối = ham 1.3) nhưng TRÙNG Y HỆT tin đã có ở đợt 1–2",test_run,37,"[QC] QK Du dieu kien mo the tin dung VIB Cashback han muc den [MONEY] dong, hoan tien 10% khong gioi han, nhan the sau 3Op. Soan VIBI 5998 (mien phi) de nhan thong tin dang ky mo the Tu choi soan TC VIB gui 1313",cao,0.756,"[QC] QK Du dieu kien mo the tin dung VIB Cashback han muc den [MONEY] dong, hoan tien 10% "
+vi_crawl_2d5c4b9b7e40,[Ngân hàng VIB] Thông báo khách hàng: Uu đãi có thời hạn!12.500 điểm thưởng thẻ tín dụng cùa ngay phẩn thưởng độc quyên của bạn:https://vib mobilcomvn,scam,banking_finance,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,sms,3,ocr,cand,https://cand.vn/canh-giac-sms-gia-mao-ngan-hang-chiem-doat-tai-san-post827563.html,"Cảnh giác SMS giả mạo ngân hàng, chiếm đoạt tài sản",2026-11-13,2,18,2026-11-27T14:55:03+07:00,https://cdn.cand.vn/images/sU5IRebtkTmSHUNo4Jmo2Z85ImAZ4uFF4yN31U6zPU-UjerA9Mq9ftTQmIdQ2KgMlOK_M04t95ufhq0iRsyLcQ/img-20261111142230-958-1.jpg,../test_run/images/0e481e20b76a7df4.jpg,0,"Tin nhắn giả mạo có thể xuất hiện chung luồng hội thoại SMS với tin nhắn chính thức của ngân hàng. Ngày [DATE], Phòng An ninh mạng Công an TP Cần Thơ cho biết, tình trạng các đối tượng sử dụng tin nhắn SMS giả mạo thương hiệu ngân hàng (SMS Brandname) để lừa đảo, chiếm đoạt tài sản diễn biến phức tạ","gui 1313.
+VIB
+07:46 10 Z1y 9, 2025
+[QC] QK Du dieu kien mo
+the tin dung VIB Cashback
+han muc den 100 trieu
+dong, hoan tien 10% khong
+gioi han, nhan the sau 3Op.
+Soan VIBI
+gui
+5998 (mien
+phi) de nhan thong tin dang
+ky mo the
+Tu choi soan TC
+VIB gui 1313
+14.33, Hôm nay
+[Ngân hàng VIB] Thông
+báo khách hàng: Uu đãi có
+thời hạn!12.500 điểm
+thưởng thẻ tín dụng cùa
+bạn hết hạn hôm nay.Nhận
+ngay phẩn thưởng độc
+quyên của bạn:https:Il
+vib mobilcomvn",drop,,sms,duplicate,"[AI, tin cậy cao] TRÙNG Y HỆT tin VIB '12.500 điểm thưởng' của đợt 1–2 (đã nằm trong train tầng 2)",test_run,38,[Ngân hàng VIB] Thông báo khách hàng: Uu đãi có thời hạn!12.500 điểm thưởng thẻ tín dụng cùa ngay phẩn thưởng độc quyên của bạn:https://vib mobilcomvn,cao,0.667,[Ngân hàng VIB] Thông báo khách hàng. Ưu đãi có thời hạn!12.500 điểm thưởng thẻ tín dụng c
+vi_crawl_a24702a3acfe,Tài khoản còn đủ [MONEY] ko (không) cho mượn chuyển vào số này có tí việc. Sáng mai gởi lại được không,scam,social_impersonation,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,zalo,4,text,tuoitre,https://tuoitre.vn/tu-vu-2-lanh-dao-so-bi-hack-zalo-cong-an-nhac-bai-hoc-cu-ve-link-va-ma-qr-gia-mao-100261115102150087.htm,"Từ vụ 2 lãnh đạo sở bị hack Zalo, công an nhắc 'bài học cũ' về link và mã QR giả mạo",2026-11-15,2,11,2026-11-27T14:55:12+07:00,,,,"Trong đó, tài khoản Zalo của ông C.V.A., phó giám đốc sở X. (tên sở được viết tắt), nhắn cho nhiều người quen với nội dung: ""Tài khoản còn đủ [MONEY] ko (không) cho mượn chuyển vào số này có tí việc. Sáng mai gởi lại được không"".",,drop,,zalo,duplicate,"[AI, tin cậy cao] TRÙNG Y HỆT tin Zalo 'cho mượn' của đợt 1–2 (đã nằm trong train tầng 2)",test_run,39,Tài khoản còn đủ [MONEY] ko (không) cho mượn chuyển vào số này có tí việc. Sáng mai gởi lại được không,cao,1.0,Tài khoản còn đủ [MONEY] ko (không) cho mượn chuyển vào số này có tí việc. Sáng mai gởi lạ
+vi_crawl_d8bef61cb44d,Đang có việc gấp cần chuyển khoản mà tài khoản bị lỗi,scam,other_scam,bước 1: mạo danh/khẩn cấp/đòi tiền-thông tin,zalo,2,text,tuoitre,https://tuoitre.vn/tu-vu-2-lanh-dao-so-bi-hack-zalo-cong-an-nhac-bai-hoc-cu-ve-link-va-ma-qr-gia-mao-100261115102150087.htm,"Từ vụ 2 lãnh đạo sở bị hack Zalo, công an nhắc 'bài học cũ' về link và mã QR giả mạo",2026-11-15,2,11,2026-11-27T14:55:12+07:00,,,,"Kẻ xấu đưa ra các lý do khẩn cấp như: ""Đang có việc gấp cần chuyển khoản mà tài khoản bị lỗi"", ""đang đi công tác cần vay tạm vài triệu""... kèm theo số tài khoản ngân hàng có tên trùng hoặc gần giống với chủ tài khoản để tạo lòng tin.",,drop,,zalo,fragment,"[AI, tin cậy cao] Cụm ví dụ trong danh sách lý do, không phải tin đầy đủ",test_run,40,Đang có việc gấp cần chuyển khoản mà tài khoản bị lỗi,cao,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_01d1499a3edd,"[NAPASI Cảnh báo bào mât: Hệ thống thanh toán NAPAS phát hiện thẻ tín dụng của Quý khách có hoạt động giao dịch bất thường. Vì lý do bào mật tài khoản, một số chức năng cùa thè tín dụng sẽ tạm thời bị hạn chế. Vui lòng sớm hoàn tât xác minh bào mật thẻ tín dụng.https://napas.icu/comvn",scam,banking_finance,bước 1.1: link lạ/rút gọn,sms,6,ocr,vietnamnet,https://vietnamnet.vn/canh-bao-tin-nhan-sms-mao-danh-napas-voi-nhieu-kich-ban-lua-dao-2578061.html,Cảnh báo tin nhắn SMS mạo danh NAPAS với nhiều kịch bản lừa đảo,2026-11-24,2,8,2026-11-27T14:55:12+07:00,https://static-images.vnncdn.net/vps_images_publish/000001/000003/2026/11/24/tin-nhan-gia-mao-duoc-gui-toi-nguoi-dan-4471.jpg?width=0&s=cx4kGU-GN5URjakdtUmvdQ,../test_run/images/475eb12e73f47d4f.jpg,2,"Ảnh chụp màn hình tin nhắn SMS giả mạo NAPAS gửi đến nhiều người dân. Nguồn: NAPAS Đáng chú ý, các đối tượng này đã sử dụng nhiều kịch bản lừa đảo khác nhau. Từ yêu cầu khách hàng hoàn tất xác minh bảo mật thẻ tín dụng đến đề nghị đổi điểm thưởng theo thể lệ chương trình ưu đãi do NAPAS phối hợp các","11:12 n
+5G
+NAPAS
+Tin nhản van ban
+SMS
+10*50, Hôm nay
+[NAPASI
+Cảnh báo bào mât:
+Hệ thống thanh toán NAPAS
+phát hiện thẻ tín dụng của Quý
+động
+khách có hoạt
+giao dịch
+bất thường. Vì lý do bào mật tài
+khoản, một số chức năng cùa
+thè tín dụng sẽ tạm thời bị hạn
+chế. Vui
+lòng
+sớm hoàn tât xác
+minh bào mật thẻ tín
+dụng.https:|Inapas.icu/comvn",drop,,sms,duplicate,"[AI, tin cậy cao] TRÙNG tin NAPAS (đợt 1–2 và đợt 3)",test_run,41,"[NAPASI Cảnh báo bào mât: Hệ thống thanh toán NAPAS phát hiện thẻ tín dụng của Quý khách có hoạt động giao dịch bất thường. Vì lý do bào mật tài khoản, một số chức năng cùa thè tín dụng sẽ tạm thời bị hạn chế. Vui lòng sớm hoàn tât xác minh bào mật thẻ tín dụng.https://napas.icu/comvn",cao,0.982,[NAPAS] Cảnh báo bảo mật: Hệ thống thanh toán NAPAS phát hiện thẻ tín dụng của Quý khách c
+vi_crawl_711bc07bc5cf_b,"Cục Thuế thông báo nợ thuế cuối năm 2025, đề nghị đóng phạt ngay để tránh bị cấm xuất cảnh dịp tết",scam,gov_utility_services,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,sms,1,text,sggp,https://www.sggp.org.vn/canh-giac-ma-tran-lua-dao-online-dip-tet-post837903.html,"Cảnh giác ""ma trận"" lừa đảo online dịp Tết",2026-02-10,1,5,2026-11-27T19:25:51+07:00,,,,"Người dân cũng cần cảnh giác những tin nhắn kiểu như: ""Hóa đơn tiền điện tháng 1 chưa thanh toán. Điện lực sẽ cúp điện trong 2 giờ tới nếu không nhận được tiền"" hay ""Cục Thuế thông báo nợ thuế cuối năm 2025, đề nghị đóng phạt ngay để tránh bị cấm xuất cảnh dịp tết"" khiến người nhận rơi vào tâm lý ho",,scam,gov_utility_services,sms,,"[AI, tin cậy trung bình] Câu trích thứ 2 trong cùng đoạn bài (crawler chỉ lấy câu đầu); báo nêu làm ví dụ nên có thể đã rút gọn. Mạo danh Cục Thuế → quy tắc 2 | NGƯỜI DÙNG XÁC NHẬN 28/11 (giữ 3/4/8; MoMo = banking_finance)",run3,,"Cục Thuế thông báo nợ thuế cuối năm 2025, đề nghị đóng phạt ngay để tránh bị cấm xuất cảnh dịp tết",trung bình,0.0,He thong da ghi nhan ho so vi pham giao thong cua ban. Hay nop phat kip thoi de khong phai
+vi_crawl_a9e12b9133fa_b,"THÔNG BÁO GÓI QUỸ LỢI NHUẬN CAO MOMO PRO : GÓI QUỸ LỢI NHUẬN CAO SỐ 6 HỘI VIÊN : [NAME] MÃ THAM GIA : 63235C ĐÃ TRÚNG GIAO DỊCH GÓI QUỸ LỢI NHUẬN CAO SỐ 6 TRONG KỲ NHẬN MÃ GIAO DỊCH QUỸ LỢI NHUẬN ƯU ĐÃI HÔM NAY, HỆ THỐNG TẶNG BẠN QUÀ ƯU ĐÃI [MONEY] VÀO TÀI KHOẢN ĐẦU TƯ CỦA BẠN SAU KHI BẠN HOÀN THÀNH GÓI ĐẦU TƯ QUỸ LỢI NHUẬN CAO SỐ 6. BẠN HÃY BỔ SUNG ĐỦ VỐN KHỞI ĐẦU GÓI QUỸ LỢI NHUẬN CAO SỐ 6 LÀ 50000 ĐIỂM GIAO DỊCH VÀ LIÊN HỆ ĐẶT LỊCH HƯỚNG DẪN HOÀN THÀNH GÓI QUỸ ĐƯỢC NHẬN TRONG NGÀY HÔM NAY. CẢM ƠN QUÝ KHÁCH HÀNG ĐỒNG HÀNH VÀ PHÁT TRIỂN CÙNG HỆ THỐNG.",scam,banking_finance,mặc định (bài cảnh báo lừa đảo) - cần xem kỹ,messenger,2,ocr,genk,https://genk.vn/ham-loi-nhuan-lam-nhiem-vu-tren-ung-dung-nguoi-dan-ong-bi-lua-hon-300-trieu-dong-20250520145242234.chn,"Ham lợi nhuận làm nhiệm vụ trên ứng dụng, người đàn ông bị lừa hơn 300 triệu đồng",2025-05-20,1,2,2026-11-27T17:18:32+07:00,https://genk.mediacdn.vn/139269124445442048/2025/5/20/lua-dao-717-2965-1747727423901-17477274240061317372931.jpg,images/f6e0c5b0de63c487.jpg,0,"Tin nhắn lừa đảo. TPO - Một người đàn ông ở Hà Nội bị lừa hơn [MONEY] đồng sau khi nhận được tin nhắn qua ứng dụng Messenger với nội dung thông báo mã trúng thưởng từ ứng dụng ""MoMo Pro"" và làm nhiệm vụ để hưởng hoa hồng cao.",,scam,banking_finance,messenger,,"[AI, tin cậy trung bình] Bong bóng trái của cùng ảnh Messenger (crawler bỏ sót). Cùng ca ranh giới MoMo như a9e12b9133fa | 28/11 người dùng duyệt: che tay ""Doquoctung102""→[NAME], ""3.888.000 ĐỒNG""→[MONEY] | NGƯỜI DÙNG XÁC NHẬN 28/11 (giữ 3/4/8; MoMo = banking_finance)",run3,,"THÔNG BÁO GÓI QUỸ LỢI NHUẬN CAO MOMO PRO : GÓI QUỸ LỢI NHUẬN CAO SỐ 6 HỘI VIÊN : Doquoctung102 MÃ THAM GIA : 63235C ĐÃ TRÚNG GIAO DỊCH GÓI QUỸ LỢI NHUẬN CAO SỐ 6 TRONG KỲ NHẬN MÃ GIAO DỊCH QUỸ LỢI NHUẬN ƯU ĐÃI HÔM NAY, HỆ THỐNG TẶNG BẠN QUÀ ƯU ĐÃI 3.888.000 ĐỒNG VÀO TÀI KHOẢN ĐẦU TƯ CỦA BẠN SAU KHI BẠN HOÀN THÀNH GÓI ĐẦU TƯ QUỸ LỢI NHUẬN CAO SỐ 6. BẠN HÃY BỔ SUNG ĐỦ VỐN KHỞI ĐẦU GÓI QUỸ LỢI NHUẬN CAO SỐ 6 LÀ 50000 ĐIỂM GIAO DỊCH VÀ LIÊN HỆ ĐẶT LỊCH HƯỚNG DẪN HOÀN THÀNH GÓI QUỸ ĐƯỢC NHẬN TRONG NGÀY HÔM NAY. CẢM ƠN QUÝ KHÁCH HÀNG ĐỒNG HÀNH VÀ PHÁT TRIỂN CÙNG HỆ THỐNG.",trung bình,0.014,THONG BAO KHAN: Ho so BHYT ATK cua Ong/Ba da bi loi trên he thong VssID. Dê khong bi mất q
