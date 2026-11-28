@@ -10,7 +10,7 @@ Steps
               mean macro-F1 of 5-fold grouped CV on train+validation (one validation split of ~85 rows
               was too noisy); a gap smaller than one std counts as a tie -> prefer the simpler model.
 
-Usage (from bilingual-scam-baseline/, Python 3.11):
+Usage (from the repository root, Python 3.11):
   $env:PYTHONPATH="src"; py -3.11 scripts/train_tier2.py                 # all three models
   $env:PYTHONPATH="src"; py -3.11 scripts/train_tier2.py --models nb svm # skip CharCNN
 """

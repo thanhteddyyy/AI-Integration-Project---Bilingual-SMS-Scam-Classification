@@ -185,7 +185,7 @@ Các khóa của kết quả: `demo/README.md`. Margin < 0,3 nghĩa là mô hìn
 
 ```powershell
 py -3.11 scripts/make_colab_notebook.py   # sinh notebooks/colab_tier1_tier2.ipynb
-py -3.11 scripts/package_for_colab.py     # tạo ../bilingual-scam-colab.zip (code + dữ liệu đã xử lý)
+py -3.11 scripts/package_for_colab.py     # tạo bilingual-scam-colab.zip ở thư mục gốc (code + dữ liệu đã xử lý)
 ```
 Trên Colab: `File → Upload notebook` → `Runtime → T4 GPU` → kéo thả zip vào thanh Files → `Run all` (20–35 phút).
 Kết quả tải về `colab_results.zip` (model + báo cáo cả 2 tầng).

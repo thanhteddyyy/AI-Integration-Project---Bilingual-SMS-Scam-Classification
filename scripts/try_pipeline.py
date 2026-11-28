@@ -1,6 +1,6 @@
 """Try the full pipeline (tier 1 -> language -> tier 2) on your own messages in the terminal.
 
-Usage (from bilingual-scam-baseline/):
+Usage (from the repository root):
   $env:PYTHONPATH="src"; py -3.11 scripts/try_pipeline.py                      # interactive
   $env:PYTHONPATH="src"; py -3.11 scripts/try_pipeline.py --text "Tai khoan cua ban bi khoa..."
   $env:PYTHONPATH="src"; py -3.11 scripts/try_pipeline.py --text "..." --json  # raw dict (what the demo gets)

@@ -15,7 +15,7 @@ Questions (docs/TONG_KET_TIEN_DO.md, task 5):
 No model is retrained except the CV fold models of tier 2 (same as train_tier2.py). Inputs are the saved
 predictions / models in artifacts/.
 
-Usage (from bilingual-scam-baseline/, Python 3.11):
+Usage (from the repository root, Python 3.11):
   $env:PYTHONPATH="src"; py -3.11 scripts/error_analysis.py
 Outputs: reports/error_analysis/ (summary.md + csv)
 """

@@ -5,7 +5,7 @@ Train on the train split (+ every Vietnamese train text again without diacritics
 test and external_test, with extra checks: Vietnamese WITHOUT diacritics, short messages, and a few
 hand-written probes (mixed brand names, OTP messages).
 
-Usage (from bilingual-scam-baseline/):
+Usage (from the repository root):
   $env:PYTHONPATH="src"; py -3.11 scripts/train_langid.py
 Outputs: artifacts/langid/model.joblib (+ metrics.json, errors.csv), reports/langid/summary.md
 """

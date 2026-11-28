@@ -1,6 +1,6 @@
 """Build demo_bundle/ (+ demo_bundle.zip): the 3 models + prediction code, for the teammate building the demo.
 
-Usage (from bilingual-scam-baseline/):  py -3.11 scripts/package_demo.py
+Usage (from the repository root):  py -3.11 scripts/package_demo.py
 The bundle is NOT in git (models are large) – send the zip.
 """
 from __future__ import annotations

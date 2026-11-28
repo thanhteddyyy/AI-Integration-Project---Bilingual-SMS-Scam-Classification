@@ -7,7 +7,7 @@ if hasattr(sys.stdout, 'reconfigure'):
 
 def package_project():
     root = Path(__file__).resolve().parent.parent
-    zip_path = root.parent / "bilingual-scam-colab.zip"
+    zip_path = root / "bilingual-scam-colab.zip"  # repo root (ignored by *.zip)
     
     print(f"Creating Colab deployment zip at: {zip_path}")
     

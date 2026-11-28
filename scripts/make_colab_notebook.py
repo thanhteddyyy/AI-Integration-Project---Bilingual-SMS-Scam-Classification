@@ -5,9 +5,9 @@ version so the models load in the demo) -> data check -> tier 1 (NB / SVM / Char
 tier 1 on real Vietnamese scams (crawl runs 1-2 and run 3) -> tier 2 (9 scam types, grouped CV, external = run 3,
 chain tier 1 -> tier 2) -> language id + whole pipeline on sample messages -> error analysis -> results zip.
 
-Usage (from bilingual-scam-baseline/):
+Usage (from the repository root):
   py -3.11 scripts/make_colab_notebook.py      # writes notebooks/colab_tier1_tier2.ipynb
-  py -3.11 scripts/package_for_colab.py        # writes ../bilingual-scam-colab.zip (upload this to Colab)
+  py -3.11 scripts/package_for_colab.py        # writes bilingual-scam-colab.zip at the repo root (upload this to Colab)
 """
 from __future__ import annotations
 

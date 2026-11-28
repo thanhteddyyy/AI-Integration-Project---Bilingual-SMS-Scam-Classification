@@ -70,7 +70,7 @@ tải bài 30–350 bài/phút tùy số ảnh; OCR ~0,5 s/ảnh trên T4.
 ## 3. Chạy ở máy local
 
 ```powershell
-cd bilingual-scam-baseline
+# chạy từ thư mục gốc của repo
 pip install requests beautifulsoup4 lxml pillow
 pip install easyocr            # tùy chọn, bật OCR (cài kèm PyTorch)
 

@@ -3,6 +3,7 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .venv/
+.venv_*/
 venv/
 artifacts/*
 !artifacts/.gitkeep
@@ -15,6 +16,8 @@ reports/*
 crawl_data_scam/
 crawl_data_scam.zip
 *.zip
+# raw crawler output downloaded from Kaggle (reviewed rows live in data/review/)
+results_v*/
 
 data/processed_vi_exp_*/
 

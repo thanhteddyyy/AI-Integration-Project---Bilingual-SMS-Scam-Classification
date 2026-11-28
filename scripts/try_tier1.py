@@ -3,7 +3,7 @@
 Shows the predicted label, the SVM score of each class (higher = more likely; the largest wins)
 and the words / phrases that pushed the message towards the predicted class.
 
-Usage (from bilingual-scam-baseline/):
+Usage (from the repository root):
   PYTHONPATH=src python scripts/try_tier1.py                       # interactive, type messages
   PYTHONPATH=src python scripts/try_tier1.py --text "Tai khoan cua ban bi khoa..."
   PYTHONPATH=src python scripts/try_tier1.py --setup vietnamese_balanced
