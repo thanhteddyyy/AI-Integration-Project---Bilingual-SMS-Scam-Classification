@@ -162,7 +162,8 @@ Tin không dấu đúng 84,8%, tin có dấu đúng 78,3%. Không có dấu hi�
 ## 7. Tầng 2 trên tin thật đợt 3 (T2-b)
 
 Đợt 3 sau khi duyệt chỉ còn **9 tin** (7 khuôn mới, 2 khuôn đã có trong train); cách duyệt ở `data/review/vi_crawl_run3_reviewed.csv`.
-Chạy lại `train_tier2.py` ngày 28/11: CV không đổi (SVM 79,5 ± 4,6 > NB 70,2 > CharCNN 61,3), vẫn chọn SVM.
+Chạy lại `train_tier2.py` ngày 28/11 (trên máy và trên Colab): CV của SVM và NB không đổi (SVM 79,5 ± 4,6 > NB 70,2 > CharCNN 61,9 – bản
+Colab), vẫn chọn SVM. Số liệu mục này là của bản chính thức Colab, chạy trên tin đợt 3 **đã che** `[NAME]`/`[MONEY]`.
 
 | Tin (rút gọn) | Nhãn | Tầng 1 | Tầng 2 (SVM) |
 |---|---|---|---|
@@ -187,11 +188,12 @@ không train lại):
 | Mô hình tầng 1 (song ngữ) | Tất cả (9) | Khuôn mới (7) | SMS (7) | Chat (2) |
 |---|---|---|---|---|
 | **SVM** (đã chọn) | **7/9** | **5/7** | 6/7 | 1/2 |
-| Naive Bayes | 2/9 | 1/7 | 2/7 | 0/2 |
-| CharCNN | 2/9 | **0/7** | 2/7 | 0/2 |
+| Naive Bayes | 3/9 | 2/7 | 3/7 | 0/2 |
+| CharCNN | 4/9 | **2/7** | 3/7 | 1/2 |
 
-→ Kết quả lặp lại đúng xu hướng của đợt 1–2 (SVM 19/22 so với CharCNN 12/22 trên tin SMS khuôn mới): CharCNN chỉ bắt được tin cùng
-khuôn đã thấy, **không bắt được tin khuôn mới nào**. Đây là thêm một bằng chứng cho lựa chọn SVM ở tầng 1.
+→ Kết quả lặp lại đúng xu hướng của đợt 1–2 (SVM 19/22 so với CharCNN 13/22 trên tin SMS khuôn mới): CharCNN bắt tốt tin cùng khuôn
+đã thấy nhưng **kém rõ với tin khuôn mới** (2/7 so với 5/7 của SVM). Đây là thêm một bằng chứng cho lựa chọn SVM ở tầng 1.
+(Bản chạy trên máy trước khi che tên và với model CharCNN cũ cho CharCNN 0/7; số trên là bản chính thức.)
 
 **Gộp tin thật cả 3 đợt cho SVM song ngữ** (tập đầy đủ, mọi kênh): đợt 1–2 là 30/44, đợt 3 là 7/9, **tổng 37/53 (70%)**. Riêng SMS:
 đợt 1–2 là 29/32, đợt 3 là 6/7, tổng **35/39 (90%)**. Chat (Zalo/Messenger): **2/14**.

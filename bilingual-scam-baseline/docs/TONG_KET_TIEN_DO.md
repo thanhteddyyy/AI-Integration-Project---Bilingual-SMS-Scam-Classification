@@ -59,14 +59,19 @@ Demo Gradio: nhãn + loại scam + các từ khiến model nghi ngờ           
 | Tiếng Anh | 8.120 | 3.175 | 2.829 | 1.023 SmishX |
 | Song ngữ | 13.018 | 3.886 | 3.394 | 3.917 |
 
-### 2.2 Tầng 1 – chọn mô hình (Kaggle, 26/11)
+### 2.2 Tầng 1 – chọn mô hình (bản chính thức: Colab 28/11)
 Quy tắc cố định trước: **F2 lớp scam cao nhất trên validation**; test/external chỉ để báo cáo.
+
+> **Bản chính thức = lần chạy Colab 28/11** (`notebooks/colab_tier1_tier2.ipynb`, kết quả trong `reports/` và `artifacts/`).
+> NB và SVM giống hệt từng con số lần chạy Kaggle 26/11 và lần chạy trên máy (model SVM cho dự đoán trùng 100%); chỉ CharCNN lệch nhẹ
+> vì GPU không cho kết quả hoàn toàn giống nhau giữa các lần chạy. Số CharCNN của Kaggle 26/11 ghi trong ngoặc. Thí nghiệm rerank (mục 2.3)
+> dùng model CharCNN của Kaggle 26/11, nên số trong `rerank_experiment.md` là của lần chạy đó.
 
 | Thiết lập | Naive Bayes | **Linear SVM** | CharCNN |
 |---|---|---|---|
-| Tiếng Việt (val F2) | 79,6 | **92,1** ✅ | 85,1 |
-| Tiếng Anh (val F2) | 91,8 | **93,8** ✅ | 92,4 |
-| Song ngữ (val F2) | 92,3 | **93,6** ✅ | 93,5 |
+| Tiếng Việt (val F2) | 79,6 | **92,1** ✅ | 84,8 (85,1) |
+| Tiếng Anh (val F2) | 91,8 | **93,8** ✅ | 92,6 (92,4) |
+| Song ngữ (val F2) | 92,3 | **93,6** ✅ | 92,9 (93,5) |
 
 Kết quả thực tế của **SVM song ngữ** (lựa chọn cho demo):
 
@@ -79,8 +84,9 @@ Kết quả thực tế của **SVM song ngữ** (lựa chọn cho demo):
 | SmishX (tiếng Anh thật): recall / báo nhầm | 84,7% / 9,9% |
 
 Phát hiện đáng chú ý:
-- CharCNN tốt hơn SVM trên **test tiếng Việt của Tuấn** nhưng kém hơn rõ trên **tin thật** (12/22, báo nhầm 3,6%)
-  → test tốt chưa chắc ngoài đời tốt.
+- CharCNN song ngữ ngang SVM trên **test** (F2 92,0 so với 91,9) nhưng kém hơn rõ trên **tin thật**: 13/22 tin SMS khuôn mới so với
+  19/22, báo nhầm `vie_sms` 3,2% so với 1,0%; đợt 3 bắt 2/7 tin khuôn mới so với 5/7 (Kaggle 26/11: 12/22, báo nhầm 3,6%)
+  → test tốt chưa chắc ngoài đời tốt. CharCNN cũng dao động giữa các lần chạy (tiếng Việt test F2 62,6 ở Kaggle, 69,4 ở Colab), SVM thì không.
 - Mọi tin lừa đảo bị bỏ sót đều bị đoán là **ham**: tin giọng cá nhân (mượn tiền, bình chọn, "mẹ ơi…").
 - NB song ngữ không dùng được cho tiếng Việt (3/22 tin thật).
 

@@ -8,6 +8,7 @@
     "validation_macro_f1": 0.8664836812058702
   },
   "models_compared": [
+    "charcnn",
     "naive_bayes",
     "svm"
   ]

@@ -172,9 +172,10 @@ Viết sẵn theo kiểu "luận điểm + số liệu + câu trả lời khi b�
   **Cả hai tầng đều chọn Linear SVM** (TF-IDF từ 1–2 + cụm ký tự 3–5, `class_weight=balanced`).
 - Tầng 1 chọn theo **F2 lớp scam trên validation** (bỏ sót lừa đảo nguy hiểm hơn báo nhầm). Tầng 2 chọn theo **CV macro-F1** (mọi loại scam
   quan trọng như nhau, kể cả lớp ít tin).
-- Bảng tầng 2 (CV 5 lượt, sau A1): SVM **79,5 ± 4,6**, NB 70,2 ± 4,5, CharCNN 61,3 ± 7,1.
+- Bảng tầng 2 (CV 5 lượt, sau A1; bản chính thức Colab 28/11): SVM **79,5 ± 4,6**, NB 70,2 ± 4,5, CharCNN 61,9 ± 8,1
+  (lần chạy trên máy: 61,3 ± 7,1 – CharCNN dao động giữa các lần chạy, SVM/NB giống hệt).
 - *Nếu hỏi "sao không dùng deep learning?"*: đã thử CharCNN ở cả hai tầng. Tầng 1: CharCNN tốt trên test của Tuấn nhưng kém trên tin thật
-  (12/22 so với 19/22 của SVM, báo nhầm 3,6% so với 1,0%). Tầng 2: CharCNN thấp nhất và dao động mạnh nhất. Với vài trăm tin, model tuyến
+  (13/22 so với 19/22 của SVM, báo nhầm 3,2% so với 1,0% – bản Colab 28/11; Kaggle 26/11: 12/22, 3,6%). Tầng 2: CharCNN thấp nhất và dao động mạnh nhất. Với vài trăm tin, model tuyến
   tính trên TF-IDF ổn định hơn; cụm ký tự giúp SVM bắt được biến thể cố tình viết sai ("Vjettel", "M0BlF0NE", "Techcom6ank").
 - *Nếu hỏi "sao không ghép SVM với CharCNN?"*: ở tầng 1 đã thử rerank, không hơn SVM đơn. Ở tầng 2, hai model sai ở cùng các tin
   (ví dụ cả hai cùng sai 3/3 tin "sếp nhờ"), và trên tin thật CNN không đúng thêm tin nào mà SVM sai → ghép không có lợi.
